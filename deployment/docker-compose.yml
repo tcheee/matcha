@@ -1,0 +1,25 @@
+version: '3.6'
+services: 
+    postgres:
+        image: postgres
+        restart: always
+        environment: 
+            - DATABASE_HOST=127.0.0.1
+            - POSTGRES_USER=root
+            - POSTGRES_PASSWORD=root
+            - POSTGRES_DB=matcha 
+
+        ports: 
+            - "5432:5432"
+        volumes: 
+            - ./1_docker_create_tables.sql:/docker-entrypoint-initdb.d/1_docker_create_tables.sql
+    
+    pgadmin-compose:
+        image: dpage/pgadmin4
+        environment: 
+            PGADMIN_DEFAULT_EMAIL: "test@gmail.com"
+            PGADMIN_DEFAULT_PASSWORD: "test123!"
+        ports: 
+            - "16543:80"
+        depends_on: 
+            - postgres    

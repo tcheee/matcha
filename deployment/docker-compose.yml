@@ -12,14 +12,15 @@ services:
         ports: 
             - "5432:5432"
         volumes: 
-            - ./1_docker_create_tables.sql:/docker-entrypoint-initdb.d/1_docker_create_tables.sql
+            - ./1_docker_init_tables.sql:/docker-entrypoint-initdb.d/1_docker_init_tables.sql
     
     pgadmin-compose:
         image: dpage/pgadmin4
+        restart: always
         environment: 
             PGADMIN_DEFAULT_EMAIL: "test@gmail.com"
             PGADMIN_DEFAULT_PASSWORD: "test123!"
         ports: 
             - "16543:80"
         depends_on: 
-            - postgres    
+            - postgres

@@ -2,8 +2,8 @@ const express = require('express')
 const app = express()
 const port = 3000
 const db = require('./db/db.js')
-const mail = require('./routes/send_mail.js')
 const createUser = require('./routes/create_user.js')
+const activateUser = require('./routes/activate_user.js')
 
 app.use(express.json())
 
@@ -13,9 +13,13 @@ app.get('/', (req, res) => {
 
 app.post('/register/', (req, res) => {
     let status = createUser.create_user(req.body);
-    mail.send_mail(req.body.mail, req.body.first_name);
     res.send(status);
 });
+
+app.post('/activate/', (req, res) => {
+  let status = activateUser.activate_user(req.body.id);
+  res.send(status);
+})
 
 app.get('/login/', (req, res) => {
     res.send('I will log you!')

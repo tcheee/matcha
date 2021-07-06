@@ -1,6 +1,6 @@
 CREATE TABLE users
 (
-    id INT PRIMARY KEY NOT NULL,
+    id SERIAL PRIMARY KEY,
     mail VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(100) NOT NULL,
     first_name VARCHAR(100) NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE users
 
 CREATE TABLE images
 (
-    id INT PRIMARY KEY NOT NULL, 
+    id SERIAL PRIMARY KEY,
     user_mail VARCHAR(100) NOT NULL,
     image_link VARCHAR(65535),
     orders INT NOT NULL DEFAULT 0
@@ -27,7 +27,7 @@ CREATE TABLE images
 
 CREATE TABLE notifications
 (
-    id INT PRIMARY KEY NOT NULL, 
+    id SERIAL PRIMARY KEY,
     from_mail VARCHAR(100) NOT NULL, 
     to_mail VARCHAR(100) NOT NULL,
     notification_type VARCHAR(100) NOT NULL,
@@ -37,7 +37,7 @@ CREATE TABLE notifications
 
 CREATE TABLE inboxes
 (
-    id INT PRIMARY KEY NOT NULL, 
+    id SERIAL PRIMARY KEY,
     from_mail VARCHAR(100) NOT NULL, 
     to_mail VARCHAR(100) NOT NULL,
     content VARCHAR(65535),
@@ -46,7 +46,7 @@ CREATE TABLE inboxes
 
 CREATE TABLE visits
 (
-    id INT PRIMARY KEY NOT NULL, 
+    id SERIAL PRIMARY KEY,
     from_mail VARCHAR(100) NOT NULL, 
     to_mail VARCHAR(100) NOT NULL,
     creation_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -54,7 +54,7 @@ CREATE TABLE visits
 
 CREATE TABLE likes
 (
-    id INT PRIMARY KEY NOT NULL, 
+    id SERIAL PRIMARY KEY,
     from_mail VARCHAR(100) NOT NULL, 
     to_mail VARCHAR(100) NOT NULL,
     likes INT NOT NULL,
@@ -63,30 +63,30 @@ CREATE TABLE likes
 
 CREATE TABLE matches
 (
-    id INT PRIMARY KEY NOT NULL, 
+    id SERIAL PRIMARY KEY,
     mail_a VARCHAR(100) NOT NULL, 
     mail_b VARCHAR(100) NOT NULL,
     creation_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO users(id, mail, password, first_name, last_name, age, genre, orientation, lat, lng, biography, interests) VALUES
- (1, 'test@mail.com', 'oitnbionbtin', 'another', 'guy', 25, 1, 0, 10, 25, 'This is my bio', 'test;interest;lol'),
- (2, 'testigo@mail.com', 'oitngorpbionbtin', 'another', 'tom', 25, 1, 0, 10, 25, 'This is my bio', 'test;interest;lol');
+INSERT INTO users(mail, password, first_name, last_name, age, genre, orientation, lat, lng, biography, interests) VALUES
+ ('test@mail.com', 'oitnbionbtin', 'another', 'guy', 25, 1, 0, 10, 25, 'This is my bio', 'test;interest;lol'),
+ ('testigo@mail.com', 'oitngorpbionbtin', 'another', 'tom', 25, 1, 0, 10, 25, 'This is my bio', 'test;interest;lol');
 
-INSERT INTO images(id, user_mail, image_link) VALUES
- (1, 'test@mail.com', 'http://link/ec2/photos_1');
+INSERT INTO images(user_mail, image_link) VALUES
+ ('test@mail.com', 'http://link/ec2/photos_1');
 
-INSERT INTO notifications(id, from_mail, to_mail, notification_type) VALUES
- (1, 'test@mail.com', 'to@mail.com', 'visit');
+INSERT INTO notifications(from_mail, to_mail, notification_type) VALUES
+ ('test@mail.com', 'to@mail.com', 'visit');
 
-INSERT INTO inboxes(id, from_mail, to_mail, content) VALUES
- (1, 'test@mail.com', 'to@mail.com', 'Yo, comment tu vas?');
+INSERT INTO inboxes(from_mail, to_mail, content) VALUES
+ ('test@mail.com', 'to@mail.com', 'Yo, comment tu vas?');
 
-INSERT INTO visits(id, from_mail, to_mail) VALUES
- (1, 'test@mail.com', 'to@mail.com');
+INSERT INTO visits(from_mail, to_mail) VALUES
+ ('test@mail.com', 'to@mail.com');
 
-INSERT INTO likes(id, from_mail, to_mail, likes) VALUES
- (1, 'test@mail.com', 'to@mail.com', 1);
+INSERT INTO likes(from_mail, to_mail, likes) VALUES
+ ('test@mail.com', 'to@mail.com', 1);
 
-INSERT INTO matches(id, mail_a, mail_b) VALUES
- (1, 'test@mail.com', 'to@mail.com');
+INSERT INTO matches(mail_a, mail_b) VALUES
+ ('test@mail.com', 'to@mail.com');

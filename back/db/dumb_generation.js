@@ -36,17 +36,11 @@ for (let i = 0; i < 500 ; i++) {
     let timestamp = Date.now();
 
     db.query('INSERT INTO users(id, mail, password, first_name, last_name, age, genre, orientation, lat, lng, biography, last_connection, is_active, interests) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14);', [index, mail, password, fname, lname, age, genre, orientation, latt, long, bio, timestamp, '1', interests], (err, result) => {
-        if (err) {
-          return (err)
-        }
-        console.log(result.rows[0]);
+        console.log('Dumbing done for ' + index);
       })
 
     db.query('INSERT INTO images(id, user_mail, image_link) VALUES($1, $2, $3);', [index, mail, image], (err, result) => {
-        if (err) {
-          return (err)
-        }
-        console.log(result.rows[0]);
+        console.log('Dumbing done for ' + index);
       })
     
   }

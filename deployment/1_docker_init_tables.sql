@@ -69,6 +69,15 @@ CREATE TABLE matches
     creation_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE blocks
+(
+    id SERIAL PRIMARY KEY,
+    from_mail VARCHAR(100) NOT NULL, 
+    to_mail VARCHAR(100) NOT NULL,
+    blocked BOOLEAN DEFAULT '1', 
+    creation_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 INSERT INTO users(mail, password, first_name, last_name, age, genre, orientation, lat, lng, biography, interests) VALUES
  ('test@mail.com', 'oitnbionbtin', 'another', 'guy', 25, 1, 0, 10, 25, 'This is my bio', 'test;interest;lol'),
  ('testigo@mail.com', 'oitngorpbionbtin', 'another', 'tom', 25, 1, 0, 10, 25, 'This is my bio', 'test;interest;lol');
@@ -90,3 +99,6 @@ INSERT INTO likes(from_mail, to_mail, likes) VALUES
 
 INSERT INTO matches(mail_a, mail_b) VALUES
  ('test@mail.com', 'to@mail.com');
+
+INSERT INTO blocks(from_mail, to_mail) VALUES
+ ('test@mail.com', 'toblockingmail@mail.com');

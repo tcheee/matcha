@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 function create_token(id, maxAge) {
-    return jwt.sign({id}, 'We are going to match with as many people as possible because diversity is good for growth', {
+    return jwt.sign({id}, 'secret key', {
         expiresIn: maxAge
     });
 }

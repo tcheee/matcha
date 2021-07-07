@@ -4,7 +4,7 @@ function requireAuth(req,res, next) {
     const token = req.cookies.jwt;
 
     if (token) {
-        jwt.verify(token, 'We are going to match with as many people as possible because diversity is good for growth', (err, decodedToken) =>{
+        jwt.verify(token, 'secret key', (err, decodedToken) =>{
             if (err) {
                 console.log(err.message);
                 res.status(404).redirect('/');
@@ -14,7 +14,6 @@ function requireAuth(req,res, next) {
                 next();
             }
         });
-
     }
     else {
         res.status(404).redirect('/');

@@ -7,8 +7,9 @@ const loginUser = require('./routes/login_user.js')
 const getAllUser = require('./routes/get_all_users.js')
 const getAllData = require('./routes/get_all_data.js')
 const jwtCreation = require("./functions/create_token")
+const verifyToken = require("./routes/verify_token")
 const { requireAuth } = require("./middleware/authMiddleware");
-const { get } = require('http')
+const io = require("socket.io")(3001);
 const maxAge = 24 * 10 * 60 * 60;
 
 const app = express()
@@ -17,15 +18,10 @@ const port = 3000
 app.use(express.json())
 app.use(cookieParser())
 
+// HTTP method
+
 app.get('/', (req, res) => {
   res.send('Hello World!')
-});
-
-app.post('/all/', async (req, res) => {
-  console.log(req.body);
-  let data = await getAllData.get_all_data(req.body.mail);
-  console.log(data);
-  res.json(data);
 });
 
 app.post('/register/', (req, res) => {
@@ -50,22 +46,44 @@ app.post('/login/', async (req, res) => {
     }
 });
 
-app.get('/users/', requireAuth, async (req, res) => {
-  let users = await getAllUser.get_all_users();
-  if (users != null) {
-    res.status(200).json(users);
-  }
-  else {
-    res.status(500).json("error");
-  }
+app.post('/all/', async (req, res) => {
+  console.log(req.body);
+  let data = await getAllData.get_all_data(req.body.mail);
+  console.log(data);
+  res.json(data);
 });
-
-// app.get('/user/:id', requireAuth, (req, res) => {
-//   res.send('Send a specific user');
-// });
 
 app.use((req, res) => {
     res.status(404).send('We did not find what you were looking for ...');
+});
+
+// Websocket interactions
+
+io.on("connection", async (socket) => {
+  // either with send()
+  const token = socket.handshake.auth.token;
+  console.log(token);
+  if (token) {
+    const connectionStatus = await verifyToken.verify_token(token);
+    if (connectionStatus) {
+      console.log("connection made with: " + socket.id);
+
+      socket.emit("greetings", "Hey!", { "ms": "jane" }, Buffer.from([4, 3, 3, 1]));
+
+      // handle the event sent with socket.send()
+      socket.on("message", (data) => {
+        console.log(data);
+      });
+
+      // handle the event sent with socket.emit()
+      socket.on("salutations", (elem1, elem2, elem3) => {
+        console.log(elem1, elem2, elem3);
+      });
+    } 
+  }
+  else {
+    socket.send("error");
+  }
 });
 
 app.listen(port, () => {

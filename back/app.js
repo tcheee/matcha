@@ -1,11 +1,18 @@
 const express = require('express')
-const app = express()
-const port = 3000
-const db = require('./db/db.js')
+const cookieParser = require('cookie-parser')
+
 const createUser = require('./routes/create_user.js')
 const activateUser = require('./routes/activate_user.js')
+const loginUser = require('./routes/login_user.js')
+const jwtCreation = require("./functions/create_token")
+const { requireAuth } = require("./middleware/authMiddleware");
+const maxAge = 24 * 10 * 60 * 60;
+
+const app = express()
+const port = 3000
 
 app.use(express.json())
+app.use(cookieParser())
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
@@ -21,19 +28,21 @@ app.post('/activate/', (req, res) => {
   res.send(status);
 })
 
-app.get('/login/', (req, res) => {
-    res.send('I will log you!')
+app.post('/login/', async (req, res) => {
+    let user_id = await loginUser.login_user(req.body.mail, req.body.password)
+    if (user_id > 0) {
+      let token = jwtCreation.create_token(user_id)
+      res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge * 1000});
+      res.status(201).json(user_id);
+    }
+    else {
+      res.status(404).send("error")
+    }
 });
 
-// app.get('/:mail', (req, res, next) => {
-//     db.query('SELECT * FROM public.users WHERE mail = $1', [req.params.mail], (err, result) => {
-//       if (err) {
-//         return next(err)
-//       }
-//       console.log(result.rows[0]);
-//       res.send(result.rows[0]);
-//     })
-//   })
+// app.get('/user/:id', requireAuth, (req, res) => {
+//   res.send('Send a specific user');
+// });
 
 app.use((req, res) => {
     res.status(404).send('We did not find what you were looking for ...');

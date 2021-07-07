@@ -6,8 +6,9 @@ const activateUser = require('./routes/activate_user.js')
 const loginUser = require('./routes/login_user.js')
 const getAllUser = require('./routes/get_all_users.js')
 const getAllData = require('./routes/get_all_data.js')
-const jwtCreation = require("./functions/create_token")
 const verifyToken = require("./routes/verify_token")
+const timing = require("./routes/update_timestamp")
+const jwtCreation = require("./functions/create_token")
 const { requireAuth } = require("./middleware/authMiddleware");
 const io = require("socket.io")(3001);
 const maxAge = 24 * 10 * 60 * 60;
@@ -66,6 +67,7 @@ io.on("connection", async (socket) => {
   if (token) {
     const connectionStatus = await verifyToken.verify_token(token);
     if (connectionStatus) {
+      //timing.update_timestamp(mail);
       console.log("connection made with: " + socket.id);
 
       socket.emit("greetings", "Hey!", { "ms": "jane" }, Buffer.from([4, 3, 3, 1]));

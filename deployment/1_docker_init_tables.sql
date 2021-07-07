@@ -8,9 +8,9 @@ CREATE TABLE users
     age VARCHAR(100) NOT NULL,
     genre INT NOT NULL,
     orientation INT NOT NULL,
-    lat INT NOT NULL,
-    lng INT NOT NULL,
-    biography VARCHAR(65535) NOT NULL,
+    lat DECIMAL,
+    lng DECIMAL,
+    biography VARCHAR(65535),
     fame INT NOT NULL DEFAULT 100,
     last_connection TIMESTAMP, 
     is_active BOOLEAN DEFAULT '0', 
@@ -79,8 +79,8 @@ CREATE TABLE blocks
 );
 
 INSERT INTO users(mail, password, first_name, last_name, age, genre, orientation, lat, lng, biography, interests) VALUES
- ('test@mail.com', 'oitnbionbtin', 'another', 'guy', 25, 1, 0, 10, 25, 'This is my bio', 'test;interest;lol'),
- ('testigo@mail.com', 'oitngorpbionbtin', 'another', 'tom', 25, 1, 0, 10, 25, 'This is my bio', 'test;interest;lol');
+ ('test@mail.com', 'oitnbionbtin', 'another', 'guy', 25, 1, 0, 10.15, 25.30, 'This is my bio', 'test;interest;lol'),
+ ('testigo@mail.com', 'oitngorpbionbtin', 'another', 'tom', 25, 1, 0, 10.20, 18.18756478, 'I love dating apps', 'test;interest;lol');
 
 INSERT INTO images(user_mail, image_link) VALUES
  ('test@mail.com', 'http://link/ec2/photos_1');

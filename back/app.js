@@ -4,8 +4,11 @@ const cookieParser = require('cookie-parser')
 const createUser = require('./routes/create_user.js')
 const activateUser = require('./routes/activate_user.js')
 const loginUser = require('./routes/login_user.js')
+const getAllUser = require('./routes/get_all_users.js')
+const getAllData = require('./routes/get_all_data.js')
 const jwtCreation = require("./functions/create_token")
 const { requireAuth } = require("./middleware/authMiddleware");
+const { get } = require('http')
 const maxAge = 24 * 10 * 60 * 60;
 
 const app = express()
@@ -16,6 +19,13 @@ app.use(cookieParser())
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
+});
+
+app.post('/all/', async (req, res) => {
+  console.log(req.body);
+  let data = await getAllData.get_all_data(req.body.mail);
+  console.log(data);
+  res.json(data);
 });
 
 app.post('/register/', (req, res) => {
@@ -38,6 +48,16 @@ app.post('/login/', async (req, res) => {
     else {
       res.status(404).send("error")
     }
+});
+
+app.get('/users/', requireAuth, async (req, res) => {
+  let users = await getAllUser.get_all_users();
+  if (users != null) {
+    res.status(200).json(users);
+  }
+  else {
+    res.status(500).json("error");
+  }
 });
 
 // app.get('/user/:id', requireAuth, (req, res) => {

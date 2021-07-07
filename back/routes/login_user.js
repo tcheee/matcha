@@ -1,10 +1,9 @@
 const db = require('../db/db.js')
-const mail = require('./send_mail.js')
 const bcrypt = require('bcrypt');
 
 
-async function login_user(mail, password) {
-    db.query('SELECT * from public.users where mail = $1;', [mail], (err, res) => {
+function login_user(mail, password) {
+    db.query('SELECT * from public.users where mail = $1;', [mail], async (err, res) => {
         if (res) {
             const result = res.rows[0]
             const auth = await bcrypt.compare(password, result.password);

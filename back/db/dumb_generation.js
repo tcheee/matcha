@@ -15,10 +15,9 @@ const interest = ["Cat", "Dog", "Bird", "Car", "Bike", "Cake", "Cooking", "Smoki
 const images = ["https://cdn.pixabay.com/photo/2017/08/30/12/45/girl-2696947__480.jpg", "https://cdn.pixabay.com/photo/2015/11/26/00/14/woman-1063100__340.jpg", "https://cdn.pixabay.com/photo/2016/11/29/13/14/attractive-1869761__340.jpg", "https://cdn.pixabay.com/photo/2017/06/05/11/01/airport-2373727__340.jpg", "https://cdn.pixabay.com/photo/2015/03/26/09/41/tie-690084__340.jpg", "https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166__480.jpg", "https://cdn.pixabay.com/photo/2017/09/21/07/47/girl-2771001__480.jpg", "https://cdn.pixabay.com/photo/2017/10/19/18/23/actress-2868705__480.jpg", "https://cdn.pixabay.com/photo/2017/06/18/18/26/holi-2416686__480.jpg", "https://cdn.pixabay.com/photo/2015/09/18/11/38/man-945438__480.jpg"]
 
 for (let i = 0; i < 500 ; i++) {
-    let index = i + 500;
     let k = getRandomInt(0,9);
 
-    let mail = "testnew" + i + "@mail.com"
+    let mail = "testnewo" + i + "@mail.com"
     let password = "test123" + i
     let fname = firstname[k]
     let lname = lastname[k]
@@ -33,17 +32,20 @@ for (let i = 0; i < 500 ; i++) {
     let interest3 = interest[k] + "3";
     let interests = interest1 + ";" + interest2 + ";" + interest3;
     let image = images[k]
-    let timestamp = Date.now();
+    let unix_timestamp = Date.now();
+    let timestamp = new Date(unix_timestamp);
 
-    db.query('INSERT INTO users(id, mail, password, first_name, last_name, age, genre, orientation, lat, lng, biography, last_connection, is_active, interests) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14);', [index, mail, password, fname, lname, age, genre, orientation, latt, long, bio, timestamp, '1', interests], (err, result) => {
-        console.log('Dumbing done for ' + index);
+    db.query('INSERT INTO users(mail, password, first_name, last_name, age, genre, orientation, lat, lng, biography, last_connection, is_active, interests) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13);', [mail, password, fname, lname, age, genre, orientation, latt, long, bio, timestamp, '1', interests], (err, result) => {
+        console.log('Dumbing done for ' + mail);
       })
 
-    db.query('INSERT INTO images(id, user_mail, image_link) VALUES($1, $2, $3);', [index, mail, image], (err, result) => {
-        console.log('Dumbing done for ' + index);
+    db.query('INSERT INTO images(user_mail, image_link) VALUES($1, $2);', [mail, image], (err, result) => {
+        console.log('Dumbing done for ' + mail);
       })
     
   }
+
+return (0);
 
 /* 
 

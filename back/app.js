@@ -15,10 +15,10 @@ const maxAge = 24 * 10 * 60 * 60;
 
 const app = express()
 const port = 3000
-var server = require('http').createServer(app);
-var io = require('socket.io')(server);
+const httpServer = require("http").createServer(app);
+const io = require("socket.io")(httpServer);
 
-////app.use(express.static('test_back'));
+app.use(express.static('test_back'));
 app.use(express.json())
 app.use(cors());
 app.use(cookieParser())
@@ -68,36 +68,46 @@ app.use((req, res) => {
 
 io.on("connection", async (socket) => {
   // either with send()
-  const token = socket.handshake.auth.token;
-  console.log(token);
-  console.log(socket.id);
-  console.log("here")
-  if (token) {
-    const connectionStatus = await verifyToken.verify_token(token);
-    if (connectionStatus) {
-      //timing.update_timestamp(mail);
-      console.log("connection made with: " + socket.id);
+  // const token = socket.handshake.auth.token;
+  // console.log(token);
+  console.log("made connection here")
 
-      socket.emit("greetings", "Hey!", { "ms": "jane" }, Buffer.from([4, 3, 3, 1]));
+  let data = await getAllData.get_all_data("test@mail.com");
+  io.sockets.emit('data', data);
 
-      // handle the event sent with socket.send()
-      socket.on("message", (data) => {
-        console.log(data);
-      });
+  socket.on("message", (data) => {
+    
+        console.log(data.message);
+  });
 
-      // handle the event sent with socket.emit()
-      socket.on("salutations", (elem1, elem2, elem3) => {
-        console.log(elem1, elem2, elem3);
-      });
-    } 
-  }
-  else {
-    socket.send("error");
-  }
+  socket.on("data", async (data) => {
+    console.log(data.id);
 });
 
-app.listen(port, () => {
+  // if (token) {
+  //   const connectionStatus = await verifyToken.verify_token(token);
+  //   if (connectionStatus) {
+  //     //timing.update_timestamp(mail);
+  //     console.log("connection made with: " + socket.id);
+
+  //     socket.emit("greetings", "Hey!", { "ms": "jane" }, Buffer.from([4, 3, 3, 1]));
+
+  //     // handle the event sent with socket.send()
+  //     socket.on("message", (data) => {
+  //       console.log(data);
+  //     });
+
+  //     // handle the event sent with socket.emit()
+  //     socket.on("salutations", (elem1, elem2, elem3) => {
+  //       console.log(elem1, elem2, elem3);
+  //     });
+  //   } 
+  // }
+  // else {
+  //   socket.send("error");
+  // }
+});
+
+httpServer.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 });
-
-server.listen(4000);

@@ -70,13 +70,13 @@ app.use((req, res) => {
 
 // Websocket interactions
 
-io.on("connection", async (socket) => {
+io.on("connection", (socket) => {
   // either with send()
   // const token = socket.handshake.auth.token;
   // console.log(token);
   console.log("made connection here")
 
-  socket.on("data", (data) => {
+  socket.on("data", async (data) => {
     console.log(data)
     console.log(data.id)
     const token = socket.handshake.auth.token;

@@ -16,7 +16,13 @@ const maxAge = 24 * 10 * 60 * 60;
 const app = express()
 const port = 3000
 const httpServer = require("http").createServer(app);
-const io = require("socket.io")(httpServer);
+const io = require("socket.io")(httpServer, {
+    cors: {
+      origin: 'http://localhost:4200',
+      methods: ["GET", "POST", "PATCH"],
+      credentials: true
+  }
+});
 
 app.use(express.static('test_back'));
 app.use(express.json())
@@ -70,20 +76,24 @@ app.use((req, res) => {
 
 // Websocket interactions
 
-io.on("connection", async (socket) => {
+io.on("connection", (socket) => {
   // either with send()
   // const token = socket.handshake.auth.token;
   // console.log(token);
   console.log("made connection here")
 
-  try {
-    let data = await getAllData.get_all_data("test@mail.com");
-    io.sockets.emit('data', data);
-  } catch (err) {
-    console.error(err);
-  }
-
-
+  socket.on("data", async (data) => {
+    console.log(data)
+    console.log(data.id)
+    const token = socket.handshake.auth.token;
+    console.log(token)
+    try {
+      let data = await getAllData.get_all_data("test@mail.com");
+      io.sockets.emit('data', data);
+    } catch (err) {
+      console.error(err);
+    }
+  })
 
   socket.on("message", (data) => {
         console.log(data.message);

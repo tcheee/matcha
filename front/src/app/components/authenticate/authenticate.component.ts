@@ -29,8 +29,14 @@ export class AuthenticateComponent implements OnInit {
   }
 
   onSubmit() {
-    this.authservice.login(this.form.value).subscribe(result => console.log(result))
-  }
+    this.authservice.login(this.form.value).subscribe(result => {
+      if (result.success){
+        console.log(result);
+        alert(result.message)
+      }else {
+        alert(result.message)
+      }})
+  };
 
   registerPage(){
     this.router.navigate(['register'])

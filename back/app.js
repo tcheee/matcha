@@ -46,7 +46,7 @@ app.post('/login/', async (req, res) => {
       let token = jwtCreation.create_token(user_id, maxAge)
       console.log(token);
       res.cookie('jwt', token, {maxAge: maxAge * 1000});
-      res.status(200).json(user_id);
+      res.status(200).json({message:"The user is connect", id: user_id);
     }
     else {
       res.status(404).send("error")

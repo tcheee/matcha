@@ -32,7 +32,7 @@ export class AuthenticateComponent implements OnInit {
     this.authservice.login(this.form.value).subscribe(result => {
       if (result.success){
         console.log(result);
-        alert(result.message)
+        this.authservice.getData()
       }else {
         alert(result.message)
       }})

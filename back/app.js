@@ -40,16 +40,20 @@ app.post('/activate/', (req, res) => {
 })
 
 app.post('/login/', async (req, res) => {
-    let user_id = await loginUser.login_user(req.body.email, req.body.password)
-    console.log(user_id);
-    if (user_id > 0) {
-      let token = jwtCreation.create_token(user_id, maxAge)
-      console.log(token);
-      res.cookie('jwt', token, {maxAge: maxAge * 1000});
-      res.status(200).json(user_id);
-    }
-    else {
-      res.status(404).send("error")
+    try {
+      let user_id = await loginUser.login_user(req.body.email, req.body.password)
+      console.log(user_id);
+      if (user_id > 0) {
+        let token = jwtCreation.create_token(user_id, maxAge)
+        console.log(token);
+        res.cookie('jwt', token, {maxAge: maxAge * 1000});
+        res.status(200).json({message:"User is connected", id: user_id});
+      }
+      else {
+        res.status(404).send("error")
+      }
+    } catch (err) {
+      console.error(err);
     }
 });
 
@@ -72,11 +76,16 @@ io.on("connection", async (socket) => {
   // console.log(token);
   console.log("made connection here")
 
-  let data = await getAllData.get_all_data("test@mail.com");
-  io.sockets.emit('data', data);
+  try {
+    let data = await getAllData.get_all_data("test@mail.com");
+    io.sockets.emit('data', data);
+  } catch (err) {
+    console.error(err);
+  }
+
+
 
   socket.on("message", (data) => {
-    
         console.log(data.message);
   });
 

@@ -64,6 +64,8 @@ io.on("connection", async (socket) => {
   // either with send()
   const token = socket.handshake.auth.token;
   console.log(token);
+  console.log(socket.id);
+  console.log("here")
   if (token) {
     const connectionStatus = await verifyToken.verify_token(token);
     if (connectionStatus) {

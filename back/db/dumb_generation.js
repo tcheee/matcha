@@ -1,4 +1,6 @@
 const db = require('./db.js')
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random()*(max-min+1)+min);
@@ -18,7 +20,8 @@ for (let i = 0; i < 500 ; i++) {
     let k = getRandomInt(0,9);
 
     let mail = "testnewo" + i + "@mail.com"
-    let password = "test123" + i
+    var password = "test123" + i
+    password = bcrypt.hash(password, saltRounds);
     let fname = firstname[k]
     let lname = lastname[k]
     let age = getRandomInt(18,65);

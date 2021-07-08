@@ -8,7 +8,6 @@ function block_user(from, to) {
         }
         else {
             const id_user = result.rows[0].id
-            mail.send_mail(body.mail, body.first_name, id_user);
             return(id_user)
         }
       })

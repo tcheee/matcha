@@ -4,12 +4,12 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 
-async function create_user(body) {
+function create_user(body) {
     let unix_timestamp = Date.now();
     let date = new Date(unix_timestamp)
     let interests = body.interests.join(';');
 
-    body.password = await bcrypt.hash(body.password, saltRounds);
+    body.password = bcrypt.hash(body.password, saltRounds);
 
     db.query('INSERT INTO users(mail, password, first_name, last_name, age, genre, orientation, lat, lng, biography, last_connection, is_active, interests) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING id;', [body.mail, body.password, body.first_name, body.last_name, body.age, body.genre, body.orientation, body.lat, body.lng, body.biography, date, '0', interests], (err, result) => {
         if (err) {

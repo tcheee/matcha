@@ -40,11 +40,13 @@ app.post('/activate/', (req, res) => {
 })
 
 app.post('/login/', async (req, res) => {
-    let user_id = await loginUser.login_user(req.body.mail, req.body.password)
+    let user_id = await loginUser.login_user(req.body.email, req.body.password)
+    console.log(user_id);
     if (user_id > 0) {
-      let token = jwtCreation.create_token(user_id)
-      res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge * 1000});
-      res.status(201).json(user_id);
+      let token = jwtCreation.create_token(user_id, maxAge)
+      console.log(token);
+      res.cookie('jwt', token, {maxAge: maxAge * 1000});
+      res.status(200).json(user_id);
     }
     else {
       res.status(404).send("error")

@@ -10,6 +10,6 @@ export class AuthServiceService {
 
   constructor(private http:HttpClient) { }
   login(data : any) :Observable<any>{
-    return this.http.post(`${baseUrl}`, data);
+    return this.http.post(`${baseUrl}`, data, {withCredentials: true});
   }
 }

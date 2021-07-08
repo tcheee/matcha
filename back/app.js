@@ -16,7 +16,13 @@ const maxAge = 24 * 10 * 60 * 60;
 const app = express()
 const port = 3000
 const httpServer = require("http").createServer(app);
-const io = require("socket.io")(httpServer);
+const io = require("socket.io")(httpServer, {
+    cors: {
+      origin: 'http://localhost:4200',
+      methods: ["GET", "POST", "PATCH"],
+      credentials: true
+  }
+});
 
 app.use(express.static('test_back'));
 app.use(express.json())

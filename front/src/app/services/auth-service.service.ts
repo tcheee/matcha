@@ -17,11 +17,13 @@ export class AuthServiceService {
     private socket : Socket,
     ) { }
 
-    getData() {
-      this.socket.emit('data', {id : 1003});
+    getData(id : number) {
+      console.log("EMIT")
+      this.socket.emit("data", {id : id} );
     }
     getResponseData() {
-      return this.socket.fromEvent('data').pipe(map((data: any) => console.log(data)));
+      console.log("RESPONSE")
+      return this.socket.fromEvent('data').pipe(map((data: any) => console.log("fdfdfdfdfdfd")));
     }
 
 

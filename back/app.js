@@ -76,14 +76,18 @@ io.on("connection", async (socket) => {
   // console.log(token);
   console.log("made connection here")
 
-  try {
-    let data = await getAllData.get_all_data("test@mail.com");
-    io.sockets.emit('data', data);
-  } catch (err) {
-    console.error(err);
-  }
-
-
+  socket.on("data", (data) => {
+    console.log(data)
+    console.log(data.id)
+    const token = socket.handshake.auth.token;
+    console.log(token)
+    try {
+      let data = await getAllData.get_all_data("test@mail.com");
+      io.sockets.emit('data', data);
+    } catch (err) {
+      console.error(err);
+    }
+  })
 
   socket.on("message", (data) => {
         console.log(data.message);

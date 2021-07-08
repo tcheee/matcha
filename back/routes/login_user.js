@@ -4,11 +4,11 @@ const bcrypt = require('bcrypt');
 
 function login_user(mail, password) {
     return new Promise((resolve, reject) => {
-        db.query('SELECT * from public.users where mail = $1;', [mail], async (err, res) => {
+        db.query('SELECT * from public.users where mail = $1;', [mail], (err, res) => {
             console.log(res.rows[0]);
             if (res.rows[0] != undefined) {
                 const result = res.rows[0];
-                const auth = await bcrypt.compare(password, result.password);
+                const auth = bcrypt.compare(password, result.password);
                 if (auth) {
                     console.log("Let's connect " + mail + " to the app!");
                     resolve(result.id);

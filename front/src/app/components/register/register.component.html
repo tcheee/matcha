@@ -1,7 +1,7 @@
- <mat-card style="text-align: center">
- <mat-card-title> Formulaire d'enregistrement </mat-card-title>
-
- <p>
+ <mat-card style="text-align: center ; background-color: #c0c0c0">
+ <mat-card-title style="font-family: URW Chancery L, cursive"> Registration Form </mat-card-title>
+  <mat-divider ></mat-divider>
+ <p style="margin: 20px">
  <mat-form-field appearance="outline">
     <mat-label>Email</mat-label>
     <input matInput #input placeholder="Ex. Pascale@gmail.com">
@@ -9,13 +9,13 @@
   </p>
   <p>
    <mat-form-field appearance="outline">
-    <mat-label>Prenom</mat-label>
+    <mat-label>First Name</mat-label>
     <input matInput #input placeholder="Ex. Pascale">
   </mat-form-field>
   </p>
     <p>
    <mat-form-field appearance="outline">
-    <mat-label>Nom</mat-label>
+    <mat-label>Last Name</mat-label>
     <input matInput #input placeholder="Ex. Dupont">
   </mat-form-field>
   </p>
@@ -27,11 +27,17 @@
   </p>
     <p>
    <mat-form-field appearance="outline">
-    <mat-label> Genre </mat-label>
+    <mat-label>Location</mat-label>
+    <input matInput #input maxlength="25" placeholder="Ex. France">
+  </mat-form-field>
+  </p>
+    <p>
+   <mat-form-field appearance="outline">
+    <mat-label> Gender </mat-label>
   <mat-select >
-    <mat-option value="option1">Homme</mat-option>
-    <mat-option value="option2">Femme</mat-option>
-    <mat-option value="option3">Non Binaire</mat-option>
+    <mat-option value="option1">Man</mat-option>
+    <mat-option value="option2">Woman</mat-option>
+    <mat-option value="option3">Non-binary</mat-option>
   </mat-select>
   </mat-form-field>
   </p>
@@ -39,22 +45,23 @@
    <mat-form-field appearance="outline">
     <mat-label> Orientation </mat-label>
   <mat-select >
-    <mat-option value="option1">Heterosexuel</mat-option>
-    <mat-option value="option2">Homosexuel</mat-option>
-    <mat-option value="option3">Bisexuel</mat-option>
+    <mat-option value="option1">Heterosexual</mat-option>
+    <mat-option value="option2">Homosexual</mat-option>
+    <mat-option value="option3">Bisexual</mat-option>
   </mat-select>
   </mat-form-field>
   </p>
     <p>
 <mat-form-field appearance="outline">
-    <mat-label>centre d'intérêt</mat-label>
-    <textarea matInput placeholder="Ex. #terasse #velo"></textarea>
+    <mat-label> Interests </mat-label>
+    <textarea matInput placeholder="Ex. #drink #hyking"></textarea>
   </mat-form-field>
   </p>
     <p>
 <mat-form-field appearance="outline">
-    <mat-label> Biographie </mat-label>
-    <textarea matInput placeholder="Ex. J'aime le surf..."></textarea>
+    <mat-label> Biography </mat-label>
+    <textarea matInput placeholder="Ex. I'm a good guy..."></textarea>
   </mat-form-field>
   </p>
+  <button mat-raised-button type="submit" style="background-color: #9c9c9c"> Create my account </button>
   </mat-card>

@@ -1,8 +1,8 @@
 const axios = require('axios')
 
 const data = {
-    mail: "thomasgroingogionoinogo43goknpo.cherret42@gmail.com", 
-    password: "myPasswordnotHash", 
+    mail: "che@mail.com", 
+    password: "root", 
     first_name: "Tom", 
     last_name: "Che", 
     age: 25, 

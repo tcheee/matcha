@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthServiceService} from '../../services/auth-service.service'
 @Component({
   selector: 'app-authenticate',
   templateUrl: './authenticate.component.html',
@@ -14,6 +15,7 @@ export class AuthenticateComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router : Router,
+    private authservice : AuthServiceService,
   ) {}
 
   ngOnInit() {
@@ -27,11 +29,11 @@ export class AuthenticateComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log("lllllllllll")
-    this.formSubmitAttempt = true;
+    this.authservice.login(this.form.value).subscribe(result => console.log(result))
   }
 
   registerPage(){
     this.router.navigate(['register'])
+
   }
 }

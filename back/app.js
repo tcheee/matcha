@@ -1,5 +1,6 @@
 const express = require('express')
 const cookieParser = require('cookie-parser')
+const cors = require('cors');
 
 const createUser = require('./routes/create_user.js')
 const activateUser = require('./routes/activate_user.js')
@@ -10,19 +11,22 @@ const verifyToken = require("./routes/verify_token")
 const timing = require("./routes/update_timestamp")
 const jwtCreation = require("./functions/create_token")
 const { requireAuth } = require("./middleware/authMiddleware");
-const io = require("socket.io")(3001);
 const maxAge = 24 * 10 * 60 * 60;
 
 const app = express()
 const port = 3000
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
 
+////app.use(express.static('test_back'));
 app.use(express.json())
+app.use(cors());
 app.use(cookieParser())
 
 // HTTP method
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.sendFile('/Users/tche/Documents/matcha/back/test_back/test_socket.html')
 });
 
 app.post('/register/', (req, res) => {
@@ -93,3 +97,5 @@ io.on("connection", async (socket) => {
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 });
+
+server.listen(4000);

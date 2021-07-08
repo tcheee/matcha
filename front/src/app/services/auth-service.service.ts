@@ -13,18 +13,21 @@ import { Socket } from 'ngx-socket-io';
 export class AuthServiceService {
 
   constructor(
-    private http:HttpClient,
+    private http: HttpClient,
     private socket : Socket,
     ) { }
 
     getData(id : number) {
       console.log("EMIT")
-      this.socket.emit("data", {id : id} );
+      this.socket.emit("data", {id : id}, (response: any) => {
+        console.log("REPONSE")
+        console.log(response)
+      });
     }
-    getResponseData() {
-      console.log("RESPONSE")
-      return this.socket.fromEvent('data').pipe(map((data: any) => console.log("fdfdfdfdfdfd")));
-    }
+    // getResponseData() {
+    //   console.log("RESPONSE")
+    //   return this.socket.fromEvent('data').pipe(map((data) => console.log(data)));
+    // }
 
 
 

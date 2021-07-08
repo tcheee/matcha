@@ -14,6 +14,7 @@ CREATE TABLE users
     fame INT NOT NULL DEFAULT 100,
     last_connection TIMESTAMP, 
     is_active BOOLEAN DEFAULT '0', 
+    is_online BOOLEAN DEFAULT '0';
     interests VARCHAR(65535) NOT NULL
 );
 

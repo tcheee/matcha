@@ -82,14 +82,17 @@ io.on("connection", (socket) => {
   // console.log(token);
   console.log("made connection here")
 
-  socket.on("data", async (data) => {
+  socket.on("data", async (data, callback) => {
     console.log(data)
     console.log(data.id)
     const token = socket.handshake.auth.token;
     console.log(token)
     try {
-      let data = await getAllData.get_all_data("test@mail.com");
-      io.sockets.emit('data', data);
+      const all_data = await getAllData.get_all_data("test@mail.com");
+      console.log(all_data);
+      callback({
+        data: all_data
+      });
     } catch (err) {
       console.error(err);
     }
@@ -98,11 +101,6 @@ io.on("connection", (socket) => {
   socket.on("message", (data) => {
         console.log(data.message);
   });
-
-  socket.on("data", async (data) => {
-    console.log(data.id);
-});
-
   // if (token) {
   //   const connectionStatus = await verifyToken.verify_token(token);
   //   if (connectionStatus) {

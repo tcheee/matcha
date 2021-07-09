@@ -15,11 +15,13 @@ import { SharedModule } from './shared/shared.module';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { ForgetpasswordComponent } from './components/forgetpassword/forgetpassword.component';
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 @NgModule({
   declarations: [
     AppComponent,
+    ForgetpasswordComponent,
   ],
   imports: [
     BrowserModule,

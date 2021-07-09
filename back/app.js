@@ -10,6 +10,7 @@ const getAllData = require('./routes/get_all_data.js')
 const verifyToken = require("./routes/verify_token")
 const resetPassword = require("./routes/reset_password.js")
 const resendPassword = require("./routes/resend_password.js")
+
 const timing = require("./routes/update_timestamp")
 const jwtCreation = require("./functions/create_token")
 const { requireAuth } = require("./middleware/authMiddleware");
@@ -25,6 +26,9 @@ const io = require("socket.io")(httpServer, {
       credentials: true
   }
 });
+const { sendMessage } = require("./sockets/sendMessage.js")(io);
+const { getDataAllUsers } = require("./sockets/getDataAllUsers.js")(io);
+
 
 app.use(express.static('test_back'));
 app.use(express.json())
@@ -88,54 +92,17 @@ app.use((req, res) => {
 
 // Websocket interactions
 
-io.on("connection", (socket) => {
-  // either with send()
-  // const token = socket.handshake.auth.token;
-  // console.log(token);
+const onConnection = (socket) => {
   console.log("made connection here")
 
-  socket.on("data", async (data, callback) => {
-    console.log(data)
-    console.log(data.id)
-    const token = socket.handshake.auth.token;
-    console.log(token)
-    try {
-      const all_data = await getAllData.get_all_data("test@mail.com");
-      console.log(all_data);
-      callback({
-        data: all_data
-      });
-    } catch (err) {
-      console.error(err);
-    }
-  })
+  socket.on('data', getDataAllUsers)
 
-  socket.on("message", (data) => {
-        console.log(data.message);
-  });
-  // if (token) {
-  //   const connectionStatus = await verifyToken.verify_token(token);
-  //   if (connectionStatus) {
-  //     //timing.update_timestamp(mail);
-  //     console.log("connection made with: " + socket.id);
+}
 
-  //     socket.emit("greetings", "Hey!", { "ms": "jane" }, Buffer.from([4, 3, 3, 1]));
+io.on("connection", onConnection);
 
-  //     // handle the event sent with socket.send()
-  //     socket.on("message", (data) => {
-  //       console.log(data);
-  //     });
 
-  //     // handle the event sent with socket.emit()
-  //     socket.on("salutations", (elem1, elem2, elem3) => {
-  //       console.log(elem1, elem2, elem3);
-  //     });
-  //   } 
-  // }
-  // else {
-  //   socket.send("error");
-  // }
-});
+// Connecting the server to the port
 
 httpServer.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)

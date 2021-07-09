@@ -68,6 +68,7 @@ CREATE TABLE matches
     id SERIAL PRIMARY KEY,
     mail_a VARCHAR(100) NOT NULL, 
     mail_b VARCHAR(100) NOT NULL,
+    room VARCHAR(100) NOT NULL UNIQUE,
     creation_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -99,8 +100,8 @@ INSERT INTO visits(from_mail, to_mail) VALUES
 INSERT INTO likes(from_mail, to_mail, likes) VALUES
  ('test@mail.com', 'to@mail.com', 1);
 
-INSERT INTO matches(mail_a, mail_b) VALUES
- ('test@mail.com', 'to@mail.com');
+INSERT INTO matches(mail_a, mail_b, room) VALUES
+ ('test@mail.com', 'to@mail.com', 'uuid-first-room');
 
 INSERT INTO blocks(from_mail, to_mail) VALUES
  ('test@mail.com', 'toblockingmail@mail.com');

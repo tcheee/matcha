@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators'
-import { baseUrl } from 'src/environments/environment';
+import { baseUrl, resetPasswordUrl } from 'src/environments/environment';
 
 // socket
 import { Socket } from 'ngx-socket-io';
@@ -35,6 +35,6 @@ export class AuthServiceService {
     return this.http.post(`${baseUrl}`, data, {withCredentials: true});
   }
   resetPassword(data : any) : Observable<any>{
-    return this.http.post(`${baseUrl}`, data)
+    return this.http.post(`${resetPasswordUrl}`, data)
   }
 }

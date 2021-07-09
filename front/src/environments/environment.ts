@@ -7,7 +7,7 @@ export const environment = {
 };
 
 export const baseUrl = 'http://localhost:3000/login'
-export const forgetPasswordUrl = 'http://localhost:3000/resend-password'
+export const resetPasswordUrl = 'http://localhost:3000/resend'
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

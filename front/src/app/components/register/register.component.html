@@ -1,40 +1,52 @@
  <mat-card style="text-align: center ; background-color: #c0c0c0">
  <mat-card-title style="font-family: URW Chancery L, cursive"> Registration Form </mat-card-title>
   <mat-divider ></mat-divider>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
  <p style="margin: 20px">
  <mat-form-field appearance="outline">
     <mat-label>Email</mat-label>
-    <input matInput #input placeholder="Ex. Pascale@gmail.com">
+    <input matInput #input placeholder="Ex. Pascale@gmail.com" formControlName="email"
+    class="form-control"/>
+  </mat-form-field>
+   <p>
+   <mat-form-field appearance="outline">
+    <mat-label>Password</mat-label>
+    <input matInput #input placeholder="Min. 6character" formControlName="password"
+    class="form-control">
   </mat-form-field>
   </p>
   <p>
    <mat-form-field appearance="outline">
     <mat-label>First Name</mat-label>
-    <input matInput #input placeholder="Ex. Pascale">
+    <input matInput #input placeholder="Ex. Pascale" formControlName="firstName"
+    class="form-control">
   </mat-form-field>
   </p>
     <p>
    <mat-form-field appearance="outline">
     <mat-label>Last Name</mat-label>
-    <input matInput #input placeholder="Ex. Dupont">
+    <input matInput #input placeholder="Ex. Dupont" formControlName="lastName"
+    class="form-control">
   </mat-form-field>
   </p>
   <p>
    <mat-form-field appearance="outline">
     <mat-label>Age</mat-label>
-    <input matInput #input maxlength="25" placeholder="Ex. 17">
+    <input matInput #input maxlength="25" placeholder="Ex. 17" formControlName="age"
+    class="form-control">
   </mat-form-field>
   </p>
     <p>
    <mat-form-field appearance="outline">
     <mat-label>Location</mat-label>
-    <input matInput #input maxlength="25" placeholder="Ex. France">
+    <input matInput #input maxlength="25" placeholder="Ex. France" formControlName="location"
+    class="form-control">
   </mat-form-field>
   </p>
     <p>
    <mat-form-field appearance="outline">
     <mat-label> Gender </mat-label>
-  <mat-select >
+  <mat-select formControlName="gender" class="form-control">
     <mat-option value="option1">Man</mat-option>
     <mat-option value="option2">Woman</mat-option>
     <mat-option value="option3">Non-binary</mat-option>
@@ -44,7 +56,7 @@
   <p>
    <mat-form-field appearance="outline">
     <mat-label> Orientation </mat-label>
-  <mat-select >
+  <mat-select formControlName="orientation" class="form-control">
     <mat-option value="option1">Heterosexual</mat-option>
     <mat-option value="option2">Homosexual</mat-option>
     <mat-option value="option3">Bisexual</mat-option>
@@ -54,14 +66,15 @@
     <p>
 <mat-form-field appearance="outline">
     <mat-label> Interests </mat-label>
-    <textarea matInput placeholder="Ex. #drink #hyking"></textarea>
+    <textarea matInput placeholder="Ex. #drink #hyking" formControlName="interest" class="form-control"></textarea>
   </mat-form-field>
   </p>
     <p>
 <mat-form-field appearance="outline">
     <mat-label> Biography </mat-label>
-    <textarea matInput placeholder="Ex. I'm a good guy..."></textarea>
+    <textarea matInput placeholder="Ex. I'm a good guy..."formControlName="biography" class="form-control" ></textarea>
   </mat-form-field>
   </p>
   <button mat-raised-button type="submit" style="background-color: #9c9c9c"> Create my account </button>
+  </form>
   </mat-card>

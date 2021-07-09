@@ -39,4 +39,4 @@ function check_match(from_mail, to_mail, like) {
     }
 }
 
-module.exports.check_match = check_match;
+module.exports = check_match;

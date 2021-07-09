@@ -2,8 +2,8 @@ const db = require('../../db/db.js')
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-function reset_password(uuid, password) {
-    password = bcrypt.hash(password, saltRounds);
+async function reset_password(uuid, password) {
+    password = await bcrypt.hash(password, saltRounds);
 
     db.query('UPDATE USERS set password=$1 where uuid=$2;', [password,uuid], (err, result) => {
         if (err) {

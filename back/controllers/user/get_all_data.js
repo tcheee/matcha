@@ -1,10 +1,10 @@
-const getAllUser = require('./get_all_users.js')
-const getAllBlocks = require('./get_all_blocks.js')
-const getAllMatches = require('./get_all_matches.js')
-const getAllLikes = require('./get_all_likes.js')
-const getAllUnlikes = require('./get_all_unlikes.js')
-const getReceivedLikes = require('./get_all_received_likes.js')
-const getReceivedUnlikes = require('./get_all_received_unlikes.js')
+const get_all_users = require('./get_all_users.js')
+const get_all_blocks = require('./get_all_blocks.js')
+const get_all_matches = require('./get_all_matches.js')
+const get_all_likes = require('./get_all_likes.js')
+const get_all_unlikes = require('./get_all_unlikes.js')
+const get_all_received_likes = require('./get_all_received_likes.js')
+const get_all_received_unlikes = require('./get_all_received_unlikes.js')
 
 function transformIdToArray(object, column_name) {
     var array = [];
@@ -15,17 +15,17 @@ function transformIdToArray(object, column_name) {
     return (array);
 }
 
-const get_all_data = async (mail) => {
+async function get_all_data(mail) {
     const data = {};
     data.self = {};
 
-    data.users = await getAllUser.get_all_users();
-    data.self.blocks = transformIdToArray(await getAllBlocks.get_all_blocks(mail), "to_mail");
-    data.self.matches = transformIdToArray(await getAllMatches.get_all_matches(mail), "case");
-    data.self.likes = transformIdToArray(await getAllLikes.get_all_likes(mail), "to_mail");
-    data.self.unlikes = transformIdToArray(await getAllUnlikes.get_all_unlikes(mail), "to_mail");
-    data.self.received_likes = transformIdToArray(await getReceivedLikes.get_all_received_likes(mail), "to_mail");
-    data.self.received_unlikes = transformIdToArray(await getReceivedUnlikes.get_all_received_unlikes(mail), "to_mail");
+    data.users = await get_all_users();
+    data.self.blocks = transformIdToArray(await get_all_blocks(mail), "to_mail");
+    data.self.matches = transformIdToArray(await get_all_matches(mail), "case");
+    data.self.likes = transformIdToArray(await get_all_likes(mail), "to_mail");
+    data.self.unlikes = transformIdToArray(await get_all_unlikes(mail), "to_mail");
+    data.self.received_likes = transformIdToArray(await get_all_received_likes(mail), "to_mail");
+    data.self.received_unlikes = transformIdToArray(await get_all_received_unlikes(mail), "to_mail");
 
     return(data);
 }

@@ -6,4 +6,4 @@ function create_token(id, maxAge) {
     });
 }
 
-module.exports.create_token = create_token;
+module.exports= create_token;

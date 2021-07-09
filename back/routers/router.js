@@ -2,15 +2,14 @@ const express = require('express');
 const router = express.Router();
 
 const create_user = require('../controllers/user/create_user.js')
-const activateUser = require('../controllers/user/activate_user.js')
-const loginUser = require('../controllers/user/login_user.js')
-const getAllUser = require('../controllers/user/get_all_users.js')
-const getAllData = require('../controllers/user/get_all_data.js')
-const verifyToken = require("../controllers/user/verify_token")
-const resetPassword = require("../controllers/user/reset_password.js")
-const resendPassword = require("../controllers/user/resend_password.js")
+const activate_user = require('../controllers/user/activate_user.js')
+const login_user = require('../controllers/user/login_user.js')
+const get_all_data = require('../controllers/user/get_all_data.js')
+const verify_token = require("../controllers/user/verify_token")
+const reset_password = require("../controllers/user/reset_password.js")
+const resend_password = require("../controllers/user/resend_password.js")
 const timing = require("../controllers/user/update_timestamp")
-const jwtCreation = require("../functions/create_token")
+const create_token = require("../functions/create_token")
 const { requireAuth } = require("../middleware/authMiddleware");
 const maxAge = 24 * 10 * 60 * 60;
 
@@ -46,12 +45,12 @@ router.post('/login/', async (req, res) => {
     }
 });
 
-router.post('/resendpassword/', (req, res) => {
+router.post('/resend-password/', (req, res) => {
   const status = resend_password(req.body.mail);
   res.send(status);
 });
 
-router.post('/resetpassword/', (req, res) => {
+router.post('/reset-password/', (req, res) => {
   const status = reset_password(req.body.uuid, req.body.password);
   res.send(status);
 });

@@ -1,7 +1,10 @@
 const axios = require('axios')
+const { v4: uuidv4 } = require('uuid');
+const uuid = uuidv4();
 
 const data = {
-    mail: "che@mail.com", 
+    mail: "che2@mail.com",
+    uuid: uuid, 
     password: "root", 
     first_name: "Tom", 
     last_name: "Che", 

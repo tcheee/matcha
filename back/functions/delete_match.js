@@ -12,4 +12,4 @@ function create_match(id_a, id_b) {
       })
 }
 
-module.exports.create_match = create_match;
+module.exports = create_match;

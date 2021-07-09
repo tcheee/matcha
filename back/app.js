@@ -8,6 +8,8 @@ const loginUser = require('./routes/login_user.js')
 const getAllUser = require('./routes/get_all_users.js')
 const getAllData = require('./routes/get_all_data.js')
 const verifyToken = require("./routes/verify_token")
+const resetPassword = require("./routes/reset_password.js")
+const resendPassword = require("./routes/resend_password.js")
 const timing = require("./routes/update_timestamp")
 const jwtCreation = require("./functions/create_token")
 const { requireAuth } = require("./middleware/authMiddleware");
@@ -61,6 +63,16 @@ app.post('/login/', async (req, res) => {
     } catch (err) {
       console.error(err);
     }
+});
+
+app.post('/resend-password/', (req, res) => {
+  const status = resendPassword.resend_password(req.body.mail);
+  res.send(status);
+});
+
+app.post('/reset-password/', (req, res) => {
+  const status = resetPassword.reset_password(req.body.uuid, req.body.password);
+  res.send(status);
 });
 
 app.post('/all/', async (req, res) => {

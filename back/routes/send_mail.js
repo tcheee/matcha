@@ -2,7 +2,7 @@
 const nodemailer = require("nodemailer");
 
 // async..await is not allowed in global scope, must use a wrapper
-async function send_mail(mail, fname, id_user) {
+async function send_mail(mail, subject, content) {
     console.log(id_user);
   // Generate test SMTP service account from ethereal.email
   // Only needed if you don't have a real mail account for testing
@@ -23,8 +23,8 @@ async function send_mail(mail, fname, id_user) {
   let info = await transporter.sendMail({
     from: '"Tom de Matcha 👻" <tom@matcha.com>', // sender address
     to: mail, // list of receivers
-    subject: "Hello, please confirm you Matcha account 👋👋👋", // Subject line
-    text: "Hello " + fname + ", you create an account to access Matcha. Please click on this link to active your account : http://localhost:4200/" + id_user, // plain text body
+    subject: subject, // Subject line
+    text: content // plain text body
     //html: "<b>Hello world?</b>", // html body
   });
 

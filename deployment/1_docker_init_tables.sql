@@ -1,14 +1,15 @@
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+/*CREATE EXTENSION "uuid-ossp";
+uuid DEFAULT public.uuid_generate_v4() NOT NULL, */
 
 CREATE TABLE users
 (
     id SERIAL PRIMARY KEY,
-    uuid NOT NULL DEFAULT uuid_generate_v1(),
+    uuid VARCHAR(100),
     mail VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(100) NOT NULL,
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
-    age VARCHAR(100) NOT NULL,
+    age INT NOT NULL,
     genre INT NOT NULL,
     orientation INT NOT NULL,
     lat DECIMAL,
@@ -82,9 +83,9 @@ CREATE TABLE blocks
     creation_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO users(mail, password, first_name, last_name, age, genre, orientation, lat, lng, biography, interests) VALUES
- ('test@mail.com', 'oitnbionbtin', 'another', 'guy', 25, 1, 0, 10.15, 25.30, 'This is my bio', 'test;interest;lol'),
- ('testigo@mail.com', 'oitngorpbionbtin', 'another', 'tom', 25, 1, 0, 10.20, 18.18756478, 'I love dating apps', 'test;interest;lol');
+INSERT INTO users(uuid, mail, password, first_name, last_name, age, genre, orientation, lat, lng, biography, interests) VALUES
+ ('testbbbb', 'test@mail.com', 'oitnbionbtin', 'another', 'guy', 25, 1, 0, 10.15, 25.30, 'This is my bio', 'test;interest;lol'),
+ ('aaa-roigngionio', 'testigo@mail.com', 'oitngorpbionbtin', 'another', 'tom', 25, 1, 0, 10.20, 18.18756478, 'I love dating apps', 'test;interest;lol');
 
 INSERT INTO images(user_mail, image_link) VALUES
  ('test@mail.com', 'http://link/ec2/photos_1');

@@ -1,5 +1,6 @@
 const db = require('./db.js')
 const bcrypt = require('bcrypt');
+const { v4: uuidv4 } = require('uuid');
 const saltRounds = 10;
 
 function getRandomInt(min, max) {
@@ -19,6 +20,7 @@ const images = ["https://cdn.pixabay.com/photo/2017/08/30/12/45/girl-2696947__48
 for (let i = 0; i < 500 ; i++) {
     let k = getRandomInt(0,9);
 
+    const uuid = uuidv4();
     let mail = "testnewo" + i + "@mail.com"
     var password = "test123" + i
     password = bcrypt.hash(password, saltRounds);
@@ -38,7 +40,7 @@ for (let i = 0; i < 500 ; i++) {
     let unix_timestamp = Date.now();
     let timestamp = new Date(unix_timestamp);
 
-    db.query('INSERT INTO users(mail, password, first_name, last_name, age, genre, orientation, lat, lng, biography, last_connection, is_active, interests) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13);', [mail, password, fname, lname, age, genre, orientation, latt, long, bio, timestamp, '1', interests], (err, result) => {
+    db.query('INSERT INTO users(uuid, mail, password, first_name, last_name, age, genre, orientation, lat, lng, biography, last_connection, is_active, interests) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14);', [uuid, mail, password, fname, lname, age, genre, orientation, latt, long, bio, timestamp, '1', interests], (err, result) => {
         console.log('Dumbing done for ' + mail);
       })
 

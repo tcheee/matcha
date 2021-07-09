@@ -46,7 +46,7 @@ router.post('/login/', async (req, res) => {
 });
 
 router.post('/resend-password/', (req, res) => {
-  const status = resend_password(req.body.mail);
+  const status = resend_password(req.body);
   res.send(status);
 });
 

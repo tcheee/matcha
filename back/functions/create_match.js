@@ -1,7 +1,10 @@
 const db = require('../db/db.js')
+const { v4: uuidv4 } = require('uuid');
 
 function create_match(id_a, id_b) {
-    db.query('INSERT INTO matches(mail_a, mail_b) VALUES($1, $2) RETURNING id;', [id_a, id_b], (err, result) => {
+    const uuid = uuidv4();
+
+    db.query('INSERT INTO matches(mail_a, mail_b, room) VALUES($1, $2, $1) RETURNING room;', [id_a, id_b, uuid], (err, result) => {
         if (err) {
             console.log(err)
             return(-1)

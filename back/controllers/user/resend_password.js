@@ -15,7 +15,7 @@ function resend_password(body) {
                 const content = "Hello " + first_name + ", you ask to reinitialize your password for Matcha. Please click on this link to change your password : http://localhost:4200/reset-password/" + uuid
                 const subject = "Hello, please follow the link to reset your password 👋👋👋"
                 send_mail(body.email, subject, content);
-                return(uuid)
+                return(0)
             }
             else {
                 return (-1)

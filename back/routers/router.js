@@ -61,7 +61,12 @@ router.post('/resend-password/', (req, res) => {
 
 router.post('/reset-password/', (req, res) => {
   const status = reset_password(req.body.uuid, req.body.password);
-  res.send(status);
+  if (status == 0) {
+    res.status(200).send({success: true});
+  }
+  else {
+    res.status(404).send({success: false});
+  }
 });
 
 router.post('/all/', async (req, res) => {

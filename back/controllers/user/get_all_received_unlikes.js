@@ -1,8 +1,8 @@
-const db = require('../db/db.js')
+const db = require('../../db/db.js')
 
-function get_all_unlikes(mail) {
+function get_all_received_unlikes(mail) {
     return new Promise((resolve, reject) => {
-        db.query('Select * from public.likes where from_mail = $1 and likes = -1;', [mail], (err, result) => {
+        db.query('Select * from public.likes where to_mail = $1 and likes = -1;', [mail], (err, result) => {
             if (err) {
                 console.log(err)
                 reject(err)
@@ -15,4 +15,4 @@ function get_all_unlikes(mail) {
     });
 }
 
-module.exports.get_all_unlikes = get_all_unlikes;
+module.exports = get_all_received_unlikes;

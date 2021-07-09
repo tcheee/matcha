@@ -16,4 +16,4 @@ function create_like(body) {
     match.check_match(body.from_mail, body.to_mail, body.like);
 }
 
-module.exports.create_like = create_like;
+module.exports = create_like;

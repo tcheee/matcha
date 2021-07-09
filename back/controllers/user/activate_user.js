@@ -1,4 +1,4 @@
-const db = require('../db/db.js')
+const db = require('../../db/db.js')
 
 function activate_user(id) {
     db.query('UPDATE USERS set is_active=true where id=$1;', [id], (err, result) => {
@@ -12,4 +12,4 @@ function activate_user(id) {
       })
 }
 
-module.exports.activate_user = activate_user;
+module.exports = activate_user;

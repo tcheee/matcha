@@ -13,4 +13,4 @@ function verify_token(token) {
     });
 }
 
-module.exports.verify_token = verify_token;
+module.exports = verify_token;

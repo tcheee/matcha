@@ -13,4 +13,4 @@ function create_notification(body) {
       })
 }
 
-module.exports.create_notification = create_notification;
+module.exports = create_notification;

@@ -1,4 +1,4 @@
-const db = require('../db/db.js')
+const db = require('../../db/db.js')
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
@@ -16,4 +16,4 @@ function reset_password(uuid, password) {
       })
 }
 
-module.exports.reset_password = reset_password;
+module.exports = reset_password;

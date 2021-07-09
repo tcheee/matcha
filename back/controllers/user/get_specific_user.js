@@ -1,4 +1,4 @@
-const db = require('../db/db.js')
+const db = require('../../db/db.js')
 
 function get_specific_user(id) {
     db.query('Select id, mail, first_name, last_name, age, genre, orientation, lat, lng, biography, fame, last_connection, interests from public.users where id = $1;', [id], (err, result) => {
@@ -17,4 +17,4 @@ function get_specific_user(id) {
       })
 }
 
-module.exports.get_specific_user = get_specific_user;
+module.exports = get_specific_user;

@@ -1,5 +1,5 @@
-const db = require('../db/db.js')
-const mail = require('./send_mail.js')
+const db = require('../../db/db.js')
+const send_mail = require('./send_mail.js')
 const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
@@ -21,10 +21,10 @@ function create_user(body) {
         else {
             const content = "Hello " + body.first_name + ", you create an account to access Matcha. Please click on this link to active your account : http://localhost:4200/activate-account/" + uuid
             const subject = "Hello, please confirm you Matcha account 👋👋👋"
-            mail.send_mail(body.mail, subject, content);
+            send_mail(body.mail, subject, content);
             return(id_user)
         }
       })
 }
 
-module.exports.create_user = create_user;
+module.exports = create_user;

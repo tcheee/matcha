@@ -15,4 +15,4 @@ function get_all_messages(data) {
     });
 }
 
-module.exports.get_all_messages = get_all_messages;
+module.exports = get_all_messages;

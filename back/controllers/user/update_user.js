@@ -1,4 +1,4 @@
-const db = require('../db/db.js')
+const db = require('../../db/db.js')
 
 function update_user(data) {
     data.interests = data.interests.join(';');
@@ -15,4 +15,4 @@ function update_user(data) {
       })
 }
 
-module.exports.update_user = update_user;
+module.exports = update_user;

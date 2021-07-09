@@ -1,4 +1,4 @@
-const db = require('../db/db.js')
+const db = require('../../db/db.js')
 const bcrypt = require('bcrypt');
 
 
@@ -24,4 +24,4 @@ function login_user(mail, password) {
         });
 }
 
-module.exports.login_user = login_user;
+module.exports = login_user;

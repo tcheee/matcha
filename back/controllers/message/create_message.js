@@ -13,4 +13,4 @@ function create_message(data) {
       })
 }
 
-module.exports.create_message = create_message;
+module.exports = create_message;

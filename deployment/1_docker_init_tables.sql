@@ -1,10 +1,7 @@
-/*CREATE EXTENSION "uuid-ossp";
-uuid DEFAULT public.uuid_generate_v4() NOT NULL, */
-
 CREATE TABLE users
 (
     id SERIAL PRIMARY KEY,
-    uuid VARCHAR(100),
+    uuid VARCHAR(100) UNIQUE,
     mail VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(100) NOT NULL,
     first_name VARCHAR(100) NOT NULL,
@@ -18,7 +15,7 @@ CREATE TABLE users
     fame INT NOT NULL DEFAULT 100,
     last_connection TIMESTAMP, 
     is_active BOOLEAN DEFAULT '0', 
-    is_online BOOLEAN DEFAULT '0';
+    is_online BOOLEAN DEFAULT '0',
     interests VARCHAR(65535) NOT NULL
 );
 

@@ -26,11 +26,13 @@ const io = require("socket.io")(httpServer, {
       credentials: true
   }
 });
-const { sendMessage } = require("./sockets/sendMessage.js")(io);
-const { getDataAllUsers } = require("./sockets/getDataAllUsers.js")(io);
+const { getDataAllUsers } = require("./sockets/getDataAllUsers.js")(io)
+const { handleChat } = require("./sockets/handleChat.js")(io)
+const { handleTyping } = require("./sockets/handleTyping.js")(io)
+const { handleRoomJoining } = require("./sockets/handleRoomJoining.js")(io)
 
 
-app.use(express.static('test_back'));
+app.use(express.static('test_back')); // To delete
 app.use(express.json())
 app.use(cors({credentials: true, origin: 'http://localhost:4200'}));
 app.use(cookieParser())
@@ -92,11 +94,15 @@ app.use((req, res) => {
 
 // Websocket interactions
 
+var Client = []
+
 const onConnection = (socket) => {
   console.log("made connection here")
 
   socket.on('data', getDataAllUsers)
-
+  socket.on('room', handleRoomJoining)
+  socket.on('chat', handleChat)
+  socket.on('typing', handleTyping)
 }
 
 io.on("connection", onConnection);

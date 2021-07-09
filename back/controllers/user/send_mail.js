@@ -38,4 +38,4 @@ async function send_mail(mail, subject, content) {
 
 send_mail().catch(console.error);
 
-module.exports.send_mail = send_mail;
+module.exports = send_mail;

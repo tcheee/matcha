@@ -30,4 +30,4 @@ const get_all_data = async (mail) => {
     return(data);
 }
 
-module.exports.get_all_data = get_all_data;
+module.exports = get_all_data;

@@ -15,4 +15,4 @@ function get_all_notifications(mail) {
     });
 }
 
-module.exports.get_all_notifications = get_all_notifications;
+module.exports = get_all_notifications;

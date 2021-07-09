@@ -1,4 +1,4 @@
-const getAllData = require('../routes/get_all_data.js')
+const getAllData = require('../controllers/user/get_all_data.js')
 
 module.exports = (io) => {
     const handleChat = function (data) {

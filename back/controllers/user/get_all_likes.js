@@ -1,4 +1,4 @@
-const db = require('../db/db.js')
+const db = require('../../db/db.js')
 
 function get_all_likes(mail) {
     return new Promise((resolve, reject) => {
@@ -15,4 +15,4 @@ function get_all_likes(mail) {
     });
 }
 
-module.exports.get_all_likes = get_all_likes;
+module.exports = get_all_likes;

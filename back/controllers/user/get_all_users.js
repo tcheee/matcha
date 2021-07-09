@@ -1,4 +1,4 @@
-const db = require('../db/db.js')
+const db = require('../../db/db.js')
 
 function get_all_users() {
     return new Promise((resolve, reject) => {
@@ -19,4 +19,4 @@ function get_all_users() {
     });
 }
 
-module.exports.get_all_users = get_all_users;
+module.exports = get_all_users;

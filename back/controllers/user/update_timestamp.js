@@ -1,4 +1,4 @@
-const db = require('../db/db.js')
+const db = require('../../db/db.js')
 
 function update_timestamp(id) {
     const timestamp = Date.now();
@@ -15,4 +15,4 @@ function update_timestamp(id) {
       })
 }
 
-module.exports.update_timestamp = update_timestamp;
+module.exports = update_timestamp;

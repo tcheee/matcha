@@ -10,6 +10,7 @@ function resend_password(body) {
         }
         else {
             if (result.rows[0].uuid != undefined) {
+                console.log('here')
                 const uuid = result.rows[0].uuid
                 const first_name = result.rows[0].first_name
                 const content = "Hello " + first_name + ", you ask to reinitialize your password for Matcha. Please click on this link to change your password : http://localhost:4200/reset-password/" + uuid

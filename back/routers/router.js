@@ -46,16 +46,12 @@ router.post('/login/', async (req, res) => {
 });
 
 router.post('/resend-password/', (req, res) => {
-  try {
-    const status = resend_password(req.body);
-    if (status == 0) {
-      res.status(200).send({success: true});
-    }
-    else {
-      res.status(404).send({success: false});
-    }
-  } catch (err) {
-      res.status(404).send({success: false});
+  const status = resend_password(req.body);
+  if (status == 0) {
+    res.status(200).send({success: true});
+  }
+  else {
+    res.status(404).send({success: false});
   }
 });
 

@@ -45,7 +45,8 @@ router.post('/login/', async (req, res) => {
     }
 });
 
-router.post('/resend-password/', (req, res) => {
+router.post('/resend-password', (req, res) => {
+  console.log("here")
   const status = resend_password(req.body);
   if (status == 0) {
     res.status(200).send({success: true});

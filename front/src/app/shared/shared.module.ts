@@ -39,6 +39,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 // components
 import { AuthenticateComponent } from '../components/authenticate/authenticate.component';
 import { RegisterComponent } from '../components/register/register.component';
+import { FileUploadComponent } from '../components/file-upload/file-upload.component';
 
 // forms 
 import { ReactiveFormsModule } from '@angular/forms'
@@ -46,7 +47,7 @@ import { ReactiveFormsModule } from '@angular/forms'
 const COMPONENT = [
   AuthenticateComponent,
   RegisterComponent,
-
+  FileUploadComponent,
 ];
 
 const MATERIAL_MODULES = [

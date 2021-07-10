@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+// chips 
+import {MatChipInputEvent} from '@angular/material/chips';
+
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -10,8 +15,18 @@ export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
   submitted = false;
-
-  constructor(private formBuilder: FormBuilder) { }
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
+  interests: Array<any> = [
+    {name: '#hiking'},
+    {name: '#food'},
+    {name: '#surfing'},
+  ];
+  constructor(
+    private formBuilder: FormBuilder,
+      ) { }
 
   ngOnInit() {
       this.registerForm = this.formBuilder.group({
@@ -23,8 +38,9 @@ export class RegisterComponent implements OnInit {
           location: ['', Validators.required],
           gender: ['', Validators.required],
           orientation: ['', Validators.required],
-          interest: ['', ],
+          interest: ['', Validators.required],
           biography: ['', ],
+          img1: ['', Validators.required],
       },
     );
   }
@@ -33,7 +49,7 @@ export class RegisterComponent implements OnInit {
   get f() { return this.registerForm.controls; }
 
   onSubmit() {
-    console.log("dddd")
+    console.log(this.interests)
     console.log(this.registerForm.value)
       this.submitted = true;
       
@@ -50,6 +66,26 @@ export class RegisterComponent implements OnInit {
   onReset() {
       this.submitted = false;
       this.registerForm.reset();
+  }
+
+  add(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    // Add our fruit
+    if (value) {
+      this.interests.push({name: value});
+    }
+
+    // Clear the input value
+    event.chipInput!.clear();
+  }
+
+  remove(interest: any): void {
+    const index = this.interests.indexOf(interest);
+
+    if (index >= 0) {
+      this.interests.splice(index, 1);
+    }
   }
 
 }

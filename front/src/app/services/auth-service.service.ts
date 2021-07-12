@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpBackend, HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { baseUrl, resetPasswordUrl, registerUrl, imgUrl } from 'src/environments/environment';
+import { baseUrl, resetPasswordUrl, registerUrl} from 'src/environments/environment';
 
 // socket
 import { Socket } from 'ngx-socket-io';

@@ -16,6 +16,9 @@ async function create_user(body) {
         interests.push(body.interest[elem].name)
     }
     const interest_db = interests.join(";")
+
+    console.log(body.password);
+
     body.password = await bcrypt.hash(body.password, saltRounds);
 
     console.log(body)

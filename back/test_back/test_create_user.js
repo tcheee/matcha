@@ -3,13 +3,13 @@ const { v4: uuidv4 } = require('uuid');
 const uuid = uuidv4();
 
 const data = {
-    mail: "che2@mail.com",
+    email: "che12345@mail.com",
     uuid: uuid, 
     password: "root", 
-    first_name: "Tom", 
-    last_name: "Che", 
+    firstName: "Tom", 
+    lastName: "Che", 
     age: 25, 
-    genre: 0, 
+    gender: 0, 
     orientation: 0, 
     lat: 5, 
     lng: 10, 

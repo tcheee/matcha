@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const multer = require('multer');
-var upload = multer();
+var multer  = require('multer')
+var upload = multer({ dest: 'uploads/' })
 
 const create_user = require('../controllers/user/create_user.js')
 const activate_user = require('../controllers/user/activate_user.js')
@@ -19,20 +19,21 @@ router.get('/', (req, res) => {
   res.sendFile('/Users/tche/Documents/matcha/back/test_back/test_socket.html')
 });
 
-router.post('/register/', upload.fields(['img']), (req, res) => {
+router.post('/register/', upload.single('fileInput'), (req, res) => {
   console.log("passs")
-  console.log(req.files)
   console.log(req.body)
-    let status = create_user(req.body);
-    if (status == 0) {
-      res.status(200).send({success: true});
-    }
-    else if (status == -2) {
-      res.status(400).send({success: false, message: "mail already used" })
-    }
-    else {
-      res.status(404).send({success: false});
-    }
+  console.log(req.files)
+  console.log('oigrngion')
+  let status = create_user(req.body);
+  if (status == 0) {
+    res.status(200).send({success: true});
+  }
+  else if (status == -2) {
+    res.status(400).send({success: false, message: "mail already used" })
+  }
+  else {
+    res.status(404).send({success: false});
+  }
 });
 
 router.post('/activate/', (req, res) => {

@@ -34,6 +34,7 @@ CREATE TABLE notifications
     to_mail VARCHAR(100) NOT NULL,
     notification_type VARCHAR(100) NOT NULL,
     content VARCHAR(255),
+    seen BOOLEAN DEFAULT '0',
     creation_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

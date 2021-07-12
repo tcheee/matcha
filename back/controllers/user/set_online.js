@@ -1,7 +1,7 @@
 const db = require('../../db/db.js')
 
-function activate_online(id) {
-    db.query('UPDATE USERS set is_online=true where id=$1;', [id], (err, result) => {
+function set_online(mail) {
+    db.query('UPDATE USERS set is_online=true where id=$1;', [mail], (err, result) => {
         if (err) {
             console.log(err)
             return(-1);
@@ -12,4 +12,4 @@ function activate_online(id) {
       })
 }
 
-module.exports = activate_online;
+module.exports = set_online;

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -24,6 +24,12 @@ export class RegisterComponent implements OnInit {
     {name: '#food'},
     {name: '#surfing'},
   ];
+
+  @ViewChild('fileInput')
+  fileInput : any;
+
+  file: File | null = null;
+
   constructor(
     private formBuilder: FormBuilder,
       ) { }
@@ -86,6 +92,15 @@ export class RegisterComponent implements OnInit {
     if (index >= 0) {
       this.interests.splice(index, 1);
     }
+  }
+
+  onClickFileInputButton(): void {
+    this.fileInput.nativeElement.click();
+  }
+
+  onChangeFileInput(): void {
+    const files: { [key: string]: File } = this.fileInput.nativeElement.files;
+    this.file = files[0];
   }
 
 }

@@ -2,7 +2,7 @@
  <mat-card-title style="font-family: URW Chancery L, cursive"> Registration Form </mat-card-title>
   <mat-divider ></mat-divider>
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
- <p style="margin: 20px">
+ <p style="margin: 20px 0px 0px 0px">
  <mat-form-field appearance="outline">
     <mat-label>Email</mat-label>
     <input matInput #input placeholder="Ex. Pascale@gmail.com" formControlName="email"
@@ -33,13 +33,6 @@
    <mat-form-field appearance="outline">
     <mat-label>Age</mat-label>
     <input matInput #input maxlength="25" placeholder="Ex. 17" formControlName="age"
-    class="form-control">
-  </mat-form-field>
-  </p>
-    <p>
-   <mat-form-field appearance="outline">
-    <mat-label>Location</mat-label>
-    <input matInput #input maxlength="25" placeholder="Ex. France" formControlName="location"
     class="form-control">
   </mat-form-field>
   </p>
@@ -82,15 +75,32 @@
            >
   </mat-chip-list>
 </mat-form-field>
+  </p>
+  <p>
+  <input type="file" style="display: none" #fileInput accept="image/*" (change)="onChangeFileInput()" />
+  <button mat-raised-button color="primary" class="file-select-button" (click)="onClickFileInputButton()">
+    <mat-icon>attach_file</mat-icon>
+    Choose a Picture
+  </button>
+  <h3 class="file-name" *ngIf="!file; else fileName">File name is ...</h3>
+  <ng-template #fileName>
+    <h3 class="file-name">{{ file?.name }}</h3>
+  </ng-template>
     <p>
 <mat-form-field appearance="outline">
     <mat-label> Biography </mat-label>
     <textarea matInput placeholder="Ex. I'm a good guy..."formControlName="biography" class="form-control" ></textarea>
   </mat-form-field>
   </p>
+  <h2 style="margin: 5px"> Do you want to be Geolocalize ? </h2>
   <p>
-     <app-file-upload formControlName="img1"></app-file-upload>
-  </p>
-  <button mat-raised-button type="submit" style="background-color: #9c9c9c"> Create my account </button>
+  <mat-radio-group aria-label="Select an option">
+  <mat-radio-button value="1">yes</mat-radio-button>
+  <mat-radio-button value="2">no</mat-radio-button>
+</mat-radio-group>
+</p>
+  <button mat-raised-button disabled *ngIf="!file" title="You must choose a Picture"> Create my account </button>
+  <button mat-raised-button type="submit" style="background-color: #9c9c9c" *ngIf="file"> Create my account </button>
+
   </form>
   </mat-card>

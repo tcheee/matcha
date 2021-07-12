@@ -34,11 +34,19 @@ export class AuthServiceService {
   login(data : any) :Observable<any>{
     return this.http.post(`${baseUrl}`, data, {withCredentials: true});
   }
+<<<<<<< HEAD
   resetPassword(data : any) : Observable<any>{
     return this.http.post(`${resetPasswordUrl}`, data, {withCredentials: true})
   }
   register(data : any) : Observable<any>{
     console.log("test");
     return this.http.post(`${registerUrl}`, data, {withCredentials: true})
+=======
+  resetPassword(data : any) {
+    return this.http.post(`${resetPasswordUrl}`, data).subscribe(data => console.log(data))
   }
-}
+  register(data : any){
+    this.http.post(`${registerUrl}`, data).subscribe(data => console.log(data))
+  }
+>>>>>>> 5a308da1a7d35dc4af9d7c31c1dbec44595acdcc
+  }

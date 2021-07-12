@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 var multer  = require('multer')
-var upload = multer({ dest: 'uploads/' })
+var storage = multer.memoryStorage()
+var upload = multer({ storage: storage })
 
 const create_user = require('../controllers/user/create_user.js')
 const activate_user = require('../controllers/user/activate_user.js')
@@ -10,6 +11,7 @@ const get_all_data = require('../controllers/user/get_all_data.js')
 const verify_token = require("../controllers/user/verify_token")
 const reset_password = require("../controllers/user/reset_password.js")
 const resend_password = require("../controllers/user/resend_password.js")
+const upload_image = require("../controllers/user/upload_image.js")
 const timing = require("../controllers/user/update_timestamp")
 const create_token = require("../functions/create_token")
 const { requireAuth } = require("../middleware/authMiddleware");
@@ -19,14 +21,14 @@ router.get('/', (req, res) => {
   res.sendFile('/Users/tche/Documents/matcha/back/test_back/test_socket.html')
 });
 
-router.post('/register/', upload.single('img'), (req, res) => {
-  console.log(req.body)
-  console.log(req.file)
-  let status = create_user(req.body);
-  if (status == 0) {
+router.post('/register/', upload.single('img'), async (req, res) => {
+  const encoded = req.file.buffer.toString('base64')
+  let status = await create_user(req.body);
+  let image_upload = await upload_image(req.body, encoded);
+  if (status == 0 && image_upload == 0) {
     res.status(200).send({success: true});
   }
-  else if (status == -2) {
+  else if (status == -2 && image_upload == 0) {
     res.status(400).send({success: false, message: "mail already used" })
   }
   else {

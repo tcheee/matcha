@@ -5,12 +5,14 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 
-async function create_user(body) {
+function create_user(body) {
+    return new Promise(async (resolve, reject) => {
     const uuid = uuidv4();
     let unix_timestamp = Date.now();
     let date = new Date(unix_timestamp)
 
-    let interests = [];
+    const interest_db = ''
+    //let interests = [];
 
     console.log(body.interest)
 
@@ -27,24 +29,25 @@ async function create_user(body) {
     body.lat = parseFloat(body.lat, 10);
     body.lng = parseFloat(body.lng, 10)
 
-    // db.query('INSERT INTO users(uuid, mail, password, first_name, last_name, age, genre, orientation, lat, lng, biography, last_connection, is_active, interests) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING id;', [uuid, body.email, body.password, body.firstName, body.lastName, body.age, body.gender, body.orientation, body.lat, body.lng, body.biography, date, '0', interest_db], (err, result) => {
-    //     if (err) {
-    //         if (err.constraint == 'users_mail_key') {
-    //             console.log('Mail already exists in the db.')
-    //             return (-2)
-    //         }
-    //         else {
-    //             console.log(err)
-    //             return(-1)
-    //         }
-    //     }
-    //     else {
-    //         const content = "Hello " + body.first_name + ", you create an account to access Matcha. Please click on this link to active your account : http://localhost:4200/activate-account/" + uuid
-    //         const subject = "Hello, please confirm you Matcha account 👋👋👋"
-    //         send_mail(body.email, subject, content);
-    //         return (0)
-    //     }
-    //   })
+    db.query('INSERT INTO users(uuid, mail, password, first_name, last_name, age, genre, orientation, lat, lng, biography, last_connection, is_active, interests) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING id;', [uuid, body.email, body.password, body.firstName, body.lastName, body.age, body.gender, body.orientation, body.lat, body.lng, body.biography, date, '0', interest_db], (err, result) => {
+        if (err) {
+            if (err.constraint == 'users_mail_key') {
+                console.log('Mail already exists in the db.')
+                resolve (-2)
+            }
+            else {
+                console.log(err)
+                resolve (-1)
+            }
+        }
+        else {
+            const content = "Hello " + body.first_name + ", you create an account to access Matcha. Please click on this link to active your account : http://localhost:4200/activate-account/" + uuid
+            const subject = "Hello, please confirm you Matcha account 👋👋👋"
+            send_mail(body.email, subject, content);
+            resolve (0)
+        }
+      })
+    })
 }
 
 module.exports = create_user;

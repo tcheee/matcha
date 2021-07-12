@@ -6,6 +6,7 @@ const get_all_unlikes = require('./get_all_unlikes.js')
 const get_all_received_likes = require('./get_all_received_likes.js')
 const get_all_received_unlikes = require('./get_all_received_unlikes.js')
 const get_all_visits = require('./get_all_visits.js')
+const get_first_image = require('./get_first_image.js')
 
 function transformIdToArray(object, column_name) {
     var array = [];
@@ -15,11 +16,30 @@ function transformIdToArray(object, column_name) {
     return (array);
 }
 
+ function addFirstImage(users) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            for (elem in users) {
+                console.log(users[elem].mail)
+                users[elem].image = await get_first_image(users[elem].mail)
+            }
+            resolve (0)
+        } catch (err) {
+            console.error(err);
+            reject(err)
+          }
+
+    })
+}
+
+
+
 async function get_all_data(mail) {
     const data = {};
     data.self = {};
 
     data.users = await get_all_users();
+    await addFirstImage(data.users)
     data.self.blocks = transformIdToArray(await get_all_blocks(mail), "to_mail");
     data.self.matches = transformIdToArray(await get_all_matches(mail), "case");
     data.self.likes = transformIdToArray(await get_all_likes(mail), "to_mail");

@@ -34,6 +34,7 @@ export class AuthServiceService {
   login(data : any) :Observable<any>{
     return this.http.post(`${baseUrl}`, data, {withCredentials: true});
   }
+
   resetPassword(data : any) {
     return this.http.post(`${resetPasswordUrl}`, data).subscribe(data => console.log(data))
   }

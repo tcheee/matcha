@@ -40,7 +40,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private readonly geolocation$: GeolocationService,
-    private service : AuthServiceService,
+    private authservice : AuthServiceService,
       ) { }
 
   ngOnInit() {
@@ -82,7 +82,7 @@ export class RegisterComponent implements OnInit {
       }
       )
       // send to back
-      this.service.register(this.registerFormConfirm);
+      this.authservice.register(this.registerFormConfirm);
       // display form values on success
      // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
      console.log(this.registerFormConfirm)

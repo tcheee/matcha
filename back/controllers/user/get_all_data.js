@@ -5,13 +5,13 @@ const get_all_likes = require('./get_all_likes.js')
 const get_all_unlikes = require('./get_all_unlikes.js')
 const get_all_received_likes = require('./get_all_received_likes.js')
 const get_all_received_unlikes = require('./get_all_received_unlikes.js')
+const get_all_visits = require('./get_all_visits.js')
 
 function transformIdToArray(object, column_name) {
     var array = [];
     for (i in object) {
         array[i] = object[i][column_name];
     }
-    console.log(array);
     return (array);
 }
 
@@ -26,6 +26,7 @@ async function get_all_data(mail) {
     data.self.unlikes = transformIdToArray(await get_all_unlikes(mail), "to_mail");
     data.self.received_likes = transformIdToArray(await get_all_received_likes(mail), "to_mail");
     data.self.received_unlikes = transformIdToArray(await get_all_received_unlikes(mail), "to_mail");
+    data.self.visits = transformIdToArray(await get_all_visits(mail), "to_mail");
 
     return(data);
 }

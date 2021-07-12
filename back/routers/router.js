@@ -19,11 +19,9 @@ router.get('/', (req, res) => {
   res.sendFile('/Users/tche/Documents/matcha/back/test_back/test_socket.html')
 });
 
-router.post('/register/', upload.single('fileInput'), (req, res) => {
-  console.log("passs")
+router.post('/register/', upload.single('img'), (req, res) => {
   console.log(req.body)
-  console.log(req.files)
-  console.log('oigrngion')
+  console.log(req.file)
   let status = create_user(req.body);
   if (status == 0) {
     res.status(200).send({success: true});

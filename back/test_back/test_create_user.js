@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 const uuid = uuidv4();
 
 const data = {
-    email: "che12345@mail.com",
+    email: "vi12345@mail.com",
     uuid: uuid, 
     password: "root", 
     firstName: "Tom", 

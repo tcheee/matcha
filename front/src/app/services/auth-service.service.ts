@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpBackend, HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators'
-import { baseUrl, resetPasswordUrl, registerUrl } from 'src/environments/environment';
+import { baseUrl, resetPasswordUrl, registerUrl, imgUrl } from 'src/environments/environment';
 
 // socket
 import { Socket } from 'ngx-socket-io';
@@ -15,6 +14,7 @@ export class AuthServiceService {
   constructor(
     private http: HttpClient,
     private socket : Socket,
+//    private handler : HttpBackend,
     ) { }
 
     getData(id : number) {
@@ -38,6 +38,25 @@ export class AuthServiceService {
     return this.http.post(`${resetPasswordUrl}`, data).subscribe(data => console.log(data))
   }
   register(data : any){
-    this.http.post(`${registerUrl}`, data).subscribe(data => console.log(data))
-  }
+    const payload: FormData = new FormData();
+    payload.append('age', data.age);
+    payload.append('biography', data.biography);
+    payload.append('email', data.email);
+    payload.append('firstName', data.firstName);
+    payload.append('lastName', data.lastName);
+    payload.append('gender', data.gender);
+    payload.append('orientation', data.orientation);
+    payload.append('password', data.password);
+    payload.append('lat', data.lat);
+    payload.append('lng', data.lng);
+    payload.append('interest', data.interest);
+    payload.append('img', data.img);
+
+    payload.forEach((value, key) => {
+    console.log("key %s: value %s", key, value);
+    })
+   // this.http = new HttpClient(this.handler);
+    this.http.post(`${registerUrl}`, payload)
+    .subscribe(data => console.log())
+    }
   }

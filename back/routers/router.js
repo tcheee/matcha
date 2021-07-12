@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
+var upload = multer();
 
 const create_user = require('../controllers/user/create_user.js')
 const activate_user = require('../controllers/user/activate_user.js')
@@ -17,7 +19,10 @@ router.get('/', (req, res) => {
   res.sendFile('/Users/tche/Documents/matcha/back/test_back/test_socket.html')
 });
 
-router.post('/register/', (req, res) => {
+router.post('/register/', upload.fields(['img']), (req, res) => {
+  console.log("passs")
+  console.log(req.body)
+  console.log(req.files)
     let status = create_user(req.body);
     res.send(status);
 });

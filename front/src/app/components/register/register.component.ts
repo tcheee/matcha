@@ -98,7 +98,6 @@ export class RegisterComponent implements OnInit {
 
     // Add our fruit
     if (value) {
-      console.log("laa")
       if (value[0].includes("#")){
         this.interests.push({name: value});
       }

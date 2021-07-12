@@ -1,42 +1,30 @@
 const db = require('../db/db.js')
-const create_match = require('../functions/create_match.js')
-const delete_match = require('../functions/delete_match.js')
+const check_rating = require('./check_rating.js')
 
-function check_match(from_mail, to_mail, like) {
-    if (like == 1) {
-        db.query('Select * from public.likes where from_mail = $1 and to_mail = $2 and like = 1;' [body.to_mail, body.from_mail], (err, res) => {
-            if (err) {
-                console.log(err)
-                return(-1)
-            }
-            else {
-                if (res.rows[0] != undefined) {
-                    const match_creation = create_match(from_mail, to_mail);
-                    return(match_creation)
-                }
-                else {
-                    return (-1);
-                }
-            }
-        })
+async function update_rating(mail, like) {
+    let fame = await check_rating(mail);
+
+    if (fame == -1) {
+        return (-1)
     }
     else {
-        db.query('Select * from public.matches where mail_a = $1 and mail_b = $2;' [body.to_mail, body.from_mail], (err, res) => {
-            if (err) {
-                console.log(err)
-                return(-1)
-            }
-            else {
-                if (res.rows[0] != undefined) {
-                    const match_deletion = delete_match(from_mail, to_mail);
-                    return(match_deletion)
+        fame += like 
+        if (fame >= 0) {
+            db.query('UPDATE USERS set fame = $2 where mail=$1;', [mail, fame], (err, result) => {
+                if (err) {
+                    console.log(err)
+                    return(-1);
                 }
                 else {
-                    return (-1);
+                    console.log("user updated");
+                    return(0)
                 }
-            }
-        })
+              })
+        }
+        else {
+            return (0);
+        }
     }
 }
 
-module.exports = check_match;
+module.exports = update_rating;

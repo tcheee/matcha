@@ -15,7 +15,7 @@ function create_like(body) {
       })
     
 
-    update_rating(body.to_mail);
+    update_rating(body.to_mail, body.like);
     check_match(body.from_mail, body.to_mail, body.like);
 }
 

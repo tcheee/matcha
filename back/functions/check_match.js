@@ -1,6 +1,6 @@
 const db = require('../db/db.js')
-const create_match = require('../functions/create_match.js')
-const delete_match = require('../functions/delete_match.js')
+const create_match = require('./create_match.js')
+const delete_match = require('./delete_match.js')
 
 function check_match(from_mail, to_mail, like) {
     if (like == 1) {

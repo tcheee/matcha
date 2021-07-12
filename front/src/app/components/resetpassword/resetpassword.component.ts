@@ -12,6 +12,7 @@ import { AuthServiceService} from '../../services/auth-service.service'
 export class ResetpasswordComponent implements OnInit {
   form! : FormGroup;
   formSubmitAttempt! : boolean;
+  public href: string = "";
 
   constructor(
     private fb: FormBuilder,
@@ -28,6 +29,9 @@ export class ResetpasswordComponent implements OnInit {
         Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
         ]],
     });
+
+    this.href = this.router.url;
+    console.log(this.href);
   }
 
   onSubmit() {

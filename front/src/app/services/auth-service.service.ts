@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators'
-import { baseUrl, resetPasswordUrl } from 'src/environments/environment';
+import { baseUrl, resetPasswordUrl, registerUrl } from 'src/environments/environment';
 
 // socket
 import { Socket } from 'ngx-socket-io';
@@ -36,5 +36,8 @@ export class AuthServiceService {
   }
   resetPassword(data : any) : Observable<any>{
     return this.http.post(`${resetPasswordUrl}`, data)
+  }
+  register(data : any) : Observable<any>{
+    return this.http.post(`${registerUrl}`, data)
   }
 }

@@ -11,8 +11,8 @@
    <p>
    <mat-form-field appearance="outline">
     <mat-label>Password</mat-label>
-    <input matInput #input placeholder="Min. 6character" formControlName="password"
-    class="form-control">
+    <input matInput #input placeholder="Num/Upp/Low/special" formControlName="password"
+    class="form-control" type="password">
   </mat-form-field>
   </p>
   <p>
@@ -101,6 +101,5 @@
 </p>
   <button mat-raised-button disabled *ngIf="!file" title="You must choose a Picture"> Create my account </button>
   <button mat-raised-button type="submit" style="background-color: #9c9c9c" *ngIf="file"> Create my account </button>
-
   </form>
   </mat-card>

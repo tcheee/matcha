@@ -10,7 +10,7 @@ function resend_password(body) {
             resolve(-1)
         }
         else {
-            if (result.rows[0].uuid != undefined) {
+            if (result.rows[0] != undefined) {
                 console.log('here')
                 const uuid = result.rows[0].uuid
                 const first_name = result.rows[0].first_name

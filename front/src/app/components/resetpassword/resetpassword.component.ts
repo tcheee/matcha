@@ -36,9 +36,9 @@ export class ResetpasswordComponent implements OnInit {
 
   onSubmit() {
     console.log(this.uuid)
-    console.log(this.form.value)
     const data = {uuid: this.uuid, password: this.form.value.password}
-    this.authservice.resetPassword(data)
+    console.log(data)
+    this.authservice.changePassword(data)
   };
 
 

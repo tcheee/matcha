@@ -70,8 +70,9 @@ router.post('/resend-password', async (req, res) => {
   }
 });
 
-router.post('/reset-password/', (req, res) => {
-  const status = reset_password(req.body.uuid, req.body.password);
+router.post('/reset-password/', async (req, res) => {
+  console.log(req.body)
+  const status = await reset_password(req.body.uuid, req.body.password);
   if (status == 0) {
     res.status(200).send({success: true});
   }

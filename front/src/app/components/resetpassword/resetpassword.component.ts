@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthServiceService} from '../../services/auth-service.service'
 
 @Component({
@@ -12,12 +12,13 @@ import { AuthServiceService} from '../../services/auth-service.service'
 export class ResetpasswordComponent implements OnInit {
   form! : FormGroup;
   formSubmitAttempt! : boolean;
-  public href: string = "";
+  public uuid: string = ''!;
 
   constructor(
     private fb: FormBuilder,
     private router : Router,
     private authservice : AuthServiceService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -30,12 +31,14 @@ export class ResetpasswordComponent implements OnInit {
         ]],
     });
 
-    this.href = this.router.url;
-    console.log(this.href);
+    this.uuid = this.route.snapshot.queryParamMap.get('uuid') || '';
   }
 
   onSubmit() {
-    this.authservice.resetPassword(this.form.value)
+    console.log(this.uuid)
+    console.log(this.form.value)
+    const data = {uuid: this.uuid, password: this.form.value.password}
+    this.authservice.resetPassword(data)
   };
 
 

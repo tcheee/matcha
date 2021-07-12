@@ -20,7 +20,15 @@ router.get('/', (req, res) => {
 router.post('/register/', (req, res) => {
     console.log("test");
     let status = create_user(req.body);
-    res.send(status);
+    if (status == 0) {
+      res.status(200).send({success: true});
+    }
+    else if (status == -2) {
+      res.status(400).send({success: false, message: "mail already used" })
+    }
+    else {
+      res.status(404).send({success: false});
+    }
 });
 
 router.post('/activate/', (req, res) => {
@@ -46,9 +54,9 @@ router.post('/login/', async (req, res) => {
     }
 });
 
-router.post('/resend-password', (req, res) => {
-  console.log("here")
-  const status = resend_password(req.body);
+router.post('/resend-password', async (req, res) => {
+  console.log(req.body)
+  const status = await resend_password(req.body);
   if (status == 0) {
     res.status(200).send({success: true});
   }

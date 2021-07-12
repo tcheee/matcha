@@ -2,7 +2,7 @@ const db = require('../db/db.js')
 const check_match = require('../functions/check_match.js')
 const update_rating = require('../functions/update_rating.js')
 
-function create_like(body) {
+async function create_like(body) {
     db.query('INSERT INTO likes(from_mail, to_mail, likes) VALUES($1, $2, $3) RETURNING id;', [body.from_mail, body.to_mail, body.like], (err, result) => {
         if (err) {
             console.log(err)
@@ -16,7 +16,9 @@ function create_like(body) {
     
 
     update_rating(body.to_mail, body.like);
-    check_match(body.from_mail, body.to_mail, body.like);
+    let match = await check_match(body.from_mail, body.to_mail, body.like);
+
+    return(match)
 }
 
 module.exports = create_like;

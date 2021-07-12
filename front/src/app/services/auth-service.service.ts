@@ -35,9 +35,10 @@ export class AuthServiceService {
     return this.http.post(`${baseUrl}`, data, {withCredentials: true});
   }
   resetPassword(data : any) : Observable<any>{
-    return this.http.post(`${resetPasswordUrl}`, data)
+    return this.http.post(`${resetPasswordUrl}`, data, {withCredentials: true})
   }
   register(data : any) : Observable<any>{
-    return this.http.post(`${registerUrl}`, data)
+    console.log("test");
+    return this.http.post(`${registerUrl}`, data, {withCredentials: true})
   }
 }

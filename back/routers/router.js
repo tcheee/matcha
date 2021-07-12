@@ -18,6 +18,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/register/', (req, res) => {
+    console.log("test");
     let status = create_user(req.body);
     res.send(status);
 });

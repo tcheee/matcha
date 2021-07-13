@@ -8,6 +8,8 @@ const get_all_received_unlikes = require('./get_all_received_unlikes.js')
 const get_all_visits = require('./get_all_visits.js')
 const get_specific_user = require('./get_specific_user.js')
 const get_first_image = require('./get_first_image.js')
+const get_all_notifications = require('../notification/get_all_notifications.js')
+const get_unseen_notifications = require('../notification/get_unseen_notifications.js')
 
 function transformIdToArray(object, column_name) {
     var array = [];
@@ -40,6 +42,8 @@ async function get_all_data(mail) {
     data.users = await get_all_users(mail);
     await addFirstImage(data.users) ;
     data.self.user = await get_specific_user(mail);
+    data.self.notifications_unseen = await get_unseen_notifications(mail);
+    data.self.notifications = await get_all_notifications(mail);
     data.self.blocks = transformIdToArray(await get_all_blocks(mail), "to_mail");
     data.self.matches = transformIdToArray(await get_all_matches(mail), "case");
     data.self.likes = transformIdToArray(await get_all_likes(mail), "to_mail");

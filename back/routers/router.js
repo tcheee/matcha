@@ -25,9 +25,15 @@ router.get('/', (req, res) => {
 });
 
 router.post('/register/', upload.single('img'), async (req, res) => {
-  const encoded = req.file.buffer.toString('base64')
+  let image_upload;
+  if (req.file) {
+    const encoded = req.file.buffer.toString('base64')
+    image_upload = await upload_image(req.body, encoded);
+  }
+  else {
+    image_upload = 0
+  }
   let status = await create_user(req.body);
-  let image_upload = await upload_image(req.body, encoded);
   if (status == 0 && image_upload == 0) {
     res.status(200).send({success: true});
   }

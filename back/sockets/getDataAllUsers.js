@@ -3,6 +3,7 @@ const get_all_data = require('../controllers/user/get_all_data.js')
 module.exports = (io, client) => {
     const getDataAllUsers = async function(data, callback) {
         console.log(client);
+        console.log(data);
         const socket = this;
         const token = socket.handshake.auth.token;
         console.log(token)

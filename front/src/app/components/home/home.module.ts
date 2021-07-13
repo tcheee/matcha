@@ -8,8 +8,10 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import { MatCardModule } from '@angular/material/card'
+import { MatCardModule } from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
 import { fromEventPattern } from 'rxjs';
+import { SharedModule} from '../../shared/shared.module'
 
 @NgModule({
   declarations: [ HomeComponent, ProfileComponent],
@@ -22,6 +24,7 @@ import { fromEventPattern } from 'rxjs';
       MatListModule,
       MatToolbarModule,
       MatCardModule,
+      MatButtonModule,
   ]
 })
 export class HomeModule { }

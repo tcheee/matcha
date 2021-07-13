@@ -66,10 +66,4 @@ export class ChatComponent implements OnInit {
 
     this.messageContent = '';
   }
-
-
-
-  onSubmit() {
-
-  };
 }

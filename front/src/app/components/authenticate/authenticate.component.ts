@@ -30,12 +30,15 @@ export class AuthenticateComponent implements OnInit {
 
   onSubmit() {
     this.authservice.login(this.form.value).subscribe(result => {
-      if (result.success){
-        console.log(result);
-      }else {
-        console.log(result)
+      if (result.message = "User is connected"){
         this.authservice.getData(result.id)
-      }})
+
+      }else {
+        /// wait for toms to send a bad result
+        alert("You're email or password do not exist")
+        return ;
+      }
+    })
   };
 
   forgetPasswordPage(){

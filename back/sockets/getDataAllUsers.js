@@ -2,13 +2,12 @@ const get_all_data = require('../controllers/user/get_all_data.js')
 
 module.exports = (io, client) => {
     const getDataAllUsers = async function(data, callback) {
-        console.log(client);
+        let mail = data.mail
         const socket = this;
         const token = socket.handshake.auth.token;
         console.log(token)
         try {
-          const all_data = await get_all_data("test@mail.com");
-          // console.log(all_data);
+          const all_data = await get_all_data(mail);
           callback({data: all_data});
         } catch (err) {
           console.error(err);

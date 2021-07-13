@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpBackend, HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { baseUrl, resetPasswordUrl, registerUrl} from 'src/environments/environment';
+import { baseUrl, resetPasswordUrl, registerUrl, changePasswordUrl} from 'src/environments/environment';
 
 // socket
 import { Socket } from 'ngx-socket-io';
@@ -39,6 +39,11 @@ export class AuthServiceService {
   resetPassword(data : any) {
     return this.http.post(`${resetPasswordUrl}`, data).subscribe(data => console.log(data))
   }
+
+  changePassword(data : any) {
+    return this.http.post(`${changePasswordUrl}`, data).subscribe(data => console.log(data))
+  }
+
   register(data : any){
     const payload: FormData = new FormData();
     payload.append('age', data.age);

@@ -10,11 +10,11 @@ function resend_password(body) {
             resolve(-1)
         }
         else {
-            if (result.rows[0].uuid != undefined) {
+            if (result.rows[0] != undefined) {
                 console.log('here')
                 const uuid = result.rows[0].uuid
                 const first_name = result.rows[0].first_name
-                const content = "Hello " + first_name + ", you ask to reinitialize your password for Matcha. Please click on this link to change your password : http://localhost:4200/reset-password/" + uuid
+                const content = "Hello " + first_name + ", you ask to reinitialize your password for Matcha. Please click on this link to change your password : http://localhost:4200/reset-password?uuid=" + uuid
                 const subject = "Hello, please follow the link to reset your password 👋👋👋"
                 send_mail(body.email, subject, content);
                 resolve(0)

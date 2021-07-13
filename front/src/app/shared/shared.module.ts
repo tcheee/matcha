@@ -35,6 +35,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MatCommonModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 
 // components
 import { AuthenticateComponent } from '../components/authenticate/authenticate.component';
@@ -97,11 +98,13 @@ const MATERIAL_MODULES = [
     CommonModule,
     ... MATERIAL_MODULES,
     ReactiveFormsModule,
+    FormsModule,
   ],
   exports: [
     ... MATERIAL_MODULES,
     ... COMPONENT,
     ReactiveFormsModule,
+    FormsModule,
   ]
 })
 export class SharedModule { }

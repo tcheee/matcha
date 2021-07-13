@@ -31,7 +31,7 @@ export class AuthenticateComponent implements OnInit {
   onSubmit() {
     this.authservice.login(this.form.value).subscribe(result => {
       if (result.message = "User is connected"){
-        this.authservice.getData(result.id)
+        this.authservice.getData(this.form.value.email)
 
       }else {
         /// wait for toms to send a bad result

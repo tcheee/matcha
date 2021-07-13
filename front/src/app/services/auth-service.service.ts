@@ -17,11 +17,12 @@ export class AuthServiceService {
 //    private handler : HttpBackend,
     ) { }
 
-    getData(id : number) {
+    getData(mail : string) {
       console.log("EMIT")
-      this.socket.emit("data", {id : id}, (response: any) => {
-        console.log("REPONSE")
-        console.log(response)
+      this.socket.emit("data", {mail : mail}, (response: any) => {
+        if (response.data){
+          console.log(response)
+        }
       });
     }
     // getResponseData() {

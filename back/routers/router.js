@@ -17,6 +17,9 @@ const create_token = require("../functions/create_token")
 const { requireAuth } = require("../middleware/authMiddleware");
 const maxAge = 24 * 10 * 60 * 60;
 
+
+router.use(express.static('test_back')); // To delete
+
 router.get('/', (req, res) => {
   res.sendFile('/Users/tche/Documents/matcha/back/test_back/test_socket.html')
 });

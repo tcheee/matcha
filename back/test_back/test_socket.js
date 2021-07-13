@@ -17,6 +17,7 @@ var message = document.getElementById('message'),
 
 // Emit events
 btn_room.addEventListener('click', function(){
+    console.log("click to join the room")
     socket.emit('room', {
         room: room.value
     });

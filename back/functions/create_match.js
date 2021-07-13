@@ -10,8 +10,8 @@ function create_match(id_a, id_b) {
             return(-1)
         }
         else {
-            const id_match = result.rows[0].id
-            return(id_match)
+            const room = result.rows[0].room
+            return(room)
         }
       })
 }

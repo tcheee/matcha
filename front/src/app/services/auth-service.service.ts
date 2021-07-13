@@ -25,6 +25,10 @@ export class AuthServiceService {
         }
       });
     }
+
+    sendMessage(from: string, to: string, content: string, room: string) {
+      this.socket.emit("data", {from : from, to: to, content: content, room: room})
+    }
     // getResponseData() {
     //   console.log("RESPONSE")
     //   return this.socket.fromEvent('data').pipe(map((data) => console.log(data)));

@@ -1,6 +1,6 @@
-const db = require('../db/db.js')
-const check_match = require('../functions/check_match.js')
-const update_rating = require('../functions/update_rating.js')
+const db = require('../../db/db.js')
+const check_match = require('../../functions/check_match.js')
+const update_rating = require('../../functions/update_rating.js')
 
 async function create_like(body) {
     db.query('INSERT INTO likes(from_mail, to_mail, likes) VALUES($1, $2, $3) RETURNING id;', [body.from_mail, body.to_mail, body.like], (err, result) => {

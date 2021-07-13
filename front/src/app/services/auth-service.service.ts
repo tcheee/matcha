@@ -20,8 +20,9 @@ export class AuthServiceService {
     getData(id : number) {
       console.log("EMIT")
       this.socket.emit("data", {id : id}, (response: any) => {
-        console.log("REPONSE")
-        console.log(response)
+        if (response.data){
+          console.log(response)
+        }
       });
     }
     // getResponseData() {

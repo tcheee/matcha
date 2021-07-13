@@ -1,4 +1,4 @@
-const db = require('../db/db.js')
+const db = require('../../db/db.js')
 
 function create_notification(from, to, type) {
     db.query('INSERT INTO notifications(from_mail, to_mail, notification_type) VALUES($1, $2, $3) RETURNING id;', [from, to, type], (err, result) => {

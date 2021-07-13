@@ -16,4 +16,4 @@ import { reducers } from './reducers';
   //  EffectsModule.forFeature([MainEffects], )
   ]
 })
-export class SelfStoreModule { }
+export class UsersStoreModule { }

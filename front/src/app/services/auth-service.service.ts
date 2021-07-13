@@ -9,7 +9,7 @@ import { Socket } from 'ngx-socket-io';
 // ngrx imports
 import { Store, } from '@ngrx/store';
 // store imports
-import { RootStoreState, SelfAction} from '../root-store';
+import { RootStoreState, SelfAction, UsersAction} from '../root-store';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +28,7 @@ export class AuthServiceService {
       this.socket.emit("data", {mail : mail}, (response: any) => {
         if (response.data){
           this.store$.dispatch(SelfAction.sendDatatoStore({self: response.data}))
+          this.store$.dispatch(UsersAction.sendDatatoStore({users: response.data}))
           console.log(response)
         }
       });

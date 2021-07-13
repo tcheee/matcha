@@ -1,4 +1,4 @@
-const db = require('../db/db.js')
+const db = require('../../db/db.js')
 
 function get_all_notifications(mail) {
     return new Promise((resolve, reject) => {

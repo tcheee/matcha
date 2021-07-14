@@ -3,9 +3,6 @@ import { HttpBackend, HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { baseUrl, resetPasswordUrl, registerUrl, changePasswordUrl} from 'src/environments/environment';
 
-// socket
-import { Socket } from 'ngx-socket-io';
-
 // ngrx imports
 import { Store, } from '@ngrx/store';
 // store imports
@@ -18,27 +15,9 @@ export class AuthServiceService {
 
   constructor(
     private http: HttpClient,
-    private socket : Socket,
     private store$: Store<RootStoreState.RootState>
 //    private handler : HttpBackend,
     ) { }
-
-    getData(mail : string) {
-      console.log("EMIT")
-      this.socket.emit("data", {mail : mail}, (response: any) => {
-        if (response.data){
-          this.store$.dispatch(SelfAction.sendDatatoStore({self: response.data}))
-          this.store$.dispatch(UsersAction.sendDatatoStore({users: response.data}))
-          console.log(response)
-        }
-      });
-    }
-    // getResponseData() {
-    //   console.log("RESPONSE")
-    //   return this.socket.fromEvent('data').pipe(map((data) => console.log(data)));
-    // }
-
-
 
   login(data : any) :Observable<any>{
     return this.http.post(`${baseUrl}`, data, {withCredentials: true});

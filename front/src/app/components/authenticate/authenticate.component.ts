@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthServiceService} from '../../services/auth-service.service'
+import { socketService} from '../../services/socket-service.service'
 @Component({
   selector: 'app-authenticate',
   templateUrl: './authenticate.component.html',
@@ -16,6 +17,7 @@ export class AuthenticateComponent implements OnInit {
     private fb: FormBuilder,
     private router : Router,
     private authservice : AuthServiceService,
+    private socketservice: socketService
   ) {}
 
   ngOnInit() {
@@ -31,10 +33,9 @@ export class AuthenticateComponent implements OnInit {
   onSubmit() {
     this.authservice.login(this.form.value).subscribe(result => {
       if (result.message = "User is connected"){
-        this.authservice.getData(this.form.value.email)
+        this.socketservice.getData(this.form.value.email)
         this.router.navigate(['/home'])
-
-      }else {
+      } else {
         /// wait for toms to send a bad result
         alert("You're email or password do not exist")
         return ;

@@ -17,6 +17,7 @@ import { environment, resetPasswordUrl } from '../environments/environment';
 import { ForgetpasswordComponent } from './components/forgetpassword/forgetpassword.component';
 import { ResetpasswordComponent } from './components/resetpassword/resetpassword.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { DisconnectComponent } from './components/disconnect/disconnect.component';
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 @NgModule({
@@ -25,6 +26,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     ForgetpasswordComponent,
     ResetpasswordComponent,
     ChatComponent,
+    DisconnectComponent,
   ],
   imports: [
     BrowserModule,

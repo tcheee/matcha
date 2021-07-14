@@ -11,6 +11,14 @@
         <mat-icon>person</mat-icon>
         <span>Profile</span>
       </mat-list-item>
+      <mat-list-item [routerLink]="'match'" (click)="sidenav.toggle()">
+        <mat-icon>favorite</mat-icon>
+        <span>Match </span>
+      </mat-list-item>
+               <mat-list-item [routerLink]="'history'" (click)="sidenav.toggle()">
+        <mat-icon>history</mat-icon>
+        <span>History</span>
+      </mat-list-item>
      </mat-nav-list>
     </mat-sidenav>
 <router-outlet></router-outlet>

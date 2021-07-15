@@ -28,10 +28,10 @@ export class RegisterComponent implements OnInit {
   addOnBlur = true;
   ipAdress : string = "";
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
-  interests: Array<any> = [
-    {name: '#hiking'},
-    {name: '#food'},
-    {name: '#surfing'},
+  interests: string[] = [
+    '#hiking',
+    '#food',
+    '#surfing',
   ];
 
   @ViewChild('fileInput')
@@ -110,7 +110,7 @@ export class RegisterComponent implements OnInit {
     // Add our fruit
     if (value) {
       if (value[0].includes("#")){
-        this.interests.push({name: value});
+        this.interests.push(value);
       }
       else{
         alert("you must have an # on the first character")

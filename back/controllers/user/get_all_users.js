@@ -9,10 +9,10 @@ function get_all_users(mail) {
             }
             else {
                 var users = result.rows;
-                users = users.map(user => {
-                    user.interests = user.interests.split(';');
-                    return user;
-                })
+                // users = users.map(user => {
+                //     user.interests = user.interests.split(';');
+                //     return user;
+                // })
                 resolve(users)
             }
         });

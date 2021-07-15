@@ -23,6 +23,10 @@
         <mat-icon>favorite</mat-icon>
         <span class="align-middle">Match </span>
       </mat-list-item>
+      <mat-list-item [routerLink]="'chat'" (click)="sidenav.toggle()">
+        <mat-icon>chat</mat-icon>
+        <span class="align-middle">Chat</span>
+      </mat-list-item>
                <mat-list-item [routerLink]="'history'" (click)="sidenav.toggle()">
         <mat-icon>history</mat-icon>
         <span class="align-middle">History</span>

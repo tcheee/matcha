@@ -4,6 +4,7 @@ import { HomeComponent } from './home.component';
 import { ProfileComponent } from '../profile/profile.component';
 import { HistoryComponent} from '../history/history.component';
 import { MatchComponent } from '../match/match.component';
+import { ChatComponent} from '../chat/chat.component'
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
         path : 'match',
         component : MatchComponent,
       },
+      {
+        path: 'chat',
+        component: ChatComponent,
+      }
     ]
   }];
 

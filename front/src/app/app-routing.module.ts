@@ -6,7 +6,6 @@ import { AuthenticateComponent} from './components/authenticate/authenticate.com
 import { RegisterComponent } from './components/register/register.component';
 import { ForgetpasswordComponent} from './components/forgetpassword/forgetpassword.component';
 import { ResetpasswordComponent} from './components/resetpassword/resetpassword.component';
-import { ChatComponent} from './components/chat/chat.component';
 
 const routes: Routes = [
   {path: '', component: AuthenticateComponent},
@@ -14,7 +13,6 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'forget-password', component: ForgetpasswordComponent},
   {path: 'reset-password', component: ResetpasswordComponent},
-  {path: 'chat', component: ChatComponent}
 ];
 
 @NgModule({

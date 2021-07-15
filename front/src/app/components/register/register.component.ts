@@ -5,8 +5,9 @@ import { take } from 'rxjs/operators';
 
 // chips 
 import {MatChipInputEvent} from '@angular/material/chips';
-// geo 
-import {GeolocationService} from '@ng-web-apis/geolocation';
+// geo
+import { LocationService} from '../../services/location.service';
+
 // services
 import { AuthServiceService} from '../../services/auth-service.service'
 
@@ -17,14 +18,15 @@ import { AuthServiceService} from '../../services/auth-service.service'
 })
 export class RegisterComponent implements OnInit {
 
-  lat : number;
-  lng : number;
+  lat : string = "";
+  lng : string = "";
   registerForm: FormGroup;
   registerFormConfirm : any;
   submitted = false;
   selectable = true;
   removable = true;
   addOnBlur = true;
+  ipAdress : string = "";
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   interests: Array<any> = [
     {name: '#hiking'},
@@ -39,11 +41,20 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private readonly geolocation$: GeolocationService,
     private authservice : AuthServiceService,
+    private location: LocationService,
       ) { }
 
   ngOnInit() {
+    this.location.getIpAddress().subscribe((res: any)  => {
+      this.ipAdress = res['ip'],
+      this.location.getGEOLocation(this.ipAdress).subscribe((res: any) => {
+        this.lat = res['latitude'];
+        this.lng = res['longitude'];
+        console.log(this.lat);
+        console.log(this.lng);
+      })
+    }),
       this.registerForm = this.formBuilder.group({
           email: ['', [Validators.email, Validators.required]],
           password: ['', [
@@ -60,8 +71,11 @@ export class RegisterComponent implements OnInit {
           interest: ['', Validators.required],
           biography: ['', ],
           img: ['', Validators.required],
+          lng: [''],
+          lat: ['']
       },
     );
+
   }
 
   // convenience getter for easy access to form fields
@@ -76,11 +90,12 @@ export class RegisterComponent implements OnInit {
       this.registerFormConfirm = this.registerForm.value;
       this.registerFormConfirm.interest = this.interests;
       this.registerFormConfirm.img = this.file;
-      this.geolocation$.pipe(take(1)).subscribe(position => {
-          this.registerFormConfirm['lat'] = position.coords.latitude
-          this.registerFormConfirm['lng'] = position.coords.longitude
-      }
-      )
+      this.registerFormConfirm.lat = this.lat;
+      this.registerFormConfirm.lng = this.lng;
+     console.log(this.registerFormConfirm)
+     console.log(this.registerFormConfirm.lat)
+     console.log(this.registerFormConfirm.lng)
+     console.log(this.registerFormConfirm.interest)
       // send to back
       this.authservice.register(this.registerFormConfirm);
       // display form values on success

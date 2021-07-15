@@ -12,6 +12,7 @@ const verify_token = require("../controllers/user/verify_token")
 const reset_password = require("../controllers/user/reset_password.js")
 const resend_password = require("../controllers/user/resend_password.js")
 const upload_image = require("../controllers/user/upload_image.js")
+const get_all_messages = require("../controllers/message/get_all_messages")
 const timing = require("../controllers/user/update_timestamp")
 const create_token = require("../functions/create_token")
 const { requireAuth } = require("../middleware/authMiddleware");
@@ -90,10 +91,16 @@ router.post('/reset-password/', async (req, res) => {
   }
 });
 
-router.get('/message-history/', (req, res) => {
-  console.log(req.body);
-  console.log('here message history')
-  res.status(200).send("Hello")
+router.get('/message-history/', async (req, res) => {
+  const from_mail = req.query.from_email
+  const to_mail = req.query.to_email
+  const messages = await get_all_messages(from_mail, to_mail)
+  if (messages != -1) {
+    res.status(200).json(messages)
+  }
+  else {
+    res.status(404).send({success: false, message:'There was a problem getting the history'})
+  }
 });
 
 router.post('/all/', async (req, res) => {

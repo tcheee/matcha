@@ -1,2 +1,36 @@
-
-<h1> Couou les copains</h1>
+<mat-card class="example-card">
+      <mat-card-header class="title">
+        <mat-card-title> User Information </mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <mat-list *ngIf="(selfData | async) as selfData">
+        <mat-list-item class="mat-list-item-content">
+          <mat-icon>perm_identity</mat-icon>
+          <span class="content"> {{selfData.first_name}} {{selfData.last_name}}</span>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon>email</mat-icon>
+          <span class="content">{{selfData.mail}}</span>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon>watch</mat-icon>
+          <span class="content">{{selfData.age}} years</span>
+        </mat-list-item>
+	<mat-list-item>
+          <mat-icon>rowing</mat-icon>
+          <span class="content">{{selfData.fame}} fame points</span>
+        </mat-list-item>
+	<mat-list-item>
+          <span class="content"> last connexion: {{selfData.last_connexion}}</span>
+        </mat-list-item>
+	<mat-list-item>
+          <mat-icon>person</mat-icon>
+          <span class="content">{{selfData.gender}}</span>
+        </mat-list-item>
+	<mat-list-item>
+          <span class="content">orientation:  {{selfData.orientation}}</span>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+</mat-card>

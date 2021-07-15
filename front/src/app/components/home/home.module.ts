@@ -15,6 +15,8 @@ import {MatListModule} from '@angular/material/list';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
   declarations: [ HomeComponent, ProfileComponent, HistoryComponent, MatchComponent],
@@ -28,6 +30,8 @@ import {MatButtonModule} from '@angular/material/button';
       MatToolbarModule,
       MatCardModule,
       MatButtonModule,
+      MatTooltipModule,
+      MatBadgeModule,
   ]
 })
 export class HomeModule { }

@@ -1,23 +1,31 @@
 <mat-toolbar class="example-header">
-  <button mat-button  (click)="sidenav.toggle()">
+<span class="align-middle"> Matcha</span>
+  <button mat-button class="align-left" matTooltip="Open Nav"  (click)="sidenav.toggle()">
   <mat-icon>menu</mat-icon>
   </button>
+  <button mat-button class="align-right" matTooltip="Disconnect">
+  <mat-icon>logout</mat-icon>
+  </button>
+  <button mat-button class="align-right-left" matTooltip="notifications">
+  <mat-icon matBadge="10" matBadgePosition="above after">notifications</mat-icon>
+  </button>
+
   </mat-toolbar>
 
   <mat-sidenav-container class="example-container">
     <mat-sidenav #sidenav mode="side" opened="false" mode="over" class="example-sidenav">
     <mat-nav-list>
          <mat-list-item [routerLink]="'profile'" (click)="sidenav.toggle()">
-        <mat-icon>person</mat-icon>
-        <span>Profile</span>
+        <mat-icon>face</mat-icon>
+        <span class="align-middle">Profile</span>
       </mat-list-item>
       <mat-list-item [routerLink]="'match'" (click)="sidenav.toggle()">
         <mat-icon>favorite</mat-icon>
-        <span>Match </span>
+        <span class="align-middle">Match </span>
       </mat-list-item>
                <mat-list-item [routerLink]="'history'" (click)="sidenav.toggle()">
         <mat-icon>history</mat-icon>
-        <span>History</span>
+        <span class="align-middle">History</span>
       </mat-list-item>
      </mat-nav-list>
     </mat-sidenav>

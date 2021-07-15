@@ -17,7 +17,13 @@ import { MatCardModule } from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatBadgeModule} from '@angular/material/badge';
-
+import {MatRadioModule} from '@angular/material/radio';
+import {MatSelectModule} from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatChipsModule } from '@angular/material/chips';
+// forms
+import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 @NgModule({
   declarations: [ HomeComponent, ProfileComponent, HistoryComponent, MatchComponent],
   imports: [
@@ -32,6 +38,13 @@ import {MatBadgeModule} from '@angular/material/badge';
       MatButtonModule,
       MatTooltipModule,
       MatBadgeModule,
+      MatRadioModule,
+      MatSelectModule,
+      ReactiveFormsModule,
+      FormsModule,
+      MatInputModule,
+      MatFormFieldModule,
+      MatChipsModule,
   ]
 })
 export class HomeModule { }

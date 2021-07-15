@@ -1,36 +1,74 @@
-<mat-card class="example-card">
-      <mat-card-header class="title">
-        <mat-card-title> User Information </mat-card-title>
-    </mat-card-header>
-    <mat-divider></mat-divider>
-    <mat-card-content>
-      <mat-list *ngIf="(selfData | async) as selfData">
-        <mat-list-item class="mat-list-item-content">
-          <mat-icon>perm_identity</mat-icon>
-          <span class="content"> {{selfData.first_name}} {{selfData.last_name}}</span>
-        </mat-list-item>
-        <mat-list-item>
-          <mat-icon>email</mat-icon>
-          <span class="content">{{selfData.mail}}</span>
-        </mat-list-item>
-        <mat-list-item>
-          <mat-icon>watch</mat-icon>
-          <span class="content">{{selfData.age}} years</span>
-        </mat-list-item>
-	<mat-list-item>
-          <mat-icon>rowing</mat-icon>
-          <span class="content">{{selfData.fame}} fame points</span>
-        </mat-list-item>
-	<mat-list-item>
-          <span class="content"> last connexion: {{selfData.last_connexion}}</span>
-        </mat-list-item>
-	<mat-list-item>
-          <mat-icon>person</mat-icon>
-          <span class="content">{{selfData.gender}}</span>
-        </mat-list-item>
-	<mat-list-item>
-          <span class="content">orientation:  {{selfData.orientation}}</span>
-        </mat-list-item>
-      </mat-list>
-    </mat-card-content>
-</mat-card>
+ <mat-card style="text-align: center ; background-color: #c0c0c0">
+ <mat-card-title style="font-family: URW Chancery L, cursive">  Profile</mat-card-title>
+  <mat-divider ></mat-divider>
+  <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+ <p style="margin: 20px 0px 0px 0px">
+ <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input matInput #input placeholder="Ex. Pascale@gmail.com" formControlName="email"
+    class="form-control"/>
+  </mat-form-field>
+  <p>
+   <mat-form-field appearance="outline">
+    <mat-label>First Name</mat-label>
+    <input matInput #input formControlName="firstName"
+    class="form-control">
+  </mat-form-field>
+  </p>
+    <p>
+   <mat-form-field appearance="outline">
+    <mat-label>Last Name</mat-label>
+    <input matInput #input formControlName="lastName"
+    class="form-control">
+  </mat-form-field>
+  </p>
+  <p>
+   <mat-form-field appearance="outline">
+    <mat-label>Age</mat-label>
+    <input matInput #input maxlength="25" formControlName="age"
+    class="form-control">
+  </mat-form-field>
+  </p>
+    <p>
+   <mat-form-field appearance="outline">
+    <mat-label> Gender </mat-label>
+  <mat-select formControlName="gender" [value]="gender"class="form-control">
+    <mat-option value="Man">Man</mat-option>
+    <mat-option value="Woman">Woman</mat-option>
+    <mat-option value="Non-binary">Non-binary</mat-option>
+  </mat-select>
+  </mat-form-field>
+  </p>
+  <p>
+   <mat-form-field appearance="outline">
+    <mat-label> Orientation </mat-label>
+  <mat-select formControlName="orientation" [value]="orientation" class="form-control">
+    <mat-option value="Heterosexual">Heterosexual</mat-option>
+    <mat-option value="Homosexual">Homosexual</mat-option>
+    <mat-option value="Bisexual">Bisexual</mat-option>
+  </mat-select>
+  </mat-form-field>
+  </p>
+      <p>
+<mat-form-field class="example-chip-list" appearance="fill">
+  <mat-label> List of Interests</mat-label>
+  <mat-chip-list #chipList aria-label="Interests selection">
+    <mat-chip *ngFor="let interest of interests" [selectable]="selectable"
+             [removable]="removable" (removed)="remove(interest)">
+      {{interest.name}}
+      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+    </mat-chip>
+    <input placeholder="Add New Interest..."
+           [matChipInputFor]="chipList"
+           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+           [matChipInputAddOnBlur]="addOnBlur"
+           (matChipInputTokenEnd)="add($event)"
+           formControlName="interest"
+           class="form-control"
+           >
+  </mat-chip-list>
+</mat-form-field>
+  </p>
+  <button mat-raised-button type="submit" style="background-color: #9c9c9c"  > Update Profile </button>
+  </form>
+  </mat-card>

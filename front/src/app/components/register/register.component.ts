@@ -92,10 +92,6 @@ export class RegisterComponent implements OnInit {
       this.registerFormConfirm.img = this.file;
       this.registerFormConfirm.lat = this.lat;
       this.registerFormConfirm.lng = this.lng;
-     console.log(this.registerFormConfirm)
-     console.log(this.registerFormConfirm.lat)
-     console.log(this.registerFormConfirm.lng)
-     console.log(this.registerFormConfirm.interest)
       // send to back
       this.authservice.register(this.registerFormConfirm);
       // display form values on success

@@ -40,7 +40,7 @@ async function get_all_data(mail) {
     data.self = {};
 
     data.users = await get_all_users(mail);
-    await addFirstImage(data.users) ;
+    await addFirstImage(data.users);
     data.self.user = await get_specific_user(mail);
     data.self.notifications_unseen = await get_unseen_notifications(mail);
     data.self.notifications = await get_all_notifications(mail);
@@ -51,6 +51,8 @@ async function get_all_data(mail) {
     data.self.received_likes = transformIdToArray(await get_all_received_likes(mail), "to_mail");
     data.self.received_unlikes = transformIdToArray(await get_all_received_unlikes(mail), "to_mail");
     data.self.visits = transformIdToArray(await get_all_visits(mail), "to_mail");
+    data.self.image = await get_first_image(mail);
+    data.self.login = true;
 
     return(data);
 }

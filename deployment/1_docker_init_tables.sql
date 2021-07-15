@@ -7,8 +7,8 @@ CREATE TABLE users
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
     age INT NOT NULL,
-    genre INT NOT NULL,
-    orientation INT NOT NULL,
+    genre VARCHAR(100) NOT NULL,
+    orientation VARCHAR(100) NOT NULL,
     lat DECIMAL,
     lng DECIMAL,
     biography VARCHAR(65535),
@@ -83,8 +83,8 @@ CREATE TABLE blocks
 );
 
 INSERT INTO users(uuid, mail, password, first_name, last_name, age, genre, orientation, lat, lng, biography, interests) VALUES
- ('testbbbb', 'test@mail.com', 'oitnbionbtin', 'another', 'guy', 25, 1, 0, 10.15, 25.30, 'This is my bio', 'test;interest;lol'),
- ('aaa-roigngionio', 'testigo@mail.com', 'oitngorpbionbtin', 'another', 'tom', 25, 1, 0, 10.20, 18.18756478, 'I love dating apps', 'test;interest;lol');
+ ('testbbbb', 'test@mail.com', 'oitnbionbtin', 'another', 'guy', 25, 'Man', 'Hetero', 10.15, 25.30, 'This is my bio', 'test;interest;lol'),
+ ('aaa-roigngionio', 'testigo@mail.com', 'oitngorpbionbtin', 'another', 'tom', 25, 'Girl', 'Bi', 10.20, 18.18756478, 'I love dating apps', 'test;interest;lol');
 
 INSERT INTO images(user_mail, image_link) VALUES
  ('test@mail.com', 'http://link/ec2/photos_1');

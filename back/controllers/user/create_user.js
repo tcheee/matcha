@@ -24,8 +24,6 @@ function create_user(body) {
     body.password = await bcrypt.hash(body.password, saltRounds);
 
     body.age = parseInt(body.age,10);
-    body.gender = parseInt(body.gender, 10)
-    body.orientation = parseInt(body.orientation, 10)
     body.lat = parseFloat(body.lat, 10);
     body.lng = parseFloat(body.lng, 10)
 

@@ -90,6 +90,12 @@ router.post('/reset-password/', async (req, res) => {
   }
 });
 
+router.get('/message-history/', (req, res) => {
+  console.log(req.body);
+  console.log('here message history')
+  res.status(200).send("Hello")
+});
+
 router.post('/all/', async (req, res) => {
   console.log(req.body)
   let data = await get_all_data(req.body.mail)

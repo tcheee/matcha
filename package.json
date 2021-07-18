@@ -9,7 +9,8 @@
         "build": "cd ./front && ng build --prod",
         "test": "echo \"Error: no test specified\" && exit 1",
         "front": "cd ./front && ng serve",
-        "back": "cd ./back && node app.js"
+        "back": "cd ./back && node app.js",
+        "heroku-postbuild": "cd ./front && ng build --prod"
     },
     "author": "tcherret",
     "license": "ISC",
@@ -41,6 +42,7 @@
         "nodemon": "^2.0.11",
         "pg": "^8.6.0",
         "rxjs": "~6.6.0",
+        "socket.io": "^3.1.2",
         "tslib": "^2.2.0",
         "uuid": "^8.3.2",
         "zone.js": "~0.11.4"

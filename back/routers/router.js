@@ -19,10 +19,11 @@ const { requireAuth } = require("../middleware/authMiddleware");
 const maxAge = 24 * 10 * 60 * 60;
 
 
-router.use(express.static('test_back')); // To delete and change to push again
+//router.use(express.static('test_back')); // To delete and change to push again
 
 router.get('/', (req, res) => {
-  res.sendFile('/Users/tche/Documents/matcha/back/test_back/test_socket.html')
+  res.sendFile("index.html", {root: '../front/angular.json/'});
+  //res.sendFile('/Users/tche/Documents/matcha/back/test_back/test_socket.html')
 });
 
 router.post('/register/', upload.single('img'), async (req, res) => {

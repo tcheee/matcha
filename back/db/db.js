@@ -1,11 +1,20 @@
 const { Pool } = require('pg')
-const pool = new Pool({
-    host: "127.0.0.1",
-    port: 5432,
-    user: "root",
-    password: "root",
-    database: "matcha"
-});
+// const pool = new Pool({
+//     host: "127.0.0.1",
+//     port: 5432,
+//     user: "root",
+//     password: "root",
+//     database: "matcha"
+// }); // LOCAL
+
+//PROD 
+
+const pool = new Pool ({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
+})
 
 
 module.exports = {

@@ -63,7 +63,7 @@ router.post('/login/', async (req, res) => {
         res.status(200).json({message:"User is connected", id: user_id});
       }
       else {
-        res.status(404).send("error")
+        res.status(404).send("Error trying to login the user")
       }
     } catch (err) {
       console.error(err);

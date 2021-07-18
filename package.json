@@ -7,7 +7,8 @@
     "scripts": {
         "back": "cd ./back && node app.js",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "front": "cd ./front && ng serve"
+        "front": "cd ./front && ng serve",
+        "heroku-postbuild": "cd ./front && ng build --prod"
     },
     "author": "tcherret",
     "license": "ISC",

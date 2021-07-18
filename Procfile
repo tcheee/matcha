@@ -1,2 +1,2 @@
 web: npm run back
-web: npm run front
+web: npm run heroku-postbuild

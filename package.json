@@ -1,14 +1,15 @@
 {
-    "name": "matcha",
+    "name": "matcha-heroku",
     "version": "1.0.0",
     "private": true,
     "description": "",
     "main": "./back/app.js",
     "scripts": {
-        "back": "cd ./back && node app.js",
+        "start": "cd ./back && node app.js",
+        "build": "cd ./front && ng build --prod",
         "test": "echo \"Error: no test specified\" && exit 1",
         "front": "cd ./front && ng serve",
-        "heroku-postbuild": "cd ./front && ng build --prod"
+        "back": "cd ./back && node app.js"
     },
     "author": "tcherret",
     "license": "ISC",

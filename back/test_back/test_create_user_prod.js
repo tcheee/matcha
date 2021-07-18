@@ -18,7 +18,7 @@ const data = {
 }
 
 axios
-  .post('http://https://matcha-heroku.herokuapp.com/register/', data)
+  .post('https://matcha-heroku.herokuapp.com/register/', data)
   .then(res => {
     console.log(res)
   })

@@ -10,7 +10,7 @@ const port = (process.env.PORT || 3000)
 const httpServer = require("http").createServer(app);
 const io = require("socket.io")(httpServer, {
     cors: {
-      origin: 'http://localhost:4200',
+      origin: 'http://localhost:4200' || "https://matcha-heroku.herokuapp.com/",
       methods: ["GET", "POST", "PATCH"],
       credentials: true
   }
@@ -20,7 +20,7 @@ const io = require("socket.io")(httpServer, {
 //app.use(express.static('test_back')); // To delete
 app.use(express.static("../front/dist/front/"))
 app.use(express.json())
-app.use(cors({credentials: true, origin: 'http://localhost:4200'}));
+app.use(cors({credentials: true, origin: 'http://localhost:4200' || "https://matcha-heroku.herokuapp.com/"}));
 app.use(cookieParser())
 app.use(router);
 launchSocketConnection(io);

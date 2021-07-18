@@ -14,7 +14,7 @@ function login_user(mail, password) {
                         resolve(result.id);
                     }
                     else {
-                        reject("error");
+                        resolve("-1");
                     }
                 }
                 else {

@@ -22,7 +22,7 @@ const maxAge = 24 * 10 * 60 * 60;
 //router.use(express.static('test_back')); // To delete and change to push again
 
 router.get('/', (req, res) => {
-  res.sendFile("index.html", {root: '../front/angular.json/'});
+  res.sendFile("index.html", {root: '../front/dist/front/'});
   //res.sendFile('/Users/tche/Documents/matcha/back/test_back/test_socket.html')
 });
 

@@ -33,8 +33,8 @@ export class AuthServiceService {
 
   register(data : any){
     const payload: FormData = new FormData();
-    if(data.is_geolocated === 'true')
-      payload.append('is_geolocated', data.is_geolocated);
+    if(data.is_geolocated === 'yes')
+      payload.append('is_geolocated', "true");
     else
       payload.append('is_geolocated', "false");
     payload.append('age', data.age);

@@ -34,7 +34,10 @@ const SelfReducer = createReducer(
 	login: self.self.login,
 	notficiations_unseen: self.self.notifications_unseen,
 	notifications: self.self.notifications,
-	image: self.self.image,
+	image: self.self.images.image,
+	//image1: self.self.images.image1,
+	//image2: self.self.images.image2,
+//	image3 : self.self.images.image3,
 	})
   )
 )

@@ -76,7 +76,7 @@ export class ProfileComponent implements OnInit {
         this.image =  "data:image/jpeg;base64," + res.image;
         this.gender = res.gender;
         this.orientation = res.orientation;
-        this.interests = res.interests;
+        this.interests = res.interests.split(',');
         this.updateForm = this.formBuilder.group({
           email: [res.mail , [Validators.email, Validators.required]],
           firstName: [res.first_name, Validators.required],

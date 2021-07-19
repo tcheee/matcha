@@ -34,7 +34,7 @@ const SelfReducer = createReducer(
 	login: self.self.login,
 	notficiations_unseen: self.self.notifications_unseen,
 	notifications: self.self.notifications,
-	image: self.self.image,
+	image: self.self.images.image,
 	})
   )
 )

@@ -24,7 +24,7 @@ CREATE TABLE images
 (
     id SERIAL PRIMARY KEY,
     user_mail VARCHAR(100) NOT NULL,
-    image_link VARCHAR(65535),
+    image_link TEXT,
     orders INT NOT NULL DEFAULT 0
 );
 

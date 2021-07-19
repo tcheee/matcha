@@ -119,7 +119,7 @@ export class ProfileComponent implements OnInit {
  //   }
     this.file instanceof File ? this.updateFormConfirm['img'] = this.file : null ;
     this.file1 instanceof File ? this.updateFormConfirm['img1'] = this.file1 : null ;
-    this.file2 instanceof File ? this.updateFormConfirm['img3'] = this.file2 : null ;
+    this.file2 instanceof File ? this.updateFormConfirm['img2'] = this.file2 : null ;
     this.file3 instanceof File ? this.updateFormConfirm['img3'] = this.file3 : null ;
     this.updateFormConfirm.interest = this.interests;
     this.updateFormConfirm.lat = this.lat;

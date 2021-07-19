@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 
 function login_user(mail, password) {
     return new Promise((resolve, reject) => {
-        db.query('SELECT * from public.users where mail = $1;', [mail], async (err, res) => {
+        db.query('SELECT * from public.users where mail = $1', [mail], async (err, res) => {
             try {
                 if (res) {
                     if (res.rows[0] != undefined) {

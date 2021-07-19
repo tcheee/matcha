@@ -11,6 +11,7 @@ CREATE TABLE users
     orientation VARCHAR(100) NOT NULL,
     lat VARCHAR(100),
     lng VARCHAR(100),
+    is_geolocated BOOLEAN DEFAULT '0', 
     biography VARCHAR(65535),
     fame INT NOT NULL DEFAULT 100,
     last_connection TIMESTAMP, 

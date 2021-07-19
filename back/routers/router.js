@@ -67,6 +67,7 @@ router.post('/login/', async (req, res) => {
       }
     } catch (err) {
       console.error(err);
+      res.status(404).send("Error trying to login the user: " + err)
     }
 });
 

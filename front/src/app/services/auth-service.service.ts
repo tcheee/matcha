@@ -33,6 +33,10 @@ export class AuthServiceService {
 
   register(data : any){
     const payload: FormData = new FormData();
+    if(data.is_geolocated === 'true')
+      payload.append('is_geolocated', data.is_geolocated);
+    else
+      payload.append('is_geolocated', "false");
     payload.append('age', data.age);
     payload.append('biography', data.biography);
     payload.append('email', data.email);
@@ -45,6 +49,7 @@ export class AuthServiceService {
     payload.append('lng', data.lng);
     payload.append('interest', data.interest);
     payload.append('img', data.img);
+
 
     payload.forEach((value, key) => {
     console.log("key %s: value %s", key, value);

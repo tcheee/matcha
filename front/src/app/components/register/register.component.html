@@ -106,9 +106,9 @@
   </p>
   <h2 style="margin: 5px"> Do you want to be Geolocalize ? </h2>
   <p>
-  <mat-radio-group aria-label="Select an option">
-  <mat-radio-button value="1">yes</mat-radio-button>
-  <mat-radio-button value="2">no</mat-radio-button>
+  <mat-radio-group aria-label="Select an option" formControlName="is_geolocated">
+  <mat-radio-button value="yes">yes</mat-radio-button>
+  <mat-radio-button value="no">no</mat-radio-button>
 </mat-radio-group>
 </p>
   <button mat-raised-button disabled *ngIf="!file" title="You must choose a Picture"> Create my account </button>

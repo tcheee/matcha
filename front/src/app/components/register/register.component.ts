@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { take } from 'rxjs/operators';
 
 // chips 
 import {MatChipInputEvent} from '@angular/material/chips';
@@ -84,7 +83,7 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
       this.submitted = true;
       // (when we choose a file the submit button is trigerred idk why)
-      if (!this.file) {
+      if (!this.file || !this.registerForm.valid) {
           return;
       }
       this.registerFormConfirm = this.registerForm.value;

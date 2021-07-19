@@ -15,7 +15,7 @@ function create_user(body) {
 
     body.age = parseInt(body.age,10);
 
-    db.query('INSERT INTO users(uuid, mail, password, first_name, last_name, age, genre, orientation, lat, lng, biography, last_connection, is_active, interests) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING id;', [uuid, body.email, body.password, body.firstName, body.lastName, body.age, body.gender, body.orientation, body.lat, body.lng, body.biography, date, '0', body.interest], (err, result) => {
+    db.query('INSERT INTO users(uuid, mail, password, first_name, last_name, age, genre, orientation, lat, lng, is_geolocated, biography, last_connection, is_active, interests) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING id;', [uuid, body.email, body.password, body.firstName, body.lastName, body.age, body.gender, body.orientation, body.lat, body.lng, body.geo, body.biography, date, '0', body.interest], (err, result) => {
         if (err) {
             if (err.constraint == 'users_mail_key') {
                 console.log('Mail already exists in the db.')

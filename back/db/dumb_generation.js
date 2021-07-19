@@ -1,6 +1,7 @@
 const db = require('./db.js')
 const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
+const { nextTick } = require('process');
 const saltRounds = 10;
 
 function getRandomInt(min, max) {
@@ -12,7 +13,6 @@ function getRandomFloatBetween(min,max){
 }
 
 async function launchMassCreation() {
-
   const firstname = ["Thomas", "Matthew", "Nick", "Victoria", "Victor", "Lamia", "Esmeralda", "Rick", "Morty", "Natasha"]
   const lastname = ["Sanchez", "Bella", "Marthy", "Poly", "Aneh", "Lokjo", "Dachen", "Martin", "El Haoui", "Dupont"]
   const biography = ["This is my bio", "I love Wow", "Let's play together", "My name is no name", "Cry and shout!", "Ouh Yeah, love this app!", "Come on dude", "My bio is long because I love speaking about my self, you know I did lot of things so I think I must share with you.", "Chat and nothing else", "My passion is to go and visit museums!"]
@@ -23,7 +23,7 @@ async function launchMassCreation() {
       let k = getRandomInt(0,9);
 
       const uuid = uuidv4();
-      let mail = "testnewot" + i + "@mail.com"
+      let mail = "testnewoggnt" + i + "@mail.com"
       var password = "test123" + i
       password = await bcrypt.hash(password, saltRounds);
       let fname = firstname[k]
@@ -42,20 +42,21 @@ async function launchMassCreation() {
       let unix_timestamp = Date.now();
       let timestamp = new Date(unix_timestamp);
 
-      db.query('INSERT INTO users(uuid, mail, password, first_name, last_name, age, genre, orientation, lat, lng, biography, last_connection, is_active, interests) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14);', [uuid, mail, password, fname, lname, age, genre, orientation, latt, long, bio, timestamp, '1', interests], (err, result) => {
+      db.query('INSERT INTO users(uuid, mail, password, first_name, last_name, age, genre, orientation, lat, lng, biography, last_connection, is_active, interests) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15);', [uuid, mail, password, fname, lname, age, genre, orientation, latt, long, '1', bio, timestamp, '1', interests], (err, result) => {
           console.log('Dumbing done for ' + mail);
+          next
         })
 
       db.query('INSERT INTO images(user_mail, image_link) VALUES($1, $2);', [mail, image], (err, result) => {
           console.log('Dumbing done for ' + mail);
         })
-      
     }
 
+  console.log('end')
   return (0);
 }
 
-launchMassCreation()
+return(await launchMassCreation())
 
 /* 
 

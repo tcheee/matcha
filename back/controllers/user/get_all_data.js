@@ -51,7 +51,7 @@ async function get_all_data(mail) {
     data.self.received_likes = transformIdToArray(await get_all_received_likes(mail), "to_mail");
     data.self.received_unlikes = transformIdToArray(await get_all_received_unlikes(mail), "to_mail");
     data.self.visits = transformIdToArray(await get_all_visits(mail), "to_mail");
-    data.self.image = await get_first_image(mail);
+    data.self.images = {image: await get_first_image(mail)};
     data.self.login = true;
 
     return(data);

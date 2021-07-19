@@ -12,3 +12,8 @@ export const getAllStateData: MemoizedSelector<object, any> = createSelector(
 	selectSelfState,
 	(state: State): any => state
       );
+
+export const isLogged: MemoizedSelector<object, boolean> = createSelector(
+	selectSelfState,
+	(state: State): any => state.login
+      );

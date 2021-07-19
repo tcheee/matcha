@@ -6,6 +6,8 @@ import { HistoryComponent} from '../history/history.component';
 import { MatchComponent } from '../match/match.component';
 import { ChatComponent} from '../chat/chat.component'
 
+// guards
+import { IsSignedGuardGuard} from '../../guards/is-signed-guard.guard';
 const routes: Routes = [
   {
     path: '',
@@ -14,18 +16,22 @@ const routes: Routes = [
       {
         path: 'profile',
         component: ProfileComponent,
+        canActivate: [IsSignedGuardGuard],
       },
       {
         path : 'history',
         component: HistoryComponent,
+        canActivate: [IsSignedGuardGuard],
       },
       {
         path : 'match',
         component : MatchComponent,
+        canActivate: [IsSignedGuardGuard],
       },
       {
         path: 'chat',
         component: ChatComponent,
+        canActivate: [IsSignedGuardGuard],
       }
     ]
   }];

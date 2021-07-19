@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
 const { nextTick } = require('process');
 const saltRounds = 10;
+const mail = "testigo"
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random()*(max-min+1)+min);
@@ -23,11 +24,13 @@ async function launchMassCreation() {
       let k = getRandomInt(0,9);
 
       const uuid = uuidv4();
-      let mail = "testnewoggnt" + i + "@mail.com"
+      
+      let mail = mail + i + "@mail.com"
       var password = "test123" + i
       password = await bcrypt.hash(password, saltRounds);
       let fname = firstname[k]
       let lname = lastname[k]
+      let rating = getRandomInt(20,150);
       let age = getRandomInt(18,65);
       let genre = getRandomInt(0,3);
       let orientation = getRandomInt(0,3);
@@ -52,9 +55,15 @@ async function launchMassCreation() {
         })
     }
 
-  console.log('end')
   return (0);
 }
+
+async function launchMassRelation() {
+  const message = ["Hello there, how are you doing?", "Ouh nice what about you?", "I am good thank you", "Heeeeyyyyyyy", "No wayyy you can help me", "I don't really know", "No but you know I am not sure it is a good idea to mass generate text like that, I don't know why but I don't feel it", "Ok boomer.", "Power to Ironforge", "You rock dude!"]
+  const notification_type = ['like', 'unlike', 'visit']
+
+}
+
 
 return(await launchMassCreation())
 

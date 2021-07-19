@@ -19,6 +19,10 @@ export interface State {
     received_unlikes: Array<string>;
     unlikes: Array<string>;
     visits: Array<string>;
+    notifications: Array<string>;
+    notficiations_unseen: Array<string>;
+    login: boolean;
+    image: string;
 }
 
 export const initialState: State = {
@@ -42,6 +46,10 @@ export const initialState: State = {
     received_unlikes: [],
     unlikes: [],
     visits: [],
+    login: false,
+    notficiations_unseen: [],
+    notifications: [],
+    image: '',
 };
       
 export const key = 'self';

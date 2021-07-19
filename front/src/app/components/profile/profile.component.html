@@ -67,8 +67,33 @@
            class="form-control"
            >
   </mat-chip-list>
-</mat-form-field>
+  </mat-form-field>
+  <p>
+  <img src={{image}}>
   </p>
+  <input type="file" style="display: none" name="img" #fileInput accept="image/*" (change)="onChangeFileInput()" />
+  <button mat-raised-button color="primary" class="file-select-button" (click)="onClickFileInputButton()">
+    <mat-icon>attach_file</mat-icon>
+    Change Picture 
+  </button>
+  <h3 class="file-name" *ngIf="!file; else fileName">File name is ...</h3>
+  <ng-template #fileName>
+    <h3 class="file-name">{{ file?.name }}</h3>
+  </ng-template>
+      <p>
+<mat-form-field appearance="outline">
+    <mat-label> Biography </mat-label>
+    <textarea matInput placeholder="Ex. I'm a good guy..."formControlName="biography" class="form-control" ></textarea>
+  </mat-form-field>
+  </p>
+   <h2 style="margin: 5px"> Do you want to change your Current Location ? </h2>
+  <p>
+  
+  <mat-radio-group aria-label="Select an option" formControlName="geolocalize">
+  <mat-radio-button value="1">yes</mat-radio-button>
+  <mat-radio-button value="2">no</mat-radio-button>
+</mat-radio-group>
+<p>
   <button mat-raised-button type="submit" style="background-color: #9c9c9c"  > Update Profile </button>
   </form>
   </mat-card>

@@ -28,8 +28,12 @@ import {
 })
 export class ProfileComponent implements OnInit {
 
+  lat : string = "";
+  lng : string = "";
+  ipAdress : string = "";
   selfData: Observable<any>;
   updateForm : FormGroup;
+  updateFormConfirm : any;
   interests: Array<any>;
   submitted = false;
   selectable = true;
@@ -37,6 +41,8 @@ export class ProfileComponent implements OnInit {
   addOnBlur = true;
   gender : string;
   orientation : string;
+  image : string;
+  geolocalize : string;
 
   @ViewChild('fileInput')
   fileInput : any;
@@ -46,13 +52,28 @@ export class ProfileComponent implements OnInit {
     private router: Router,
     private store$: Store<RootStoreState.RootState>,
     private formBuilder: FormBuilder,
+    private location: LocationService,
     ) { }
 
+
   ngOnInit(): void {
+    // location
+    this.location.getIpAddress().subscribe((res: any)  => {
+      this.ipAdress = res['ip'],
+      this.location.getGEOLocation(this.ipAdress).subscribe((res: any) => {
+        this.lat = res['latitude'];
+        this.lng = res['longitude'];
+        console.log(this.lat);
+        console.log(this.lng);
+      })
+    }),
+
     this.store$.select(SelfSelectors.getAllStateData).subscribe(
       res => {
+        console.log(res.image)
         console.log(res.gender);
         console.log(res.orientation)
+        this.image =  "data:image/jpeg;base64," + res.image;
         this.gender = res.gender;
         this.orientation = res.orientation;
         this.interests = res.interests;
@@ -64,12 +85,23 @@ export class ProfileComponent implements OnInit {
           gender: [ , Validators.required],
           orientation: [ null , Validators.required],
           interest: [ null, Validators.required],
-          biography: ['res.biography', ],
+          biography: [res.biography, Validators.required ],
+          geolocalize: ['', ],
       },
     );
       })
   }
   onSubmit(){
+    console.log(this.updateForm.value);
+    this.updateFormConfirm = this.updateForm.value;
+    if (this.file){
+    this.updateFormConfirm.img = this.file;
+    }
+    if (this.updateFormConfirm.geolocalize && this.updateFormConfirm.geolocalize === 1){
+      this.updateFormConfirm.lat = this.lat;
+      this.updateFormConfirm.lng = this.lng;
+    }
+
 
   }
      onReset() {

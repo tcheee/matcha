@@ -31,6 +31,10 @@ const SelfReducer = createReducer(
 	received_unlikes: self.self.received_unlikes,
 	unlikes: self.self.unlikes,
 	visits: self.self.uservisits,
+	login: self.self.login,
+	notficiations_unseen: self.self.notifications_unseen,
+	notifications: self.self.notifications,
+	image: self.self.image,
 	})
   )
 )

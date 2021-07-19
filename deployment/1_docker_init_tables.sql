@@ -44,7 +44,8 @@ CREATE TABLE inboxes
     id SERIAL PRIMARY KEY,
     from_mail VARCHAR(100) NOT NULL, 
     to_mail VARCHAR(100) NOT NULL,
-    content VARCHAR(65535),
+    content TEXT,
+    seen BOOLEAN DEFAULT '0',
     creation_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

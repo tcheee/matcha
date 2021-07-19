@@ -8,13 +8,25 @@
     <input matInput #input placeholder="Ex. Pascale@gmail.com" formControlName="email"
     class="form-control"/>
   </mat-form-field>
+   <div *ngIf="f.email.touched && f.email.invalid" class="alert alert-danger">
+            <div *ngIf="f.email.errors && f.email.errors.required"> Email is required.</div>
+            <div *ngIf="f.email.errors && f.email.errors.email">
+             Email is invalid</div>
+        </div>
    <p>
    <mat-form-field appearance="outline">
     <mat-label>Password</mat-label>
     <input matInput #input placeholder="Num/Upp/Low/special" formControlName="password"
     class="form-control" type="password">
   </mat-form-field>
-  </p>
+     <div *ngIf="f.password.touched && f.password.invalid" class="alert alert-danger">
+            <div *ngIf="f.password.errors && f.password.errors.required"> Password is required.</div>
+            <div *ngIf="f.password.errors && f.password.errors.pattern">
+             Password must have at least 1 upper/lower and special character</div>
+            <div *ngIf="f.password.errors && f.password.errors.minlength"> Password should be 6 character.</div>
+            <div *ngIf="f.password.errors && f.password.errors.maxlength">
+             Password cannot have more than 40 character</div>
+        </div>
   <p>
    <mat-form-field appearance="outline">
     <mat-label>First Name</mat-label>

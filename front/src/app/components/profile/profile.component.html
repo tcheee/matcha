@@ -74,11 +74,47 @@
   <input type="file" style="display: none" name="img" #fileInput accept="image/*" (change)="onChangeFileInput()" />
   <button mat-raised-button color="primary" class="file-select-button" (click)="onClickFileInputButton()">
     <mat-icon>attach_file</mat-icon>
-    Change Picture 
+    Change Picture 1
   </button>
   <h3 class="file-name" *ngIf="!file; else fileName">File name is ...</h3>
   <ng-template #fileName>
     <h3 class="file-name">{{ file?.name }}</h3>
+  </ng-template>
+   <p>
+  <img *ngIf="image1.length > 0" src={{image1}}>
+  </p>
+  <input type="file" style="display: none" name="img" #fileInput1 accept="image/*" (change)="onChangeFileInput1()" />
+  <button mat-raised-button color="primary" class="file-select-button" (click)="onClickFileInputButton1()">
+    <mat-icon>attach_file</mat-icon>
+    Change | Add Picture 2
+  </button>
+      <h3 class="file-name" *ngIf="!file1; else fileName1">File name is ...</h3>
+  <ng-template #fileName1>
+    <h3 class="file-name">{{ file1?.name }}</h3>
+  </ng-template>
+   <p>
+  <img *ngIf="image2.length > 0" src={{image2}}>
+  </p>
+  <input type="file" style="display: none" name="img" #fileInput2 accept="image/*" (change)="onChangeFileInput2()" />
+  <button mat-raised-button color="primary" class="file-select-button" (click)="onClickFileInputButton2()">
+    <mat-icon>attach_file</mat-icon>
+    Change | Add Picture 3
+  </button>
+  <h3 class="file-name" *ngIf="!file2; else fileName2">File name is ...</h3>
+  <ng-template #fileName2>
+    <h3 class="file-name">{{ file2?.name }}</h3>
+  </ng-template>
+   <p>
+  <img *ngIf="image3.length > 0" src={{image3}}>
+  </p>
+  <input type="file" style="display: none" name="img" #fileInput3 accept="image/*" (change)="onChangeFileInput3()" />
+  <button mat-raised-button color="primary" class="file-select-button" (click)="onClickFileInputButton3()">
+    <mat-icon>attach_file</mat-icon>
+    Change | Add Picture 4
+  </button>
+  <h3 class="file-name" *ngIf="!file3; else fileName3">File name is ...</h3>
+  <ng-template #fileName3>
+    <h3 class="file-name">{{ file3?.name }}</h3>
   </ng-template>
       <p>
 <mat-form-field appearance="outline">

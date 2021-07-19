@@ -23,6 +23,9 @@ export interface State {
     notficiations_unseen: Array<string>;
     login: boolean;
     image: string;
+    image1: string;
+    image2: string;
+    image3: string;
 }
 
 export const initialState: State = {
@@ -50,6 +53,9 @@ export const initialState: State = {
     notficiations_unseen: [],
     notifications: [],
     image: '',
+    image1: '',
+    image2: '',
+    image3: '',
 };
       
 export const key = 'self';

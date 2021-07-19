@@ -101,11 +101,8 @@ function launchMassRelation(mail, numberBot) {
 
         for (let y = 0; y < 10; y++) {
           let k = getRandomInt(0,9);
-          let data = {
-            from: mail + i + "@mail.com",
-            to: mail + j + "@mail.com",
-            content: messages[k]
-          }
+          let room = mail + i + "@mail.com" + mail + j + "@mail.com"
+          let data = y % 2 != 0 ? {from: mail + i + "@mail.com", to: mail + j + "@mail.com", content: messages[k], room: room,} : {from: mail + j + "@mail.com", to: mail + i + "@mail.com", content: messages[k], room: room,} 
           create_message(data);
         }
       }

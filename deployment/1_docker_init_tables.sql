@@ -45,6 +45,7 @@ CREATE TABLE inboxes
     from_mail VARCHAR(100) NOT NULL, 
     to_mail VARCHAR(100) NOT NULL,
     content TEXT,
+    room VARCHAR(100) NOT NULL,
     seen BOOLEAN DEFAULT '0',
     creation_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

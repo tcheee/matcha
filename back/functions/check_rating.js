@@ -8,7 +8,7 @@ function check_rating(mail) {
                 resolve(-1)
             }
             else {
-                if (result.rows != undefined)
+                if (result.rows[0] != undefined)
                 {
                     const fame = result.rows[0].fame
                     resolve(fame)

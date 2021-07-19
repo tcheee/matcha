@@ -69,7 +69,7 @@ export class RegisterComponent implements OnInit {
           gender: ['', Validators.required],
           orientation: ['', Validators.required],
           interest: ['', Validators.required],
-          biography: ['', ],
+          biography: ['', Validators.required],
           img: ['', Validators.required],
           lng: [''],
           lat: ['']

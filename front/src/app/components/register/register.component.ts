@@ -50,8 +50,6 @@ export class RegisterComponent implements OnInit {
       this.location.getGEOLocation(this.ipAdress).subscribe((res: any) => {
         this.lat = res['latitude'];
         this.lng = res['longitude'];
-        console.log(this.lat);
-        console.log(this.lng);
       })
     }),
       this.registerForm = this.formBuilder.group({
@@ -67,11 +65,12 @@ export class RegisterComponent implements OnInit {
           age: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
           gender: ['', Validators.required],
           orientation: ['', Validators.required],
-          interest: ['', Validators.required],
+          interest: ['', ],
           biography: ['', Validators.required],
-          img: ['', Validators.required],
+          img: ['', ],
           lng: [''],
-          lat: ['']
+          lat: [''],
+          is_geolocated: [''],
       },
     );
 
@@ -81,9 +80,10 @@ export class RegisterComponent implements OnInit {
   get f() { return this.registerForm.controls; }
 
   onSubmit() {
+    console.log(this.registerForm.value);
       this.submitted = true;
       // (when we choose a file the submit button is trigerred idk why)
-      if (!this.file || !this.registerForm.valid) {
+      if (!this.file || !this.registerForm.valid || this.interests.length <= 0) {
           return;
       }
       this.registerFormConfirm = this.registerForm.value;

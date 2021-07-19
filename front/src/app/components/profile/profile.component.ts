@@ -63,27 +63,20 @@ export class ProfileComponent implements OnInit {
       this.location.getGEOLocation(this.ipAdress).subscribe((res: any) => {
         this.lat = res['latitude'];
         this.lng = res['longitude'];
-        console.log(this.lat);
-        console.log(this.lng);
       })
     }),
 
     this.store$.select(SelfSelectors.getAllStateData).subscribe(
       res => {
-        console.log(res.image)
-        console.log(res.gender);
-        console.log(res.orientation)
         this.image =  "data:image/jpeg;base64," + res.image;
-        this.gender = res.gender;
-        this.orientation = res.orientation;
         this.interests = res.interests.split(',');
         this.updateForm = this.formBuilder.group({
           email: [res.mail , [Validators.email, Validators.required]],
           firstName: [res.first_name, Validators.required],
           lastName: [res.last_name, Validators.required],
           age: [res.age, [Validators.required, Validators.pattern("^[0-9]*$")]],
-          gender: [ , Validators.required],
-          orientation: [ null , Validators.required],
+          gender: [ res.genre, Validators.required],
+          orientation: [ res.orientation , Validators.required],
           interest: [ null, Validators.required],
           biography: [res.biography, Validators.required ],
           geolocalize: ['', ],

@@ -1,12 +1,10 @@
-const db = require('./db.js')
+const create_user = require('../controllers/user/create_user.js')
+const upload_image = require('../controllers/user/upload_image.js')
 const create_message = require('../controllers/message/create_message.js')
 const create_like = require('../controllers/notification/create_like')
 const create_visit = require('../controllers/notification/create_visit')
 const create_notification = require('../controllers/notification/create_notification')
 const block_user = require('../controllers/user/block_user')
-const bcrypt = require('bcrypt');
-const { v4: uuidv4 } = require('uuid');
-const saltRounds = 10;
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random()*(max-min+1)+min);
@@ -16,7 +14,7 @@ function getRandomFloatBetween(min,max){
     return Math.random()*(max-min+1)+min;
 }
 
-async function launchMassCreation(tmp_mail, numberBot) {
+function launchMassCreation(tmp_mail, numberBot) {
   return new Promise(async (resolve, reject) => {
   const firstname = ["Thomas", "Matthew", "Nick", "Victoria", "Victor", "Lamia", "Esmeralda", "Rick", "Morty", "Natasha"]
   const lastname = ["Sanchez", "Bella", "Marthy", "Poly", "Aneh", "Lokjo", "Dachen", "Martin", "El Haoui", "Dupont"]
@@ -26,64 +24,43 @@ async function launchMassCreation(tmp_mail, numberBot) {
 
   for (let i = 0; i < numberBot ; i++) {
       let k = getRandomInt(0,9);
-
-      const uuid = uuidv4();
       
-      let mail = tmp_mail + i + "@mail.com"
-      var password = "Rootroot123$"
-      password = await bcrypt.hash(password, saltRounds);
-      let fname = firstname[k]
-      let lname = lastname[k]
-      let rating = getRandomInt(20,150);
-      let age = getRandomInt(18,65);
-      let genre = getRandomInt(0,3);
-      let orientation = getRandomInt(0,3);
-      let latt = getRandomInt(10,15)
-      let long = getRandomInt(5,10)
-      let bio = biography[k]
-      let interest1 = interest[k] + "1";
-      let interest2 = interest[k] + "2";
-      let interest3 = interest[k] + "3";
-      let interests = interest1 + "," + interest2 + "," + interest3;
-      let image = images[k]
-      let unix_timestamp = Date.now();
-      let timestamp = new Date(unix_timestamp);
+      let body = {};
+      body.email = tmp_mail + i + "@mail.com"
+      body.password = "Rootroot123$"
+      body.firstName = firstname[k]
+      body.lastName = lastname[k]
+      body.age = getRandomInt(18,65);
+      body.gender = getRandomInt(0,3);
+      body.orientation = getRandomInt(0,3);
+      body.lat = getRandomInt(10,15)
+      body.lng = getRandomInt(5,10)
+      body.geo = true;
+      body.biography = biography[k]
+      body.interest = interest[k] + "1," + interest[k] + "2," + interest[k] + "3";
 
-      db.query('INSERT INTO users(uuid, mail, password, first_name, last_name, age, fame, genre, orientation, lat, lng, biography, last_connection, is_active, interests) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15);', [uuid, mail, password, fname, lname, age, rating, genre, orientation, latt, long, bio, timestamp, '1', interests], (err, result) => {
-          if (err) {
-            console.log(err)
-            return(-1)
-          }
-          else {
-            console.log(result)
-          }
-        })
-
-      db.query('INSERT INTO images(user_mail, image_link) VALUES($1, $2);', [mail, image], (err, result) => {
-        if (err) {
-          console.log(err)
-          return(-1)
-        }
-        else {
-          console.log(result)
-        }
-      })
+      await create_user(body)
+      await upload_image(body, images[k])
     }
 
     resolve(0);
   })
 }
 
-function createNotifDb(data, type, i, numberBot) {
-  data.type = type;
+async function createNotifDb(data, type, i, numberBot) {
   if (type === 'like') {
-    create_like(data);
+    data.likes = 1;
+    await create_like(data);
     if (i < numberBot / 2) {
-      create_like(data);
+      let tmp = data.from
+      data.from = data.to
+      data.to = tmp
+      await create_like(data);
     }
   }
   else if (type === "unlike") {
-    create_like(data);
+    data.likes = -1;
+    await create_like(data);
   }
   else if (type === "visit") {
     create_visit(data);
@@ -92,48 +69,58 @@ function createNotifDb(data, type, i, numberBot) {
 }
 
 function launchMassRelation(mail, numberBot) {
-  const messages = ["Hello there, how are you doing?", "Ouh nice what about you?", "I am good thank you", "Heeeeyyyyyyy", "No wayyy you can help me", "I don't really know", "No but you know I am not sure it is a good idea to mass generate text like that, I don't know why but I don't feel it", "Ok boomer.", "Power to Ironforge", "You rock dude!"]
-  const types = ['like', 'unlike', 'visit', 'block']
+  return new Promise(async (resolve, reject) => {
+    console.log("let's do this")
+    const messages = ["Hello there, how are you doing?", "Ouh nice what about you?", "I am good thank you", "Heeeeyyyyyyy", "No wayyy you can help me", "I don't really know", "No but you know I am not sure it is a good idea to mass generate text like that, I don't know why but I don't feel it", "Ok boomer.", "Power to Ironforge", "You rock dude!"]
+    const types = ['like', 'unlike', 'visit', 'block']
 
-  for (let j = 0; j < 4; j++) {
-    for (let i = 4; i < numberBot - 10; i++) {
-      let k = getRandomInt(0,9);
-      let x = getRandomInt(0,3);
+    for (let j = 0; j < 4; j++) {
+      for (let i = 4; i < numberBot; i++) {
+        let k = getRandomInt(0,9);
+        let x = getRandomInt(0,3);
 
-      let message = messages[k]
-      let type = types[x]
-      let data;
-      if (i % 2 === 0) {
-        data = {
-          from: mail + j + "@mail.com",
-          to: mail + i + "@mail.com",
-          content: message
+        let message = messages[k]
+        let type = 'like'
+        let data;
+        if (i % 2 != 0) {
+          data = {
+            from: mail + j + "@mail.com",
+            to: mail + i + "@mail.com",
+            content: message,
+            type: type
+          }
+          create_message(data);
+          createNotifDb(data, type, i, numberBot)
+          if (i > numberBot / 4) {
+            block_user(data)
+          }
         }
-        create_message(data);
-        createNotifDb(data, type, i, numberBot)
-        if (i > numberBot / 4) {
-          block_user(data)
+        else {
+          data = {
+            from: mail + i + "@mail.com",
+            to: mail + j + "@mail.com",
+            content: message,
+            type: type
+          }
+          create_message(data);
+          createNotifDb(data, type, i, numberBot)
         }
-      }
-      else {
-        data = {
-          from: mail + i + "@mail.com",
-          to: mail + j + "@mail.com",
-          content: message
-        }
-        create_message(data);
-        createNotifDb(data, type, i, numberBot)
       }
     }
-  }
+
+  resolve(0);
+  })
 
 }
 
 async function run() {
-  const mail = "victoria"
-  const numberBot = 20
+  const mail = "newtest"
+  const numberBot = 200
+  console.log('here')
   await launchMassCreation(mail, numberBot)
-  launchMassRelation(mail, numberBot)
+  console.log('launch relation')
+  await launchMassRelation(mail, numberBot)
+  console.log('the end')
 }
 
 run()

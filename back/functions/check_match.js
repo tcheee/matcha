@@ -4,20 +4,22 @@ const delete_match = require('./delete_match.js')
 
 function check_match(from_mail, to_mail, like) {
     return new Promise((resolve, reject) => {
+        console.log(from_mail, to_mail, like)
         if (like == 1) {
-            db.query('Select * from public.likes where from_mail = $1 and to_mail = $2 and like = 1;' [to_mail, from_mail], (err, res) => {
+            db.query('Select * from public.likes where from_mail = $1 and to_mail = $2 and likes = 1;', [to_mail, from_mail], async (err, res) => {
                 if (err) {
                     console.log(err)
                     reject(err)
                 }
                 else {
                     if (res.rows[0] != undefined) {
-                        const match_creation = create_match(from_mail, to_mail);
-                        if (match_creation != -1) {
-                            resolve({message: "match_created", room: match_creation})
+                        console.log(res.rows[0])
+                        const match_room = await create_match(from_mail, to_mail);
+                        if (match_room != -1) {
+                            resolve({message: "match_created", room: match_room})
                         }
                         else {
-                            resolve ({message: "like_created"})
+                            resolve ({message: "error whil creating the match"})
                         }
                     }
                     else {
@@ -27,14 +29,14 @@ function check_match(from_mail, to_mail, like) {
             })
         }
         else {
-            db.query('Select * from public.matches where mail_a = $1 and mail_b = $2;' [to_mail, from_mail], (err, res) => {
+            db.query('Select * from public.matches where mail_a = $1 and mail_b = $2;', [to_mail, from_mail], async (err, res) => {
                 if (err) {
                     console.log(err)
                     rejet (err)
                 }
                 else {
                     if (res.rows[0] != undefined) {
-                        const match_deletion = delete_match(from_mail, to_mail);
+                        const match_deletion = await delete_match(from_mail, to_mail);
                         if (match_deletion != -1) {
                             resolve ({message: "match_deleted"})
                         }

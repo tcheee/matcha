@@ -1,5 +1,4 @@
 const db = require('../../db/db.js')
-const match = require('../../functions/check_match.js')
 
 function create_visit(body) {
     db.query('INSERT INTO visits(from_mail, to_mail) VALUES($1, $2);', [body.from, body.to], (err, result) => {
@@ -8,8 +7,8 @@ function create_visit(body) {
             return(-1)
         }
         else {
-            const id_like = result.rows[0].id
-            return(id_like)
+            const ret = result.rows[0]
+            return(0)
         }
       })
 }

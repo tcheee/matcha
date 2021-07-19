@@ -1,6 +1,6 @@
 const { Pool } = require('pg')
 
-//LOCAL
+//LOCAL env
 const pool = new Pool({
     host: "127.0.0.1",
     port: 5432,

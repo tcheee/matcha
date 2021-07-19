@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpBackend, HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { baseUrl, resetPasswordUrl, registerUrl, changePasswordUrl} from 'src/environments/environment';
+import { baseUrl, resetPasswordUrl, registerUrl, changePasswordUrl, updateUrl} from 'src/environments/environment';
 
 // ngrx imports
 import { Store, } from '@ngrx/store';
@@ -58,4 +58,28 @@ export class AuthServiceService {
     this.http.post(`${registerUrl}`, payload)
     .subscribe(data => console.log())
     }
+
+    update(data : any){
+      const payload: FormData = new FormData();
+      data.hasOwnProperty('img') ? payload.append('img', data.img) : null;
+      data.hasOwnProperty('img1') ? payload.append('img1', data.img1) : null;
+      data.hasOwnProperty('img2') ? payload.append('img2', data.img2) : null;
+      data.hasOwnProperty('img3') ? payload.append('img3', data.img3) : null;
+      payload.append('age', data.age);
+      payload.append('biography', data.biography);
+      payload.append('email', data.email);
+      payload.append('firstName', data.firstName);
+      payload.append('lastName', data.lastName);
+      payload.append('gender', data.gender);
+      payload.append('orientation', data.orientation);
+      payload.append('lat', data.lat);
+      payload.append('lng', data.lng);
+      payload.append('interest', data.interest);
+
+      payload.forEach((value, key) => {
+        console.log("key %s: value %s", key, value);
+        });
+        this.http.post(`${updateUrl}`, payload)
+    .subscribe(data => console.log())
+    } 
   }

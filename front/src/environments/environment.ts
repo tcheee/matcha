@@ -11,6 +11,7 @@ export const resetPasswordUrl = 'http://localhost:3000/resend-password/'
 export const registerUrl = 'http://localhost:3000/register'
 export const changePasswordUrl = 'http://localhost:3000/reset-password/'
 export const socketURL = 'http://localhost:3000'
+export const updateUrl = 'http://localhost:3000/update'
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

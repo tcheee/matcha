@@ -13,7 +13,8 @@ import { take, first } from 'rxjs/operators';
 import {MatChipInputEvent} from '@angular/material/chips';
 // geo
 import { LocationService} from '../../services/location.service';
-
+// services
+import { AuthServiceService} from '../../services/auth-service.service'
 
 // store imports
 import {
@@ -34,7 +35,7 @@ export class ProfileComponent implements OnInit {
   selfData: Observable<any>;
   updateForm : FormGroup;
   updateFormConfirm : any;
-  interests: Array<any>;
+  interests: string [];
   submitted = false;
   selectable = true;
   removable = true;
@@ -65,18 +66,19 @@ export class ProfileComponent implements OnInit {
     private store$: Store<RootStoreState.RootState>,
     private formBuilder: FormBuilder,
     private location: LocationService,
+    private authservice : AuthServiceService
     ) { }
 
 
   ngOnInit(): void {
     // location
-    this.location.getIpAddress().subscribe((res: any)  => {
-      this.ipAdress = res['ip'],
-      this.location.getGEOLocation(this.ipAdress).subscribe((res: any) => {
-        this.lat = res['latitude'];
-        this.lng = res['longitude'];
-      })
-    }),
+ //   this.location.getIpAddress().subscribe((res: any)  => {
+ //     this.ipAdress = res['ip'],
+ //     this.location.getGEOLocation(this.ipAdress).subscribe((res: any) => {
+//        this.lat = res['latitude'];
+//        this.lng = res['longitude'];
+ //     })
+ //   }),
 
     this.store$.select(SelfSelectors.getAllStateData).pipe(first()).subscribe(
       res => {
@@ -84,6 +86,8 @@ export class ProfileComponent implements OnInit {
         this.image1 = res.image1.length > 0 ? "data:image/jpeg;base64," + res.image1 : "", 
         this.image2 = res.image2.length > 0 ? "data:image/jpeg;base64," + res.image2 : "", 
         this.image3 = res.image3.length > 0 ? "data:image/jpeg;base64," + res.image3 : "", 
+        this.lat = res.lat;
+        this.lng = res.lng;
         this.interests = res.interests.split(',');
         this.updateForm = this.formBuilder.group({
           email: [res.mail , [Validators.email, Validators.required]],
@@ -92,24 +96,37 @@ export class ProfileComponent implements OnInit {
           age: [res.age, [Validators.required, Validators.pattern("^[0-9]*$")]],
           gender: [ res.genre, Validators.required],
           orientation: [ res.orientation , Validators.required],
-          interest: [ null, Validators.required],
+          interest: [ '', ],
           biography: [res.biography, Validators.required ],
           geolocalize: ['', ],
+          lat: [''],
+          lng: [''],
       },
     );
       })
   }
   onSubmit(){
     console.log(this.updateForm.value);
-    this.updateFormConfirm = this.updateForm.value;
-    if (this.file){
-    this.updateFormConfirm.img = this.file;
-    }
-    if (this.updateFormConfirm.geolocalize && this.updateFormConfirm.geolocalize === 1){
-      this.updateFormConfirm.lat = this.lat;
-      this.updateFormConfirm.lng = this.lng;
-    }
 
+    this.updateFormConfirm = this.updateForm.value;
+    if ( !this.updateForm.valid || this.interests.length == 0) {
+      console.log(this.updateForm.valid)
+          return;
+      }
+ //   if (this.updateFormConfirm.geolocalize && this.updateFormConfirm.geolocalize === 1){
+ //     this.updateFormConfirm.lat = this.lat;
+ //     this.updateFormConfirm.lng = this.lng;
+ //   }
+    this.file instanceof File ? this.updateFormConfirm['img'] = this.file : null ;
+    this.file1 instanceof File ? this.updateFormConfirm['img1'] = this.file1 : null ;
+    this.file2 instanceof File ? this.updateFormConfirm['img3'] = this.file2 : null ;
+    this.file3 instanceof File ? this.updateFormConfirm['img3'] = this.file3 : null ;
+    this.updateFormConfirm.interest = this.interests;
+    this.updateFormConfirm.lat = this.lat;
+    this.updateFormConfirm.lng = this.lng;
+    console.log(this.updateFormConfirm)
+    this.authservice.update(this.updateFormConfirm);
+    
 
   }
      onReset() {
@@ -123,7 +140,7 @@ export class ProfileComponent implements OnInit {
     // Add our fruit
     if (value) {
       if (value[0].includes("#")){
-        this.interests.push({name: value});
+        this.interests.push(value);
       }
       else{
         alert("you must have an # on the first character")
@@ -163,7 +180,6 @@ export class ProfileComponent implements OnInit {
   onChangeFileInput1(): void {
     const files1: { [key: string]: File } = this.fileInput1.nativeElement.files;
     this.file1 = files1[0];
-    console.log(this.file1)
   }
   onChangeFileInput2(): void {
     const files2: { [key: string]: File } = this.fileInput2.nativeElement.files;

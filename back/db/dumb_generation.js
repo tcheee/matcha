@@ -76,34 +76,37 @@ function launchMassRelation(mail, numberBot) {
 
     for (let j = 0; j < 4; j++) {
       for (let i = 4; i < numberBot; i++) {
-        let k = getRandomInt(0,9);
         let x = getRandomInt(0,3);
+        let type = types[x]
 
-        let message = messages[k]
-        let type = 'like'
-        let data;
         if (i % 2 != 0) {
-          data = {
+          let data1 = {
             from: mail + j + "@mail.com",
             to: mail + i + "@mail.com",
-            content: message,
             type: type
           }
-          create_message(data);
-          createNotifDb(data, type, i, numberBot)
+          createNotifDb(data1, type, i, numberBot)
           if (i > numberBot / 4) {
-            block_user(data)
+            block_user(data1)
           }
         }
         else {
-          data = {
+          let data2 = {
             from: mail + i + "@mail.com",
             to: mail + j + "@mail.com",
-            content: message,
             type: type
           }
+          createNotifDb(data2, type, i, numberBot)
+        }
+
+        for (let y = 0; y < 10; y++) {
+          let k = getRandomInt(0,9);
+          let data = {
+            from: mail + i + "@mail.com",
+            to: mail + j + "@mail.com",
+            content: messages[k]
+          }
           create_message(data);
-          createNotifDb(data, type, i, numberBot)
         }
       }
     }
@@ -114,13 +117,10 @@ function launchMassRelation(mail, numberBot) {
 }
 
 async function run() {
-  const mail = "newtest"
+  const mail = "lots"
   const numberBot = 200
-  console.log('here')
   await launchMassCreation(mail, numberBot)
-  console.log('launch relation')
   await launchMassRelation(mail, numberBot)
-  console.log('the end')
 }
 
 run()

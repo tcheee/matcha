@@ -8,8 +8,15 @@ function check_rating(mail) {
                 resolve(-1)
             }
             else {
-                const fame = result.rows[0].fame
-                resolve(fame)
+                if (result.rows != undefined)
+                {
+                    const fame = result.rows[0].fame
+                    resolve(fame)
+                }
+                else {
+                    console.log('There was an error getting the fame of: ' + mail)
+                    resolve(-1)
+                }
             }
         })
     })

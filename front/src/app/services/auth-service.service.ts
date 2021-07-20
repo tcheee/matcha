@@ -90,6 +90,8 @@ export class AuthServiceService {
         console.log("key %s: value %s", key, value);
         });
         this.http.post(`${updateUrl}`, payload)
-    .subscribe(data => console.log(data))
-    } 
+    .subscribe(data => {
+      this.store$.dispatch(SelfAction.updateSelf({user : data['data']['user'], images : data['data']['images']}));
+     console.log(data)  }  ) 
   }
+}

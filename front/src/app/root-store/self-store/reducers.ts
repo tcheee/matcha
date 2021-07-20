@@ -34,10 +34,10 @@ const SelfReducer = createReducer(
 	login: self.self.login,
 	notficiations_unseen: self.self.notifications_unseen,
 	notifications: self.self.notifications,
-	image: self.self.images.image,
-	//image1: self.self.images.image1,
-	//image2: self.self.images.image2,
-//	image3 : self.self.images.image3,
+	image: self.self.images.image0,
+	image1: self.self.images.image1,
+	image2: self.self.images.image2,
+	image3 : self.self.images.image3,
 	})
   ),
   on (
@@ -47,6 +47,27 @@ const SelfReducer = createReducer(
 	  })
   
 
+  ),
+  on (
+	  SelfAction.updateSelf,
+	  (state, {user , images}): State => ({
+		  ...state,
+		  image: images.image0,
+		  image1: images.image1,
+		  image2: images.image2,
+		  image3 : images.image3,
+		  id: user.id,
+		  mail: user.email,
+		  first_name: user.firstName,
+		  last_name: user.lastName,
+		  age: user.age,
+		  genre: user.gender,
+		  orientation: user.orientation,
+		  lat: user.lat,
+		  lng: user.lng,
+		  biography: user.biography,
+		  interests: user.interest,
+	  })
   )
 )
 export function reducers(state: State | undefined, action: Action) {

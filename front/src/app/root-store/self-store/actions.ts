@@ -6,6 +6,11 @@ export const sendDatatoStore = createAction(
 	props<{self : any}>()
 )
 
+export const updateSelf = createAction(
+	'[Self] Update self store',
+	props<{ user : any, images : any}>()
+)
+
 export const removeUnseenNotifications = createAction(
 	'[Self] Remove Unseen Notification',
 )

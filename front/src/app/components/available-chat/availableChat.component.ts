@@ -1,5 +1,6 @@
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { first } from 'rxjs/operators';
 
 import { Component, OnInit, ViewChildren, ViewChild, AfterViewInit, QueryList, ElementRef } from '@angular/core';
 import { MatList, MatListItem } from '@angular/material/list';
@@ -15,10 +16,11 @@ import {
 @Component({
   selector: 'chat-history',
   templateUrl: './availableChat.component.html',
-  styleUrls: ['./availableChat.component.scss']
+  styleUrls: ['./availableChat.component.css']
 })
 
-export class ChatComponent implements OnInit {
+export class availableChatComponent implements OnInit {
+  email: string = "";
   messages: any[] = [];
 
   @ViewChild(MatList, { read: ElementRef, static: true }) matList: ElementRef;
@@ -34,12 +36,17 @@ export class ChatComponent implements OnInit {
     this.store$.select(SelfSelectors.getAllStateData).pipe(first()).subscribe(
       res => {
         this.email = res.mail
-      });
+      }
+      );
 
 
     this.service.getOrderMessages(this.email)
-      .subscribe((data: object) => {
-        console.log(data)
+      .subscribe((data: any) => {
+        this.messages = data
+        console.log(data);
+        // for (elem in data) {
+        //   console.log(elem)
+        // }
       });
   }
 

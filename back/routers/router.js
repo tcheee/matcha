@@ -62,7 +62,11 @@ router.post('/update/', upload.fields([{ name: 'img', maxCount: 1}, {name: 'img1
   }
   let status = await update_user(req.body);
   if (status == 0 && image_upload == 0) {
-    res.status(200).send({success: true, message: "User was updated", data: req.body});
+    let data = {
+      user: req.body,
+      images: await get_all_images(req.body.email),
+    }
+    res.status(200).send({success: true, message: "User was updated", data: data});
   }
   else if (status == -2 && image_upload == 0) {
     res.status(400).send({success: false, message: "Mail already used" })
@@ -142,9 +146,10 @@ router.get('/message-history/', async (req, res) => {
 });
 
 router.get('/message-order/', async (req, res) => {
+  console.log(req.query)
   const mail = req.query.email
   const message_order = await get_message_order(mail)
-  if (images != -1) {
+  if (message_order != -1) {
     res.status(200).json(message_order)
   }
   else {

@@ -10,7 +10,6 @@ function get_all_images(mail) {
             else {
                 let images = {};
                 if (res.rows[0] != undefined) {
-                    let images = {};
                     for (i in res.rows) {
                         images["image" + i] = res.rows[i].image_link;
                     }

@@ -35,7 +35,6 @@ export class AuthenticateComponent implements OnInit {
     this.authservice.login(this.form.value).subscribe(result => {
       if (result.message = "User is connected"){
         this.socketservice.getData(this.form.value.email)
-        this.router.navigate(['/home'])
       } else {
         /// wait for toms to send a bad result
         alert("You're email or password do not exist")

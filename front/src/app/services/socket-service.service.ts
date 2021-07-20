@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router} from '@angular/router';
 import { Observable } from 'rxjs';
 import { Observer } from 'rxjs';
 
@@ -17,7 +18,8 @@ export class socketService {
 
   constructor(
     private socket : Socket,
-    private store$: Store<RootStoreState.RootState>
+    private store$: Store<RootStoreState.RootState>,
+    private router: Router,
     ) { }
 
     getData(mail : string) {
@@ -26,6 +28,7 @@ export class socketService {
         if (response.data){
           this.store$.dispatch(SelfAction.sendDatatoStore({self: response.data}))
           this.store$.dispatch(UsersAction.sendDatatoStore({users: response.data}))
+          this.router.navigate(['/home'])
           console.log(response)
         }
       });

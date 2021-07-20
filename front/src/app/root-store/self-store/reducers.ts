@@ -39,6 +39,14 @@ const SelfReducer = createReducer(
 	//image2: self.self.images.image2,
 //	image3 : self.self.images.image3,
 	})
+  ),
+  on (
+	  SelfAction.removeUnseenNotifications,
+	  (state): State => ({
+		 ...state,
+	  })
+  
+
   )
 )
 export function reducers(state: State | undefined, action: Action) {

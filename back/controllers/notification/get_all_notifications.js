@@ -8,8 +8,12 @@ function get_all_notifications(mail) {
                 reject(err)
             }
             else {
-                const notifications = result.rows;
-                resolve(notifications)
+                if (result.rows != undefined ){
+                    resolve(result.rows)
+                }
+                else {
+                    resolve(-1)
+                }
             }
         });
     });

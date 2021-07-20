@@ -16,6 +16,7 @@ const upload_image = require("../controllers/user/upload_image.js")
 const get_all_messages = require("../controllers/message/get_all_messages")
 const get_message_order = require("../controllers/message/get_message_order")
 const get_all_images = require("../controllers/user/get_all_images.js")
+const get_all_notifications = require("../controllers/notification/get_all_notifications")
 const timing = require("../controllers/user/update_timestamp")
 const create_token = require("../functions/create_token")
 const { requireAuth } = require("../middleware/authMiddleware");
@@ -99,6 +100,18 @@ router.post('/login/', async (req, res) => {
       res.status(404).send("Error trying to login the user: " + err)
     }
 });
+
+router.get('/all-notifications', async (req, res) => {
+  const mail = req.query.email
+  const notifications = await get_all_notifications(mail)
+  if (notifications != -1) {
+    notification_seen(mail);
+    res.status(200).json(notifications)
+  }
+  else {
+    res.status(404).send({success: false, message:'There was a problem getting all the notifications'})
+  }
+})
 
 router.post('/resend-password', async (req, res) => {
   console.log(req.body)

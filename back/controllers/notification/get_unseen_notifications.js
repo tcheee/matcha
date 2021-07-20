@@ -9,7 +9,7 @@ function get_unseen_notifications(mail) {
             }
             else {
                 if (result.rows != undefined) { 
-                    const number_notifications = result.rows[0];
+                    const number_notifications = result.rows[0].count;
                     resolve(number_notifications)
                 }
                 else {

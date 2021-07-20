@@ -19,7 +19,9 @@ function launchMassCreation(tmp_mail, numberBot) {
   const firstname = ["Thomas", "Matthew", "Nick", "Victoria", "Victor", "Lamia", "Esmeralda", "Rick", "Morty", "Natasha"]
   const lastname = ["Sanchez", "Bella", "Marthy", "Poly", "Aneh", "Lokjo", "Dachen", "Martin", "El Haoui", "Dupont"]
   const biography = ["This is my bio", "I love Wow", "Let's play together", "My name is no name", "Cry and shout!", "Ouh Yeah, love this app!", "Come on dude", "My bio is long because I love speaking about my self, you know I did lot of things so I think I must share with you.", "Chat and nothing else", "My passion is to go and visit museums!"]
-  const interest = ["Cat", "Dog", "Bird", "Car", "Bike", "Cake", "Cooking", "Smoking", "Pary", "Music"]
+  const interest = ["#Cat", "#Dog", "#Bird", "#Car", "#Bike", "#Cake", "#Cooking", "#Smoking", "#Party", "#Music"]
+  const orientations = ['Heterosexual', 'Homosexual', 'Bisexual']
+  const genders = ['Man', 'Woman', 'Non-binary']
   const images = ["https://cdn.pixabay.com/photo/2017/08/30/12/45/girl-2696947__480.jpg", "https://cdn.pixabay.com/photo/2015/11/26/00/14/woman-1063100__340.jpg", "https://cdn.pixabay.com/photo/2016/11/29/13/14/attractive-1869761__340.jpg", "https://cdn.pixabay.com/photo/2017/06/05/11/01/airport-2373727__340.jpg", "https://cdn.pixabay.com/photo/2015/03/26/09/41/tie-690084__340.jpg", "https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166__480.jpg", "https://cdn.pixabay.com/photo/2017/09/21/07/47/girl-2771001__480.jpg", "https://cdn.pixabay.com/photo/2017/10/19/18/23/actress-2868705__480.jpg", "https://cdn.pixabay.com/photo/2017/06/18/18/26/holi-2416686__480.jpg", "https://cdn.pixabay.com/photo/2015/09/18/11/38/man-945438__480.jpg"]
 
   for (let i = 0; i < numberBot ; i++) {
@@ -31,11 +33,11 @@ function launchMassCreation(tmp_mail, numberBot) {
       body.firstName = firstname[k]
       body.lastName = lastname[k]
       body.age = getRandomInt(18,65);
-      body.gender = getRandomInt(0,3);
-      body.orientation = getRandomInt(0,3);
+      body.gender = genders[getRandomInt(0,3)];
+      body.orientation = orientations[getRandomInt(0,3)];
       body.lat = getRandomInt(10,15)
       body.lng = getRandomInt(5,10)
-      body.geo = true;
+      body.is_geolocated = true;
       body.biography = biography[k]
       body.interest = interest[k] + "1," + interest[k] + "2," + interest[k] + "3";
 

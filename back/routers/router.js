@@ -47,6 +47,38 @@ router.post('/register/', upload.single('img'), async (req, res) => {
   }
 });
 
+router.post('/update/', upload.fields([{ name: 'img', maxCount: 1}, {name: 'img1', maxCount: 1}, {name: 'img2', maxCount: 1}, {name: 'img3', maxCount: 1}]), async (req, res) => {
+  console.log("update")
+  let image_upload;
+  console.log(req.files)
+  console.log(req.body)
+  if (req.files) {
+    const result = req.files
+
+    for (i in result) {
+      console.log(result[i][0])
+      console.log(result[i][0].fieldname)
+      console.log(parseInt(result[i][0].fieldname))
+    }
+
+    //const encoded = req.file.buffer.toString('base64')
+    //image_upload = await upload_image(req.body, encoded);
+  }
+  else {
+    image_upload = 0
+  }
+  // let status = await create_user(req.body);
+  // if (status == 0 && image_upload == 0) {
+  //   res.status(200).send({success: true});
+  // }
+  // else if (status == -2 && image_upload == 0) {
+  //   res.status(400).send({success: false, message: "mail already used" })
+  // }
+  // else {
+  //   res.status(404).send({success: false});
+  // }
+});
+
 router.post('/activate/', (req, res) => {
   let status = activate_user(req.body.id);
   res.send(status);

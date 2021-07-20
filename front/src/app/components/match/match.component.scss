@@ -11,3 +11,10 @@ table {
       .mat-row:hover .mat-cell {
 	border-color: currentColor;
       }
+      .filter-row {
+	display: flex;
+	flex-direction: row;
+	flex: 1;
+	align-content: center;
+	justify-content: space-between;
+      }

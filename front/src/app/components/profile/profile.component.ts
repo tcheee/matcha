@@ -192,4 +192,8 @@ export class ProfileComponent implements OnInit {
     const files3: { [key: string]: File } = this.fileInput3.nativeElement.files;
     this.file3 = files3[0];
   }
+
+  updatePassword(){
+    this.router.navigate(['reset-password'])
+  }
 }

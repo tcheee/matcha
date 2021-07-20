@@ -14,6 +14,7 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
+    canActivate: [IsSignedGuardGuard],
     children: [
       {
         path: 'profile',

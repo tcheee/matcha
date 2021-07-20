@@ -89,6 +89,6 @@ export class AuthServiceService {
         console.log("key %s: value %s", key, value);
         });
         this.http.post(`${updateUrl}`, payload)
-    .subscribe(data => console.log())
+    .subscribe(data => console.log(data))
     } 
   }

@@ -20,7 +20,7 @@ export interface State {
     unlikes: Array<string>;
     visits: Array<string>;
     notifications: Array<string>;
-    notficiations_unseen: Array<string>;
+    notficiations_unseen: string;
     login: boolean;
     image: string;
     image1: string;
@@ -50,7 +50,7 @@ export const initialState: State = {
     unlikes: [],
     visits: [],
     login: false,
-    notficiations_unseen: [],
+    notficiations_unseen: '',
     notifications: [],
     image: '',
     image1: '',

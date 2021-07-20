@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.store$.select(SelfSelectors.notificationsUnseen).subscribe(
-      res => this.notificationsUnseen = parseInt(res['count'])
+      res => this.notificationsUnseen = parseInt(res)
     )
   }
 

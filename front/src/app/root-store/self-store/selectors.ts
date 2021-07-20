@@ -18,7 +18,7 @@ export const isLogged: MemoizedSelector<object, boolean> = createSelector(
 	(state: State): any => state.login
       );
 
-export const notificationsUnseen: MemoizedSelector<object, Array<string>> = createSelector(
+export const notificationsUnseen: MemoizedSelector<object, string> = createSelector(
 	selectSelfState,
 	(state: State): any => state.notficiations_unseen
       );

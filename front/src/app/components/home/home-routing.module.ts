@@ -34,6 +34,7 @@ const routes: Routes = [
       {
         path: 'match/:id',
         component: MatchProfileComponent,
+        canActivate: [IsSignedGuardGuard],
       },
       {
         path: 'chat',

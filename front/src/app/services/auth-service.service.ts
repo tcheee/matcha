@@ -29,7 +29,7 @@ export class AuthServiceService {
   }
 
   getMessagesHistory(data : any) :Observable<any>{
-    return this.http.get(`${messageHistoryUrl}`, {withCredentials: true, params: {email: data}});
+    return this.http.get(`${messageHistoryUrl}`, {withCredentials: true, params: {room: data}});
   }
 
   resetPassword(data : any) {

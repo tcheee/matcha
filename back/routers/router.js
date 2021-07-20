@@ -146,9 +146,8 @@ router.get('/all-photos/', async (req, res) => {
 });
 
 router.get('/message-history/', async (req, res) => {
-  const from_mail = req.query.from_email
-  const to_mail = req.query.to_email
-  const messages = await get_all_messages(from_mail, to_mail)
+  const room = req.query.room
+  const messages = await get_all_messages(room)
   if (messages != -1) {
     res.status(200).json(messages)
   }

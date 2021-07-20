@@ -2,7 +2,7 @@
   <mat-card class="main-card">
     <mat-list class="chat-list">
         <mat-list-item *ngFor="let message of messages" [ngClass]="['chat-list-item']">
-          <a [routerLink]="['/', message.room]" style="text-decoration: none; color: inherit;">
+          <a [routerLink]="['/home/chat/', message.room]" [state]="{ to: message.contact}" style="text-decoration: none; color: inherit;">
             <h4 mat-line>
               <b>{{message.contact}}</b>
             </h4>

@@ -1,8 +1,8 @@
 const db = require('../../db/db.js')
 
-function get_all_messages(from_mail, to_mail) {
+function get_all_messages(room) {
     return new Promise((resolve, reject) => {
-        db.query('Select * from public.inboxes where (from_mail = $1 and to_mail = $2) or (from_mail = $2 and to_mail = $1) order by creation_time;', [from_mail, to_mail], (err, result) => {
+        db.query('Select * from public.inboxes where room = $1 order by creation_time;', [room], (err, result) => {
             if (err) {
                 console.log(err)
                 reject(-1)

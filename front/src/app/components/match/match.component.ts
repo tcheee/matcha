@@ -24,7 +24,7 @@ export class MatchComponent implements OnInit, AfterViewInit {
   selfData : any;
   usersData$ : Observable<any>;
   usersData : any;
-  displayedColumns: string[] = ['first_name', 'last_name', 'interests', 'genre', 'fame'];
+  displayedColumns: string[] = ['first_name', 'last_name', 'image', 'interests', 'genre', 'fame'];
   dataSource : MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

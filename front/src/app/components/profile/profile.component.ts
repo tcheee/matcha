@@ -84,10 +84,10 @@ export class ProfileComponent implements OnInit {
     this.store$.select(SelfSelectors.getAllStateData).pipe(first()).subscribe(
       res => {
         this.id = res.id
-        this.image =  "data:image/jpeg;base64," + res.image;
-        this.image1 = res.image1.length > 0 ? "data:image/jpeg;base64," + res.image1 : "", 
-        this.image2 = res.image2.length > 0 ? "data:image/jpeg;base64," + res.image2 : "", 
-        this.image3 = res.image3.length > 0 ? "data:image/jpeg;base64," + res.image3 : "", 
+        this.image =  res.image
+        this.image1 = res.image1 !== "data:image/jpeg;base64,"  ? res.image1 : "", 
+        this.image2 = res.image2 !== "data:image/jpeg;base64," ? res.image2 : "", 
+        this.image3 = res.image3  !==  "data:image/jpeg;base64," ? res.image3 : "", 
         this.lat = res.lat;
         this.lng = res.lng;
         this.interests = res.interests.split(',');

@@ -63,8 +63,8 @@ router.post('/update/', upload.fields([{ name: 'img', maxCount: 1}, {name: 'img1
   let status = await update_user(req.body);
   if (status == 0 && image_upload == 0) {
     let data = {
-      users = req.body,
-      images = await get_all_images(req.body.email),
+      user: req.body,
+      images: await get_all_images(req.body.email),
     }
     res.status(200).send({success: true, message: "User was updated", data: data});
   }

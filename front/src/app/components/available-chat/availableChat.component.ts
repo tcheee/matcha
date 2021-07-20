@@ -43,7 +43,10 @@ export class availableChatComponent implements OnInit {
     this.service.getOrderMessages(this.email)
       .subscribe((data: any) => {
         this.messages = data
-        console.log(this.messages)
+        console.log(data);
+        // for (elem in data) {
+        //   console.log(elem)
+        // }
       });
   }
 

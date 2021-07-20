@@ -8,16 +8,19 @@ function get_all_images(mail) {
                 resolve(-1)
             }
             else {
+                let images = {};
                 if (res.rows[0] != undefined) {
                     let images = {};
                     for (i in res.rows) {
                         images["image" + i] = res.rows[i].image_link;
                     }
-                    resolve(images)
                 }
                 else {
-                    resolve(undefined)
+                    for (let i = 0; i < 4; i++) {
+                        images["image" + i] = '';
+                    }
                 }
+                resolve(images)
             }
         });
     });

@@ -7,6 +7,7 @@ import { HomeComponent} from './home.component';
 import { ProfileComponent} from '../profile/profile.component';
 import { HistoryComponent} from '../history/history.component';
 import { MatchComponent } from '../match/match.component';
+import { MatchProfileComponent } from '../match-profile/match-profile.component';
 
 // material module
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -22,10 +23,14 @@ import {MatSelectModule} from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatChipsModule } from '@angular/material/chips';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
 // forms
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
+import { fromEventPattern } from 'rxjs';
 @NgModule({
-  declarations: [ HomeComponent, ProfileComponent, HistoryComponent, MatchComponent],
+  declarations: [ HomeComponent, ProfileComponent, HistoryComponent, MatchComponent, MatchProfileComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,
@@ -45,6 +50,9 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms'
       MatInputModule,
       MatFormFieldModule,
       MatChipsModule,
+      MatTableModule,
+      MatPaginatorModule,
+      MatSortModule,
   ]
 })
 export class HomeModule { }

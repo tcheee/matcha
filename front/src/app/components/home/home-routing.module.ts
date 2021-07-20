@@ -5,9 +5,10 @@ import { ProfileComponent } from '../profile/profile.component';
 import { HistoryComponent} from '../history/history.component';
 import { MatchComponent } from '../match/match.component';
 import { ChatComponent} from '../chat/chat.component'
-
+import { MatchProfileComponent} from '../match-profile/match-profile.component';
 // guards
 import { IsSignedGuardGuard} from '../../guards/is-signed-guard.guard';
+import { fromEventPattern } from 'rxjs';
 const routes: Routes = [
   {
     path: '',
@@ -32,6 +33,10 @@ const routes: Routes = [
         path: 'chat',
         component: ChatComponent,
         canActivate: [IsSignedGuardGuard],
+      },
+      {
+        path: 'match/:id',
+        component: MatchProfileComponent,
       }
     ]
   }];

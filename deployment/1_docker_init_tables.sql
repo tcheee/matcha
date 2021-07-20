@@ -25,7 +25,8 @@ CREATE TABLE images
     id SERIAL PRIMARY KEY,
     user_mail VARCHAR(100) NOT NULL,
     image_link TEXT,
-    orders INT NOT NULL UNIQUE DEFAULT 0
+    orders INT NOT NULL DEFAULT 0,
+    UNIQUE (user_mail, orders)
 );
 
 CREATE TABLE notifications

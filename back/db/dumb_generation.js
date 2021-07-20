@@ -38,7 +38,7 @@ function launchMassCreation(tmp_mail, numberBot) {
       body.interest = interest[k] + "1," + interest[k] + "2," + interest[k] + "3";
 
       await create_user(body)
-      await upload_image(body, images[k])
+      await upload_image(body, images[k], 0)
     }
 
     resolve(0);

@@ -29,6 +29,7 @@ import {
 })
 export class ProfileComponent implements OnInit {
 
+  id: string = "";
   lat : string = "";
   lng : string = "";
   ipAdress : string = "";
@@ -82,6 +83,7 @@ export class ProfileComponent implements OnInit {
 
     this.store$.select(SelfSelectors.getAllStateData).pipe(first()).subscribe(
       res => {
+        this.id = res.id
         this.image =  "data:image/jpeg;base64," + res.image;
         this.image1 = res.image1.length > 0 ? "data:image/jpeg;base64," + res.image1 : "", 
         this.image2 = res.image2.length > 0 ? "data:image/jpeg;base64," + res.image2 : "", 
@@ -117,6 +119,7 @@ export class ProfileComponent implements OnInit {
  //     this.updateFormConfirm.lat = this.lat;
  //     this.updateFormConfirm.lng = this.lng;
  //   }
+    this.updateFormConfirm.id = this.id;
     this.file instanceof File ? this.updateFormConfirm['img'] = this.file : null ;
     this.file1 instanceof File ? this.updateFormConfirm['img1'] = this.file1 : null ;
     this.file2 instanceof File ? this.updateFormConfirm['img2'] = this.file2 : null ;

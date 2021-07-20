@@ -1,1 +1,1 @@
-docker-compose up -d && sleep 2m && node ../back/db/dumb_generation.js
+docker-compose up -d && sleep 20s && node ../back/db/dumb_generation.js

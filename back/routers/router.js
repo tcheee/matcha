@@ -5,6 +5,7 @@ var storage = multer.memoryStorage()
 var upload = multer({ storage: storage })
 
 const create_user = require('../controllers/user/create_user.js')
+const update_user = require('../controllers/user/update_user.js')
 const activate_user = require('../controllers/user/activate_user.js')
 const login_user = require('../controllers/user/login_user.js')
 const get_all_data = require('../controllers/user/get_all_data.js')
@@ -16,6 +17,7 @@ const get_all_messages = require("../controllers/message/get_all_messages")
 const timing = require("../controllers/user/update_timestamp")
 const create_token = require("../functions/create_token")
 const { requireAuth } = require("../middleware/authMiddleware");
+const { parse } = require('path/posix');
 const maxAge = 24 * 10 * 60 * 60;
 
 
@@ -23,60 +25,50 @@ const maxAge = 24 * 10 * 60 * 60;
 
 router.get('/', (req, res) => {
   res.sendFile("index.html", {root: '../front/dist/front/'});
-  //res.sendFile('/Users/tche/Documents/matcha/back/test_back/test_socket.html')
 });
 
 router.post('/register/', upload.single('img'), async (req, res) => {
   let image_upload;
   if (req.file) {
     const encoded = req.file.buffer.toString('base64')
-    image_upload = await upload_image(req.body, encoded);
+    image_upload = await upload_image(req.body, encoded, 0);
   }
   else {
     image_upload = 0
   }
   let status = await create_user(req.body);
   if (status == 0 && image_upload == 0) {
-    res.status(200).send({success: true});
+    res.status(200).send({success: true, message: "User successfully register and image uploaded"});
   }
   else if (status == -2 && image_upload == 0) {
     res.status(400).send({success: false, message: "mail already used" })
   }
   else {
-    res.status(404).send({success: false});
+    res.status(404).send({success: false, message: "We were not able to register the user ..."});
   }
 });
 
 router.post('/update/', upload.fields([{ name: 'img', maxCount: 1}, {name: 'img1', maxCount: 1}, {name: 'img2', maxCount: 1}, {name: 'img3', maxCount: 1}]), async (req, res) => {
-  console.log("update")
-  let image_upload;
-  console.log(req.files)
-  console.log(req.body)
+  let image_upload = 0;
   if (req.files) {
-    const result = req.files
-
-    for (i in result) {
-      console.log(result[i][0])
-      console.log(result[i][0].fieldname)
-      console.log(parseInt(result[i][0].fieldname))
+    for (elem in req.files) {
+      let index = elem[3] ? elem[3] : 0
+      const encoded = req.files[elem][0].buffer.toString('base64')
+      if (await upload_image(req.body, encoded, index) != 0) {
+        image_upload = -1
+      }
     }
-
-    //const encoded = req.file.buffer.toString('base64')
-    //image_upload = await upload_image(req.body, encoded);
+  }
+  let status = await update_user(req.body);
+  if (status == 0 && image_upload == 0) {
+    res.status(200).send({success: true, message: "User was updated", data: req.body});
+  }
+  else if (status == -2 && image_upload == 0) {
+    res.status(400).send({success: false, message: "Mail already used" })
   }
   else {
-    image_upload = 0
+    res.status(404).send({success: false});
   }
-  // let status = await create_user(req.body);
-  // if (status == 0 && image_upload == 0) {
-  //   res.status(200).send({success: true});
-  // }
-  // else if (status == -2 && image_upload == 0) {
-  //   res.status(400).send({success: false, message: "mail already used" })
-  // }
-  // else {
-  //   res.status(404).send({success: false});
-  // }
 });
 
 router.post('/activate/', (req, res) => {

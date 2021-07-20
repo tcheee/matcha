@@ -65,6 +65,7 @@ export class AuthServiceService {
       data.hasOwnProperty('img1') ? payload.append('img1', data.img1) : null;
       data.hasOwnProperty('img2') ? payload.append('img2', data.img2) : null;
       data.hasOwnProperty('img3') ? payload.append('img3', data.img3) : null;
+      payload.append('id', data.id);
       payload.append('age', data.age);
       payload.append('biography', data.biography);
       payload.append('email', data.email);

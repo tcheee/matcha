@@ -1,69 +1,33 @@
 import { Component, OnInit, ViewChildren, ViewChild, AfterViewInit, QueryList, ElementRef } from '@angular/core';
 import { MatList, MatListItem } from '@angular/material/list';
-import { socketService} from '../../services/socket-service.service'
+import { AuthServiceService } from '../../services/auth-service.service'
 
 @Component({
-  selector: 'app-chat',
-  templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.css']
+  selector: 'chat-history',
+  templateUrl: './availableChat.component.html',
+  styleUrls: ['./availableChat.component.scss']
 })
 
 export class ChatComponent implements OnInit {
   messages: any[] = [];
   room: string = ''!;
   username: string = ''!;
-  messageContent: string = ''!;
-  ioConnection: any;
-  storedUserName: string;
 
   @ViewChild(MatList, { read: ElementRef, static: true }) matList: ElementRef;
   @ViewChildren(MatListItem, { read: ElementRef }) matListItems: QueryList<MatListItem>;
 
   constructor(
-    private socketService: socketService
+    private service : AuthServiceService,
   ) {}
 
   ngOnInit(): void {
-    this.socketService.onChat()
-      .subscribe((message: any) => {
-        this.messages.push(message);
+    this.service.getOrderMessages(mail)
+      .subscribe((data: object) => {
+        console.log(data)
       });
   }
 
   ngAfterViewInit(): void {
     // subscribing to any changes in the list of items / messages
-    this.matListItems.changes.subscribe(elements => {
-      this.scrollToBottom();
-    });
-  }
-
-  private scrollToBottom(): void {
-    try {
-      this.matList.nativeElement.scrollTop = this.matList.nativeElement.scrollHeight;
-    } catch (err) {
-    }
-  }
-
-  public joinRoom(room:string): void {
-    if (!room) {
-      return
-    }
-
-    this.socketService.joinRoom(room);
-  }
-
-  public sendMessage(message: string): void {
-    if (!message) {
-      return;
-    }
-
-    this.socketService.sendChat(
-      this.username,
-      'other guy',
-      message,
-      this.room
-    );
-
-    this.messageContent = '';
   }
 }

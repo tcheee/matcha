@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthServiceService} from '../../services/auth-service.service'
 import { socketService} from '../../services/socket-service.service'
+
 @Component({
   selector: 'app-authenticate',
   templateUrl: './authenticate.component.html',

@@ -13,7 +13,6 @@ function get_all_images(mail) {
                     for (i in res.rows) {
                         images["image" + i] = res.rows[i].image_link;
                     }
-                    console.log(images);
                     resolve(images)
                 }
                 else {

@@ -14,10 +14,11 @@ const reset_password = require("../controllers/user/reset_password.js")
 const resend_password = require("../controllers/user/resend_password.js")
 const upload_image = require("../controllers/user/upload_image.js")
 const get_all_messages = require("../controllers/message/get_all_messages")
+const get_message_order = require("../controllers/message/get_message_order")
+const get_all_images = require("../controllers/user/get_all_images.js")
 const timing = require("../controllers/user/update_timestamp")
 const create_token = require("../functions/create_token")
 const { requireAuth } = require("../middleware/authMiddleware");
-const { parse } = require('path/posix');
 const maxAge = 24 * 10 * 60 * 60;
 
 
@@ -117,6 +118,17 @@ router.post('/reset-password/', async (req, res) => {
   }
 });
 
+router.get('/all-photos/', async (req, res) => {
+  const mail = req.query.email
+  const images = await get_all_images(mail)
+  if (images != -1) {
+    res.status(200).json(images)
+  }
+  else {
+    res.status(404).send({success: false, message:'There was a problem getting all the images'})
+  }
+});
+
 router.get('/message-history/', async (req, res) => {
   const from_mail = req.query.from_email
   const to_mail = req.query.to_email
@@ -126,6 +138,17 @@ router.get('/message-history/', async (req, res) => {
   }
   else {
     res.status(404).send({success: false, message:'There was a problem getting the history'})
+  }
+});
+
+router.get('/message-order/', async (req, res) => {
+  const mail = req.query.email
+  const message_order = await get_message_order(mail)
+  if (images != -1) {
+    res.status(200).json(message_order)
+  }
+  else {
+    res.status(404).send({success: false, message:'There was a problem getting the order of messages'})
   }
 });
 

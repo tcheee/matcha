@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpBackend, HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { baseUrl, resetPasswordUrl, registerUrl, changePasswordUrl, updateUrl} from 'src/environments/environment';
+import { baseUrl, resetPasswordUrl, registerUrl, changePasswordUrl, updateUrl, orderMessageUrl, messageHistoryUrl} from 'src/environments/environment';
 
 // ngrx imports
 import { Store, } from '@ngrx/store';
@@ -21,6 +21,14 @@ export class AuthServiceService {
 
   login(data : any) :Observable<any>{
     return this.http.post(`${baseUrl}`, data, {withCredentials: true});
+  }
+
+  getOrderMessages(data : any) :Observable<any>{
+    return this.http.get(`${orderMessageUrl}`, {withCredentials: true, params: data});
+  }
+
+  getMessagesHistory(data : any) :Observable<any>{
+    return this.http.get(`${messageHistoryUrl}`, {withCredentials: true, params: data});
   }
 
   resetPassword(data : any) {

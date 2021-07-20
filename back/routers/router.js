@@ -23,7 +23,7 @@ const { requireAuth } = require("../middleware/authMiddleware");
 const maxAge = 24 * 10 * 60 * 60;
 
 
-//router.use(express.static('test_back')); // To delete and change to push again
+//router.use(express.static('test_back')); // To delete and change to push again 
 
 router.get('/', (req, res) => {
   res.sendFile("index.html", {root: '../front/dist/front/'});
@@ -101,12 +101,11 @@ router.post('/login/', async (req, res) => {
     }
 });
 
-router.get('/all-notifications', async (req, res) => {
-  const mail = req.query.email
-  const notifications = await get_all_notifications(mail)
-  if (notifications != -1) {
-    notification_seen(mail);
-    res.status(200).json(notifications)
+router.post('/notifications-seen', async (req, res) => {
+  const mail = req.body.mail
+  let status = await notification_seen(mail);
+  if (status === 0) {
+    res.status(200).json({success: true, message:'Notifications updated'})
   }
   else {
     res.status(404).send({success: false, message:'There was a problem getting all the notifications'})

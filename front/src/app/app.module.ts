@@ -19,6 +19,7 @@ import { ForgetpasswordComponent } from './components/forgetpassword/forgetpassw
 import { ResetpasswordComponent } from './components/resetpassword/resetpassword.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { DisconnectComponent } from './components/disconnect/disconnect.component';
+import { availableChatComponent } from './components/available-chat/availableChat.component';
 
 const config: SocketIoConfig = { url: `${socketURL}`, options: {} };
 @NgModule({
@@ -27,6 +28,7 @@ const config: SocketIoConfig = { url: `${socketURL}`, options: {} };
     ForgetpasswordComponent,
     ResetpasswordComponent,
     ChatComponent,
+    availableChatComponent,
     DisconnectComponent,
   ],
   imports: [

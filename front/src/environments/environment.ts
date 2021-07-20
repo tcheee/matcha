@@ -12,7 +12,7 @@ export const registerUrl = 'http://localhost:3000/register'
 export const changePasswordUrl = 'http://localhost:3000/reset-password/'
 export const socketURL = 'http://localhost:3000'
 export const updateUrl = 'http://localhost:3000/update'
-export const orderMessageUrl = 'http://localhost:3000//message-order/'
+export const orderMessageUrl = 'http://localhost:3000/message-order/'
 export const messageHistoryUrl = 'http://localhost:3000/message-history/'
 /*
  * For easier debugging in development mode, you can import the following file

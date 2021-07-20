@@ -5,6 +5,7 @@ import { ProfileComponent } from '../profile/profile.component';
 import { HistoryComponent} from '../history/history.component';
 import { MatchComponent } from '../match/match.component';
 import { ChatComponent} from '../chat/chat.component'
+import { availableChatComponent} from '../available-chat/availableChat.component'
 import { MatchProfileComponent} from '../match-profile/match-profile.component';
 // guards
 import { IsSignedGuardGuard} from '../../guards/is-signed-guard.guard';
@@ -30,14 +31,19 @@ const routes: Routes = [
         canActivate: [IsSignedGuardGuard],
       },
       {
+        path: 'match/:id',
+        component: MatchProfileComponent,
+      },
+      {
         path: 'chat',
-        component: ChatComponent,
+        component: availableChatComponent,
         canActivate: [IsSignedGuardGuard],
       },
       {
-        path: 'match/:id',
-        component: MatchProfileComponent,
-      }
+        path: 'chat/:room',
+        component: ChatComponent,
+        canActivate: [IsSignedGuardGuard],
+      },
     ]
   }];
 

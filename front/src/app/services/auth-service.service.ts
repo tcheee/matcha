@@ -24,11 +24,12 @@ export class AuthServiceService {
   }
 
   getOrderMessages(data : any) :Observable<any>{
-    return this.http.get(`${orderMessageUrl}`, {withCredentials: true, params: data});
+    console.log(data);
+    return this.http.get(`${orderMessageUrl}`, {withCredentials: true, params: {email: data}});
   }
 
   getMessagesHistory(data : any) :Observable<any>{
-    return this.http.get(`${messageHistoryUrl}`, {withCredentials: true, params: data});
+    return this.http.get(`${messageHistoryUrl}`, {withCredentials: true, params: {email: data}});
   }
 
   resetPassword(data : any) {

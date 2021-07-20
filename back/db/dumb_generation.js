@@ -10,10 +10,6 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random()*(max-min+1)+min);
   }
 
-function getRandomFloatBetween(min,max){
-    return Math.random()*(max-min+1)+min;
-}
-
 function launchMassCreation(tmp_mail, numberBot) {
   return new Promise(async (resolve, reject) => {
   const firstname = ["Thomas", "Matthew", "Nick", "Victoria", "Victor", "Lamia", "Esmeralda", "Rick", "Morty", "Natasha"]

@@ -35,8 +35,15 @@
   </mat-card-content>
     <mat-divider></mat-divider>
   <mat-card-actions>
-    <button mat-button>LIKE</button>
-    <button mat-button>SHARE</button>
+   <button mat-icon-button color="warn" matTooltip="Like">
+        <mat-icon>favorite</mat-icon>
+      </button>
+    <button mat-icon-button color="basic" matTooltip="Block User">
+        <mat-icon>block</mat-icon>
+      </button>
+    <button mat-icon-button color="primary" matTooltip="Report User as Fake">
+        <mat-icon>report</mat-icon>
+      </button>
   </mat-card-actions>
 </mat-card>
 </div>

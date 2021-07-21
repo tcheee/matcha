@@ -1,1 +1,42 @@
-<p>match-profile works!</p>
+<div class="div-card">
+<mat-card class="example-card">
+  <mat-card-header class="header">
+    <mat-card-title>{{userData[0].first_name}}  {{userData[0].last_name}}</mat-card-title>
+    <mat-card-subtitle>{{userData[0].fame}} fame points</mat-card-subtitle>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content >
+    <p style="margin: 20px 0px 0px 0px">
+    </p>
+    <p *ngIf="userData[0].interests.length > 0">
+     Interests :  {{userData[0].interests}}
+    </p>
+    <p style="margin: 6px 0px 0px 0px" *ngIf="userData[0].biography.length > 0">
+    Bio : {{userData[0].biography}}
+    </p>
+    <p style="margin: 6px 0px 0px 0px" >
+    Age : {{userData[0].age}} years
+    </p>
+    <p style="margin: 6px 0px 0px 0px" >
+    Gender : {{userData[0].gender}}
+    </p>
+    <p style="margin: 6px 0px 0px 0px" >
+    Orientation : {{userData[0].orientation}}
+    </p>
+    <p style="margin: 6px 0px 0px 0px" >
+    Last connection : {{userData[0].last_connection}}
+    </p>
+    <mat-divider></mat-divider>
+    <h1 style="margin: 5px 0px 0px 0px">Picture</h1>
+    <img style="margin: 5px 0px 0px 0px" [src]="userData[0].image"/>
+  <!--  <img style="margin: 5px 0px 0px 0px" [src]="image1" *ngIf="image1.length > 0"/>
+    <img style="margin: 5px 0px 0px 0px" [src]="image2" *ngIf="image2.length > 0"/>
+    <img style="margin: 5px 0px 0px 0px" [src]="image3" *ngIf="image3.length > 0"/> -->
+  </mat-card-content>
+    <mat-divider></mat-divider>
+  <mat-card-actions>
+    <button mat-button>LIKE</button>
+    <button mat-button>SHARE</button>
+  </mat-card-actions>
+</mat-card>
+</div>

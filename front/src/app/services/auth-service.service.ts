@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpBackend, HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { baseUrl, resetPasswordUrl, registerUrl, changePasswordUrl, updateUrl, orderMessageUrl, messageHistoryUrl} from 'src/environments/environment';
-
+import {MatSnackBar} from '@angular/material/snack-bar';
 // ngrx imports
 import { Store, } from '@ngrx/store';
 // store imports
 import { RootStoreState, SelfAction, UsersAction} from '../root-store';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,9 @@ export class AuthServiceService {
 
   constructor(
     private http: HttpClient,
-    private store$: Store<RootStoreState.RootState>
+    private store$: Store<RootStoreState.RootState>,
+    private _snackBar: MatSnackBar,
+    private router : Router,
 //    private handler : HttpBackend,
     ) { }
 
@@ -65,7 +68,17 @@ export class AuthServiceService {
     })
    // this.http = new HttpClient(this.handler);
     this.http.post(`${registerUrl}`, payload)
-    .subscribe(data => console.log())
+    .subscribe(data => {
+      this._snackBar.open("You are successfully created")
+      this.router.navigate(['/']),
+      console.log("return data is " + JSON.stringify(data))},
+      (error) => { 
+        // error() method block
+        if (error)
+        console.log(error)
+        this._snackBar.open(error.error.message, "Try again")
+      }
+    )
     }
 
     update(data : any){

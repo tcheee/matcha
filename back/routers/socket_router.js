@@ -1,6 +1,4 @@
 function launchSocketConnection(io) {
-    var client = {}
-    var i = 0;
     const set_online = require('../controllers/user/set_online.js')
     const { getDataAllUsers } = require("../sockets/getDataAllUsers.js")(io, client)
     const { handleChat } = require("../sockets/handleChat.js")(io)

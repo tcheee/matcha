@@ -1,13 +1,14 @@
 <div class="chat-container">
   <mat-card class="main-card">
     <mat-list class="chat-list">
+      <h1 mat-line style="text-align:center"> Your Chat</h1>
         <mat-list-item *ngFor="let message of messages" [ngClass]="['chat-list-item']">
           <a [routerLink]="['/home/chat/', message.room]" [state]="{ to: message.contact}" style="text-decoration: none; color: inherit;">
             <h4 mat-line>
               <b>{{message.contact}}</b>
             </h4>
             <p mat-line>
-              <span>{{message.from_mail}}: {{message.content}} </span>
+              <span><i>{{message.from_mail}}</i>: {{message.content}} </span>
             </p>
           </a>
         </mat-list-item>

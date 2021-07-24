@@ -2,26 +2,31 @@ import { Injectable } from '@angular/core';
 import { Router} from '@angular/router';
 import { Observable } from 'rxjs';
 import { Observer } from 'rxjs';
-
+import { io } from 'socket.io-client';
 // socket
-import { Socket } from 'ngx-socket-io';
+//import { Socket} from 'ngx-socket-io';
 
 // ngrx imports
 import { Store, } from '@ngrx/store';
 // store imports
 import { RootStoreState, SelfAction, UsersAction} from '../root-store';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class socketService {
 
+  socket : any;
   constructor(
-    private socket : Socket,
+    //private socket : Socket,
     private store$: Store<RootStoreState.RootState>,
     private router: Router,
     ) { }
 
+    setUpSocketConnexion(){
+      this.socket = io(environment.socketURL)
+    }
     getData(mail : string) {
       console.log("EMIT")
       this.socket.emit("data", {mail : mail}, (response: any) => {

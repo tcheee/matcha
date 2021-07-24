@@ -3,14 +3,15 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  socketURL : 'http://localhost:3000',
 };
 
 export const baseUrl = 'http://localhost:3000/login'
 export const resetPasswordUrl = 'http://localhost:3000/resend-password/'
 export const registerUrl = 'http://localhost:3000/register'
 export const changePasswordUrl = 'http://localhost:3000/reset-password/'
-export const socketURL = 'http://localhost:3000'
+
 export const updateUrl = 'http://localhost:3000/update'
 export const orderMessageUrl = 'http://localhost:3000/message-order/'
 export const messageHistoryUrl = 'http://localhost:3000/message-history/'

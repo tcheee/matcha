@@ -5,9 +5,6 @@ import { HttpClientModule} from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// socket
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-import { socketURL} from 'src/environments/environment';
 
 // import shared and core modules
 import { CoreModule } from './core/core.module';
@@ -21,7 +18,6 @@ import { ChatComponent } from './components/chat/chat.component';
 import { DisconnectComponent } from './components/disconnect/disconnect.component';
 import { availableChatComponent } from './components/available-chat/availableChat.component';
 
-const config: SocketIoConfig = { url: `${socketURL}`, options: {} };
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +31,6 @@ const config: SocketIoConfig = { url: `${socketURL}`, options: {} };
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    SocketIoModule.forRoot(config),
     BrowserAnimationsModule,
     CoreModule,
     SharedModule,

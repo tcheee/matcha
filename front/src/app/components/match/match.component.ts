@@ -34,7 +34,7 @@ export class MatchComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
   constructor(
-    private store$: Store<RootStoreState.RootState>
+    private store$: Store<RootStoreState.RootState>,
 
   ) { }
 

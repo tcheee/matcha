@@ -43,6 +43,9 @@ export class HomeComponent implements OnInit {
     this.store$.dispatch(SelfAction.removeUnseenNotifications());
     this.router.navigate(['/home/history'])
   }
+  home(){
+    this.router.navigate(["home/welcome"])
+  }
   logout(){
     this.router.navigate(["/"]);
   }

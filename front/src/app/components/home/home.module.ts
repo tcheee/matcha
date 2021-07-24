@@ -8,6 +8,7 @@ import { ProfileComponent} from '../profile/profile.component';
 import { HistoryComponent} from '../history/history.component';
 import { MatchComponent } from '../match/match.component';
 import { MatchProfileComponent } from '../match-profile/match-profile.component';
+import { WelcomeComponent} from '../welcome/welcome.component';
 
 // material module
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -30,7 +31,7 @@ import {MatSortModule} from '@angular/material/sort';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import { fromEventPattern } from 'rxjs';
 @NgModule({
-  declarations: [ HomeComponent, ProfileComponent, HistoryComponent, MatchComponent, MatchProfileComponent],
+  declarations: [ HomeComponent, ProfileComponent, HistoryComponent, MatchComponent, MatchProfileComponent, WelcomeComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,
@@ -53,6 +54,7 @@ import { fromEventPattern } from 'rxjs';
       MatTableModule,
       MatPaginatorModule,
       MatSortModule,
+
   ]
 })
 export class HomeModule { }

@@ -37,6 +37,9 @@
      <p *ngIf="likedyou == true" style="margin: 6px 0px 0px 0px" >
      {{userData[0].first_name}} liked you 
     </p>
+    <p *ngIf="youlike == true" style="margin: 6px 0px 0px 0px" >
+      You liked {{userData[0].first_name}}
+    </p>
   <mat-card-actions>
    <button *ngIf="youlike == false" mat-icon-button color="warn" matTooltip="Like" (click)="likeAction()">
         <mat-icon>favorite</mat-icon>

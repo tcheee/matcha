@@ -116,7 +116,7 @@ export class RegisterComponent implements OnInit {
         this.interests.push(value);
       }
       else{
-        alert("you must have an # on the first character")
+        this._snackBar.open("You have to start with '#' character")
       }
     }
 

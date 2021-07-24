@@ -23,7 +23,7 @@ export class socketService {
     private store$: Store<RootStoreState.RootState>,
     private router: Router,
     ) { }
-
+// SOCKET CONNECTION
     setUpSocketConnexion(){
       this.socket = io(environment.socketURL)
     }
@@ -39,6 +39,7 @@ export class socketService {
       });
     }
 
+    // SOCKET CHAT
     joinRoom(room:string) {
       this.socket.emit("room", {room: room});
     }
@@ -54,6 +55,12 @@ export class socketService {
                 console.log(data);
                 observer.next(data)});
         });
+    }
+
+    // SOCKET LIKE/UNLIKE/BLOCK/NOTIF
+    sendMatchAction(message: string, from : string, to : string){
+      console.log(message, from, to)
+      this.socket.emit(message, {from : from , to : to})
     }
 
   }

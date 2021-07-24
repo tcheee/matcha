@@ -14,3 +14,17 @@ export const updateSelf = createAction(
 export const removeUnseenNotifications = createAction(
 	'[Self] Remove Unseen Notification',
 )
+
+export const likeAction = createAction(
+	'[Self] Like Action',
+	props<{from : string, to : string}>()
+)
+
+export const unLikeAction = createAction(
+	'[Self] unLike Action',
+	props<{from : string, to : string}>()
+)
+export const blockAction = createAction(
+	'[Self] Block Action',
+	props<{from : string, to : string}>()
+)

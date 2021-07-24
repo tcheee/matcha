@@ -34,11 +34,17 @@
     <img style="margin: 5px 0px 0px 0px" [src]="image3" *ngIf="image3.length > 0"/> -->
   </mat-card-content>
     <mat-divider></mat-divider>
+     <p *ngIf="likedyou == true" style="margin: 6px 0px 0px 0px" >
+     {{userData[0].first_name}} liked you 
+    </p>
   <mat-card-actions>
-   <button mat-icon-button color="warn" matTooltip="Like">
+   <button *ngIf="youlike == false" mat-icon-button color="warn" matTooltip="Like" (click)="likeAction()">
         <mat-icon>favorite</mat-icon>
       </button>
-    <button mat-icon-button color="basic" matTooltip="Block User">
+    <button *ngIf="youlike == true" mat-icon-button matTooltip="UnLike" (click)="unlikeAction()">
+        <mat-icon>favorite_border</mat-icon>
+      </button>
+    <button mat-icon-button color="basic" matTooltip="Block User" (clcik)="blockAction()">
         <mat-icon>block</mat-icon>
       </button>
     <button mat-icon-button color="primary" matTooltip="Report User as Fake">

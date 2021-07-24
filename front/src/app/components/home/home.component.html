@@ -33,10 +33,18 @@
       </mat-list-item>
                <mat-list-item [routerLink]="'history'" (click)="sidenav.toggle()">
         <mat-icon>history</mat-icon>
-        <span class="align-middle">History / Notification</span>
+        <span class="align-middle">History</span>
       </mat-list-item>
      </mat-nav-list>
     </mat-sidenav>
+   <!--   <h1 class="div">Welcome to Matcha App !</h1>
+    <button class="match" mat-flat-button (click)="routeMatchComp()" >
+    Let's Match
+    </button>
+    -->
 <router-outlet></router-outlet>
 
+    <footer fxFlexOffset="auto">
+    </footer>
   </mat-sidenav-container>
+    

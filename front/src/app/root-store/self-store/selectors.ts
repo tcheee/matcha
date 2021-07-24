@@ -22,3 +22,8 @@ export const notificationsUnseen: MemoizedSelector<object, string> = createSelec
 	selectSelfState,
 	(state: State): any => state.notficiations_unseen
       );
+
+export const mail: MemoizedSelector<object, string> = createSelector(
+	selectSelfState,
+	(state: State): any => state.mail
+)

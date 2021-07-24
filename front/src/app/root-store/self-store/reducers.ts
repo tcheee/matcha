@@ -44,6 +44,7 @@ const SelfReducer = createReducer(
 	  SelfAction.removeUnseenNotifications,
 	  (state): State => ({
 		 ...state,
+		 notficiations_unseen : "0",
 	  })
   
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpBackend, HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { baseUrl, resetPasswordUrl, registerUrl, changePasswordUrl, updateUrl, orderMessageUrl, messageHistoryUrl} from 'src/environments/environment';
+import { baseUrl, resetPasswordUrl, registerUrl, changePasswordUrl, updateUrl, orderMessageUrl, messageHistoryUrl, resetNotifUrl} from 'src/environments/environment';
 import {MatSnackBar} from '@angular/material/snack-bar';
 // ngrx imports
 import { Store, } from '@ngrx/store';
@@ -41,6 +41,10 @@ export class AuthServiceService {
 
   changePassword(data : any) {
     return this.http.post(`${changePasswordUrl}`, data).subscribe(data => console.log(data))
+  }
+  removeNotification(mail : string){
+    return this.http.post(`${resetNotifUrl}`,{mail : mail}).subscribe(data => console.log(data))
+
   }
 
   register(data : any){

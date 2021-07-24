@@ -9,6 +9,8 @@ import { LocationService} from '../../services/location.service';
 
 // services
 import { AuthServiceService} from '../../services/auth-service.service'
+// snackbar
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-register',
@@ -42,6 +44,7 @@ export class RegisterComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authservice : AuthServiceService,
     private location: LocationService,
+    private _snackBar: MatSnackBar,
       ) { }
 
   ngOnInit() {
@@ -84,6 +87,7 @@ export class RegisterComponent implements OnInit {
       this.submitted = true;
       // (when we choose a file the submit button is trigerred idk why)
       if (!this.file || !this.registerForm.valid || this.interests.length <= 0) {
+      this._snackBar.open("The form is not Valid, Please complete the red field(s)")
           return;
       }
       this.registerFormConfirm = this.registerForm.value;

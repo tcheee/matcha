@@ -11,6 +11,7 @@ import { take, first } from 'rxjs/operators';
 
 // chips 
 import {MatChipInputEvent} from '@angular/material/chips';
+import {MatSnackBar} from '@angular/material/snack-bar';
 // geo
 import { LocationService} from '../../services/location.service';
 // services
@@ -67,7 +68,8 @@ export class ProfileComponent implements OnInit {
     private store$: Store<RootStoreState.RootState>,
     private formBuilder: FormBuilder,
     private location: LocationService,
-    private authservice : AuthServiceService
+    private authservice : AuthServiceService,
+    private _snackBar: MatSnackBar,
     ) { }
 
 
@@ -112,6 +114,7 @@ export class ProfileComponent implements OnInit {
 
     this.updateFormConfirm = this.updateForm.value;
     if ( !this.updateForm.valid || this.interests.length == 0) {
+      this._snackBar.open("The form is not Valid, You must have at least one interest, email, firstname ...")
       console.log(this.updateForm.valid)
           return;
       }

@@ -108,6 +108,8 @@ export class AuthServiceService {
         });
         this.http.post(`${updateUrl}`, payload)
     .subscribe(data => {
+      this._snackBar.open("You are successfully Updated")
+      this.router.navigate(['/home/welcome'])
       this.store$.dispatch(SelfAction.updateSelf({user : data['data']['user'], images : data['data']['images']}));
      console.log(data)  }  ) 
   }

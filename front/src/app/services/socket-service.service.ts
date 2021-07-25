@@ -27,6 +27,7 @@ export class socketService {
     setUpSocketConnexion(){
       this.socket = io(environment.socketURL)
     }
+
     getData(mail : string) {
       console.log("EMIT")
       this.socket.emit("data", {mail : mail}, (response: any) => {

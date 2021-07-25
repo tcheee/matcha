@@ -15,6 +15,7 @@ function launchSocketConnection(io) {
 
     const onConnection = (socket) => {
         console.log("made connection here")
+        console.log(socket)
         //set_online(mail)
 
         client[i] = socket.id // to transform once we have the mail in the socket request

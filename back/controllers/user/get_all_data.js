@@ -15,7 +15,11 @@ const get_all_images = require('./get_all_images.js')
 function transformIdToArray(object, column_name) {
     var array = [];
     for (i in object) {
-        array[i] = object[i][column_name];
+        let data = {
+            target: object[i][column_name],
+            room: object[i]['room']
+        }
+        array[i] = data
     }
     return (array);
 }
@@ -24,7 +28,6 @@ function transformIdToArray(object, column_name) {
     return new Promise(async (resolve, reject) => {
         try {
             for (elem in users) {
-                console.log(users[elem].mail)
                 users[elem].image = await get_first_image(users[elem].mail)
             }
             resolve (0)

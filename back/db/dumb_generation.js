@@ -5,6 +5,14 @@ const create_like = require('../controllers/notification/create_like')
 const create_visit = require('../controllers/notification/create_visit')
 const create_notification = require('../controllers/notification/create_notification')
 const block_user = require('../controllers/user/block_user')
+const fs = require('fs');
+
+function base64_encode(file) {
+  // read binary data
+  var bitmap = fs.readFileSync(file);
+  // convert binary data to base64 encoded string
+  return new Buffer(bitmap).toString('base64');
+}
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random()*(max-min+1)+min);
@@ -18,7 +26,6 @@ function launchMassCreation(tmp_mail, numberBot) {
   const interest = ["#Cat", "#Dog", "#Bird", "#Car", "#Bike", "#Cake", "#Cooking", "#Smoking", "#Party", "#Music"]
   const orientations = ['Heterosexual', 'Homosexual', 'Bisexual']
   const genders = ['Man', 'Woman', 'Non-binary']
-  const images = ["https://cdn.pixabay.com/photo/2017/08/30/12/45/girl-2696947__480.jpg", "https://cdn.pixabay.com/photo/2015/11/26/00/14/woman-1063100__340.jpg", "https://cdn.pixabay.com/photo/2016/11/29/13/14/attractive-1869761__340.jpg", "https://cdn.pixabay.com/photo/2017/06/05/11/01/airport-2373727__340.jpg", "https://cdn.pixabay.com/photo/2015/03/26/09/41/tie-690084__340.jpg", "https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166__480.jpg", "https://cdn.pixabay.com/photo/2017/09/21/07/47/girl-2771001__480.jpg", "https://cdn.pixabay.com/photo/2017/10/19/18/23/actress-2868705__480.jpg", "https://cdn.pixabay.com/photo/2017/06/18/18/26/holi-2416686__480.jpg", "https://cdn.pixabay.com/photo/2015/09/18/11/38/man-945438__480.jpg"]
 
   for (let i = 0; i < numberBot ; i++) {
       let k = getRandomInt(0,9);
@@ -36,9 +43,10 @@ function launchMassCreation(tmp_mail, numberBot) {
       body.is_geolocated = true;
       body.biography = biography[k]
       body.interest = interest[k] + "1," + interest[k] + "2," + interest[k] + "3";
+      var encoded = base64_encode('./test/' + k + ".jpeg");
 
       await create_user(body)
-      await upload_image(body, images[k], 0)
+      await upload_image(body, encoded, 0)
     }
 
     resolve(0);

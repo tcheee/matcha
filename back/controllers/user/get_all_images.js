@@ -2,7 +2,7 @@ const db = require('../../db/db.js')
 
 function get_all_images(mail) {
     return new Promise((resolve, reject) => {
-        db.query('Select * from public.images where user_mail = $1 order by orders DESC', [mail], (err, res) => {
+        db.query('Select * from public.images where user_mail = $1 order by orders', [mail], (err, res) => {
             if (err) {
                 console.log(err)
                 resolve(-1)

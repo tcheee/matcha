@@ -4,7 +4,6 @@ const create_notification = require('../controllers/notification/create_notifica
 module.exports = (io, client) => {
     const { notify } = require("./notifyUser.js")(io, client)
     const handleVisit = async function (data) {
-        console.log('-------------- we have a visit -----------')
         const socket = this;
         data.type = 'visit'
         const visit = await create_visit(data)

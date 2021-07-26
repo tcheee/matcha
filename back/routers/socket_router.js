@@ -17,6 +17,7 @@ function launchSocketConnection(io) {
         console.log("made connection here")
         client[socket.handshake.auth.mail] = socket.id
         set_online(socket.handshake.auth.mail)
+        socket.broadcast.emit('login_update', {mail: socket.handshake.auth.mail, login: true})
     
         socket.on('data', getDataAllUsers)
         socket.on('room', handleRoomJoining)

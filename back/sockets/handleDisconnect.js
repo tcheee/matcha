@@ -8,6 +8,7 @@ module.exports = (io, client) => {
             if (client[elem] == socket.id) {
                 set_offline(elem)
                 delete client[elem]
+                socket.broadcast.emit('login_update', {mail: socket.handshake.auth.mail, login: false})
             }
         }
     }

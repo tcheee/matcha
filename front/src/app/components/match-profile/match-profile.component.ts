@@ -50,7 +50,6 @@ export class MatchProfileComponent implements OnInit {
     this.selfData$ = this.store$.select(SelfSelectors.getAllStateData);
     this.selfData$.pipe(first()).subscribe(res => {
       this.selfData = res;
-      console.log(res);
     });
     this.usersData$ = this.store$.select(UsersSelector.getAllStateData);
     this.usersData$.pipe(first()).subscribe(res => {
@@ -70,12 +69,10 @@ export class MatchProfileComponent implements OnInit {
         this.image1 = result.hasOwnProperty("image1") ? "data:image/jpeg;base64," + result.image1 : "";
         this.image2 = result.hasOwnProperty("image2") ? "data:image/jpeg;base64," + result.image2 : "";
         this.image3 = result.hasOwnProperty("image3") ? "data:image/jpeg;base64," + result.image3 : "";
-        console.log(result)
       }
     )
     this.store$.dispatch(SelfAction.VisitAction({from : this.selfData.mail, to: this.userData[0].mail}))
     this.socketService.sendMatchAction("visit", this.selfData.mail, this.userData[0].mail)
-    console.log(this.userData);
   }
 //// ACTION
 likeAction(){

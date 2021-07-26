@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpBackend, HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { baseUrl, resetPasswordUrl, registerUrl, changePasswordUrl, updateUrl, orderMessageUrl, messageHistoryUrl, resetNotifUrl, resetMessagefUrl} from 'src/environments/environment';
+import { baseUrl, resetPasswordUrl, registerUrl, changePasswordUrl, updateUrl, imageUrl, orderMessageUrl, messageHistoryUrl, resetNotifUrl, resetMessagefUrl} from 'src/environments/environment';
 import {MatSnackBar} from '@angular/material/snack-bar';
 // ngrx imports
 import { Store, } from '@ngrx/store';
@@ -53,6 +53,10 @@ export class AuthServiceService {
        }
        
     })
+  }
+  getImages(data : string) {
+    console.log(data)
+    return this.http.get(`${imageUrl}`, {params: {mail : data}});
   }
 
   removeMessage(mail : string, isRedirect : boolean){

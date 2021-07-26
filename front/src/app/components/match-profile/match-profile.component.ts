@@ -16,6 +16,7 @@ import {
 
 // Service import 
 import { socketService} from '../../services/socket-service.service';
+import { AuthServiceService} from '../../services/auth-service.service';
 @Component({
   selector: 'app-match-profile',
   templateUrl: './match-profile.component.html',
@@ -40,7 +41,7 @@ export class MatchProfileComponent implements OnInit {
     private store$: Store<RootStoreState.RootState>,
     private router: Router,
     private socketService : socketService,
-
+    private authservice : AuthServiceService,
   ) { }
 
   ngOnInit(): void {
@@ -62,6 +63,9 @@ export class MatchProfileComponent implements OnInit {
       if (likedmail.target == this.userData[0].mail)
         this.youlike = true;
     })
+    this.authservice.getImages(this.userData[0].mail).subscribe(
+      result => console.log(result)
+    )
     // API CALL FOR IMG
     // all-photos param email : ....
   //  this.image1 = this.userData[0].image1 != "data:image/jpeg;base64," ? this.userData[0].image1 : ""

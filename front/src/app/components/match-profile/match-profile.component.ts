@@ -48,21 +48,23 @@ export class MatchProfileComponent implements OnInit {
   ngOnInit(): void {
     const id = this._activatedRoute.snapshot.paramMap.get('id');
     this.selfData$ = this.store$.select(SelfSelectors.getAllStateData);
-    this.selfData$.pipe(first()).subscribe(res => {
-      this.selfData = res;
-    });
+   
     this.usersData$ = this.store$.select(UsersSelector.getAllStateData);
-    this.usersData$.pipe(first()).subscribe(res => {
+    this.usersData$.subscribe(res => {
       this.usersData = res.users
     })
     this.userData = this.usersData.filter(function(res : any) {
       return res.id == id;
     });
-    this.likedyou = this.userData[0].mail === this.selfData.mail
-    this.selfData.likes.forEach((likedmail : any) => {
+    this.selfData$.subscribe(res => {
+      this.selfData = res;
+      this.likedyou = this.userData[0].mail === this.selfData.mail
+      this.selfData.likes.forEach((likedmail : any) => {
       if (likedmail.target == this.userData[0].mail)
         this.youlike = true;
     })
+    });
+    
     this.authservice.getImages(this.userData[0].mail).subscribe(
       (result : any) => {
         this.image = result.hasOwnProperty("image0") ? "data:image/jpeg;base64," + result.image0 : "";

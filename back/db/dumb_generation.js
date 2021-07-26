@@ -122,7 +122,7 @@ function launchMassRelation(mail, numberBot) {
 
 async function run() {
   const mail = "lots"
-  const numberBot = 20
+  const numberBot = 200
   await launchMassCreation(mail, numberBot)
   await launchMassRelation(mail, numberBot)
 }

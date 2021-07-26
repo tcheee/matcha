@@ -22,8 +22,10 @@ async function create_like(body) {
     return new Promise(async (resolve, reject) => {
         const result = await insertLikeDb(body);
         if (result !== -1) {
+            console.log('it is a like')
             update_rating(body.to, body.likes);
             let match = await check_match(body.from, body.to, body.likes);
+            console.log('yeaaah ', match)
             resolve(match)
         }
         else {

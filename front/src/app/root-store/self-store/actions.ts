@@ -32,3 +32,7 @@ export const blockAction = createAction(
 	'[Self] Block Action',
 	props<{from : string, to : string}>()
 )
+export const VisitAction = createAction(
+	'[Self] Block Action',
+	props<{from : string, to : string}>()
+)

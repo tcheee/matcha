@@ -66,15 +66,9 @@ export class MatchProfileComponent implements OnInit {
     this.authservice.getImages(this.userData[0].mail).subscribe(
       result => console.log(result)
     )
-    // API CALL FOR IMG
-    // all-photos param email : ....
-  //  this.image1 = this.userData[0].image1 != "data:image/jpeg;base64," ? this.userData[0].image1 : ""
- //   this.image2 = this.userData[0].image2 != "data:image/jpeg;base64," ? this.userData[0].image2 : ""
- //   this.image3 = this.userData[0].image3 != "data:image/jpeg;base64," ? this.userData[0].image3 : ""
+    this.store$.dispatch(SelfAction.VisitAction({from : this.selfData.mail, to: this.userData[0].mail}))
+    this.socketService.sendMatchAction("visit", this.selfData.mail, this.userData[0].mail)
     console.log(this.userData);
-    // check if id user in in like self
-    // check if id user is in match self
-    // say that we visit profile of id 
   }
 //// ACTION
 likeAction(){

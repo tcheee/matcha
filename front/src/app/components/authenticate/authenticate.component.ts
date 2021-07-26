@@ -34,7 +34,7 @@ export class AuthenticateComponent implements OnInit {
   onSubmit() {
     this.authservice.login(this.form.value).subscribe(result => {
       if (result.message = "User is connected"){
-        this.socketservice.setUpSocketConnexion()
+        this.socketservice.setUpSocketConnexion(result.jwt, this.form.value['email'])
         this.socketservice.getData(this.form.value.email)
       } else {
         /// wait for toms to send a bad result

@@ -24,8 +24,13 @@ export class socketService {
     private router: Router,
     ) { }
 // SOCKET CONNECTION
-    setUpSocketConnexion(){
-      this.socket = io(environment.socketURL)
+    setUpSocketConnexion(jwt : string, email : string){
+      this.socket = io(environment.socketURL, {
+        auth : {
+        token : jwt,
+        mail : email,
+        }
+      })
     }
 
     getData(mail : string) {

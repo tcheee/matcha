@@ -5,15 +5,16 @@ function get_specific_user(mail) {
         db.query('Select id, mail, first_name, last_name, age, genre, orientation, lat, lng, is_geolocated, biography, fame, last_connection, interests from public.users where mail = $1;', [mail], (err, result) => {
             if (err) {
                 console.log(err)
-                reject(null)
+                resolve (false)
             }
             else {
-                var users = result.rows;
-                // users = users.map(user => {
-                //     user.interests = user.interests.split(';');
-                //     return user;
-                // })
-                resolve (users)
+                if (result.rows != undefined) {
+                    var user = result.rows[0];
+                    resolve (user)
+                }
+                else {
+                    resolve (false)
+                }
             }
         })
     })

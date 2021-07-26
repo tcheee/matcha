@@ -36,9 +36,9 @@ const SelfReducer = createReducer(
 	messages_unseen : self.self.messages_unseen,
 	notifications: self.self.notifications,
 	image: "data:image/jpeg;base64," + self.self.images.image0,
-//	image1: "data:image/jpeg;base64," + self.self.images.image1,
-//	image2: "data:image/jpeg;base64," + self.self.images.image2,
-//	image3 : "data:image/jpeg;base64," + self.self.images.image3,
+	image1: "data:image/jpeg;base64," + self.self.images.image1,
+	image2: "data:image/jpeg;base64," + self.self.images.image2,
+	image3 : "data:image/jpeg;base64," + self.self.images.image3,
 	})
   ),
   on (

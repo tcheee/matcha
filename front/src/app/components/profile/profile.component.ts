@@ -87,9 +87,10 @@ export class ProfileComponent implements OnInit {
       res => {
         this.id = res.id
         this.image =  res.image
-        this.image1 = res.image1 !== "data:image/jpeg;base64," ?  res.image1 : "", 
-        this.image2 = res.image2 !== "data:image/jpeg;base64," ?  res.image2 : "", 
-        this.image3 = res.image3 !== "data:image/jpeg;base64," ?  res.image3 : "",
+        this.image1 = res.image1 !== "data:image/jpeg;base64,undefined" ?  res.image1 : "", 
+        this.image2 = res.image2 !== "data:image/jpeg;base64,undefined" ?  res.image2 : "", 
+        this.image3 = res.image3 !== "data:image/jpeg;base64,undefined" ?  res.image3 : "",
+        console.log(this.image1)
         this.lat = res.lat;
         this.lng = res.lng;
         this.interests = res.interests.split(',');

@@ -16,6 +16,15 @@
     margin-left: 30%;
     background-color: #f6e8f0;
     width: 40%;
+    text-overflow: ellipsis;
+}
+
+.message {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 300px;
+    display: block;
+    overflow: hidden
 }
 
 .main-card {
@@ -28,4 +37,6 @@
 
 .a {
     text-decoration: none;
+    width: 40%;
+    text-overflow: ellipsis;
 }

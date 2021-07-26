@@ -69,6 +69,9 @@ export class ChatComponent implements OnInit {
       console.log(data)
       this.messages = data
     });
+
+    //Put all the message to seen = true
+    this.service.removeMessage(this.email)
     
     //Add message to the list when received via the Socket
     this.socketService.onChat()

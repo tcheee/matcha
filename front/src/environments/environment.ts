@@ -16,6 +16,7 @@ export const updateUrl = 'http://localhost:3000/update'
 export const orderMessageUrl = 'http://localhost:3000/message-order/'
 export const messageHistoryUrl = 'http://localhost:3000/message-history/'
 export const resetNotifUrl = 'http://localhost:3000/notifications-seen'
+export const resetMessagefUrl = 'http://localhost:3000/messages-seen'
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

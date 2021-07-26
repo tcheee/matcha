@@ -16,8 +16,8 @@ const upload_image = require("../controllers/user/upload_image.js")
 const get_all_messages = require("../controllers/message/get_all_messages")
 const get_message_order = require("../controllers/message/get_message_order")
 const get_all_images = require("../controllers/user/get_all_images.js")
-const get_all_images = require("../controllers/user/get_all_images.js")
 const notification_seen = require("../controllers/notification/notification_seen")
+const message_seen = require("../controllers/message/message_seen")
 const timing = require("../controllers/user/update_timestamp")
 const { requireAuth } = require("../middleware/authMiddleware");
 const maxAge = 24 * 10 * 60 * 60;
@@ -102,14 +102,22 @@ router.post('/login/', async (req, res) => {
 });
 
 router.post('/notifications-seen', async (req, res) => {
-  const mail = req.body.mail
-  console.log('hereee for notifications-seen')
-  let status = await notification_seen(mail);
+  let status = await notification_seen(req.body.mail);
   if (status === 0) {
     res.status(200).json({success: true, message:'Notifications updated'})
   }
   else {
-    res.status(404).send({success: false, message:'There was a problem getting all the notifications'})
+    res.status(404).send({success: false, message:'There was a problem updating all the notifications'})
+  }
+})
+
+router.post('/messages-seen', async (req, res) => {
+  let status = await message_seen(req.body.mail);
+  if (status === 0) {
+    res.status(200).json({success: true, message:'Messages updated'})
+  }
+  else {
+    res.status(404).send({success: false, message:'There was a problem updating all the messages'})
   }
 })
 

@@ -26,10 +26,10 @@ module.exports = (io, client) => {
             const from = await notifySpecificUser(client, data.from)
             const to = await notifySpecificUser (client, data.to)
             if (from) {
-                io.sockets.socket(client[data.from]).emit('notification_update', {data: from})
+                io.to(client[data.from]).emit('notification_update', {data: from})
             }
             if (to) {
-                io.sockets.socket(client[data.to]).emit('notification_update', {data: to})
+                io.to(client[data.to]).emit('notification_update', {data: to})
             }
         } catch (err) {
           console.error(err);

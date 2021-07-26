@@ -33,6 +33,6 @@ export const blockAction = createAction(
 	props<{from : string, to : string}>()
 )
 export const VisitAction = createAction(
-	'[Self] Block Action',
+	'[Self] visit Action',
 	props<{from : string, to : string}>()
 )

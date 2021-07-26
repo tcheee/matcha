@@ -29,6 +29,7 @@ function launchMassCreation(tmp_mail, numberBot) {
 
   for (let i = 0; i < numberBot ; i++) {
       let k = getRandomInt(0,9);
+      let j = getRandomInt(0,2)
       
       let body = {};
       body.email = tmp_mail + i + "@mail.com"
@@ -36,14 +37,14 @@ function launchMassCreation(tmp_mail, numberBot) {
       body.firstName = firstname[k]
       body.lastName = lastname[k]
       body.age = getRandomInt(18,65);
-      body.gender = genders[getRandomInt(0,3)];
-      body.orientation = orientations[getRandomInt(0,3)];
+      body.gender = genders[j];
+      body.orientation = orientations[j];
       body.lat = getRandomInt(10,15)
       body.lng = getRandomInt(5,10)
       body.is_geolocated = true;
       body.biography = biography[k]
       body.interest = interest[k] + "1," + interest[k] + "2," + interest[k] + "3";
-      var encoded = base64_encode('./test/' + k + ".jpeg");
+      var encoded = base64_encode('../back/db/test/' + k + ".jpeg");
 
       await create_user(body)
       await upload_image(body, encoded, 0)
@@ -121,7 +122,7 @@ function launchMassRelation(mail, numberBot) {
 
 async function run() {
   const mail = "lots"
-  const numberBot = 200
+  const numberBot = 20
   await launchMassCreation(mail, numberBot)
   await launchMassRelation(mail, numberBot)
 }

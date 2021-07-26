@@ -21,6 +21,7 @@ export interface State {
     visits: Array<string>;
     notifications: Array<string>;
     notficiations_unseen: string;
+    messages_unseen: string;
     login: boolean;
     image: string;
     image1: string;
@@ -51,6 +52,7 @@ export const initialState: State = {
     visits: [],
     login: false,
     notficiations_unseen: '',
+    messages_unseen: '',
     notifications: [],
     image: '',
     image1: '',

@@ -33,6 +33,7 @@ const SelfReducer = createReducer(
 	visits: self.self.uservisits,
 	login: self.self.login,
 	notficiations_unseen: self.self.notifications_unseen,
+	messages_unseen : self.self.messages_unseen,
 	notifications: self.self.notifications,
 	image: "data:image/jpeg;base64," + self.self.images.image0,
 	image1: "data:image/jpeg;base64," + self.self.images.image1,

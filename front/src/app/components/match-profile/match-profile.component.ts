@@ -58,8 +58,8 @@ export class MatchProfileComponent implements OnInit {
       return res.id == id;
     });
     this.likedyou = this.userData[0].mail === this.selfData.mail
-    this.selfData.likes.forEach((likedmail : string) => {
-      if (likedmail == this.userData[0].mail)
+    this.selfData.likes.forEach((likedmail : any) => {
+      if (likedmail.target == this.userData[0].mail)
         this.youlike = true;
     })
     // API CALL FOR IMG

@@ -43,6 +43,9 @@ export class socketService {
           console.log(response)
         }
       });
+      this.socket.on('notification_update', (data: any) => {
+        console.log(data);
+      });
     }
 
     // SOCKET CHAT

@@ -16,7 +16,9 @@ function transformIdToArray(object, column_name) {
     for (i in object) {
         let data = {
             target: object[i][column_name],
-            room: object[i]['room']
+        }
+        if (column_name === "case") {
+            data.room = object[i]['room']
         }
         array[i] = data
     }

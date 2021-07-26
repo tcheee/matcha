@@ -31,9 +31,10 @@ export class MatchProfileComponent implements OnInit {
   usersData : any;
   userData : any;
   id : any;
-  image1: any;
-  image2: string;
-  image3: string;
+  image : string = "";
+  image1: string = "";
+  image2: string = "";
+  image3: string = "";
   likedyou : boolean = false;
   youlike : boolean = false;
   constructor(
@@ -64,7 +65,13 @@ export class MatchProfileComponent implements OnInit {
         this.youlike = true;
     })
     this.authservice.getImages(this.userData[0].mail).subscribe(
-      result => console.log(result)
+      (result : any) => {
+        this.image = result.hasOwnProperty("image0") ? "data:image/jpeg;base64," + result.image0 : "";
+        this.image1 = result.hasOwnProperty("image1") ? "data:image/jpeg;base64," + result.image1 : "";
+        this.image2 = result.hasOwnProperty("image2") ? "data:image/jpeg;base64," + result.image2 : "";
+        this.image3 = result.hasOwnProperty("image3") ? "data:image/jpeg;base64," + result.image3 : "";
+        console.log(result)
+      }
     )
     this.store$.dispatch(SelfAction.VisitAction({from : this.selfData.mail, to: this.userData[0].mail}))
     this.socketService.sendMatchAction("visit", this.selfData.mail, this.userData[0].mail)

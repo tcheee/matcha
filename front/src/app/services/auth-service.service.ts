@@ -55,13 +55,14 @@ export class AuthServiceService {
     })
   }
 
-  removeMessage(mail : string){
+  removeMessage(mail : string, isRedirect : boolean){
     return this.http.post(`${resetMessagefUrl}`,{mail : mail}).subscribe((data : any)=> {
       if (data.success === true){
         this.store$.dispatch(SelfAction.removeUnseenMessages());
-        this.router.navigate(['/home/chat'])
-       }
-       else {
+        if (isRedirect)
+          this.router.navigate(['/home/chat'])
+      }
+      else {
         this._snackBar.open("Something bad Happened")
        }
        

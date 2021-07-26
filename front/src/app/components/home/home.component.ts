@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit {
   removeMessages(){
     this.store$.select(SelfSelectors.mail).pipe(first()).subscribe(
       res =>
-      this.authservice.removeMessage(res));
+      this.authservice.removeMessage(res, true));
   }
   home(){
     this.router.navigate(["home/welcome"])

@@ -36,3 +36,7 @@ export const VisitAction = createAction(
 	'[Self] visit Action',
 	props<{from : string, to : string}>()
 )
+export const NotificationUpdate = createAction(
+	'[Self] Notification Update',
+	props<{self : any}>()
+)

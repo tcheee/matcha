@@ -1,7 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable} from '@angular/core';
 import { Router} from '@angular/router';
 import { Observable } from 'rxjs';
-import { Observer } from 'rxjs';
 import { io } from 'socket.io-client';
 // socket
 //import { Socket} from 'ngx-socket-io';
@@ -45,6 +44,8 @@ export class socketService {
       });
       this.socket.on('notification_update', (data: any) => {
         console.log(data);
+        console.log("SOCKET UPDATE")
+        this.store$.dispatch(SelfAction.NotificationUpdate({self : data}))
       });
     }
 

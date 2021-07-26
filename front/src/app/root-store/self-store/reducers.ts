@@ -30,7 +30,7 @@ const SelfReducer = createReducer(
 	received_likes: self.self.received_likes,
 	received_unlikes: self.self.received_unlikes,
 	unlikes: self.self.unlikes,
-	visits: self.self.uservisits,
+	visits: self.self.visits,
 	login: self.self.login,
 	notficiations_unseen: self.self.notifications_unseen,
 	messages_unseen : self.self.messages_unseen,
@@ -40,6 +40,23 @@ const SelfReducer = createReducer(
 	image2: "data:image/jpeg;base64," + self.self.images.image2,
 	image3 : "data:image/jpeg;base64," + self.self.images.image3,
 	})
+  ),
+  on (
+	  SelfAction.NotificationUpdate,
+	  (state, {self}): State => ({
+		  ...state,
+		  blocks : self.data.blocks,
+		  likes : self.data.likes,
+		  matches : self.data.matches,
+		  received_likes: self.data.received_likes,
+		  received_unlikes : self.data.received_unlikes,
+		  unlikes : self.data.unlikes,
+		  visits: self.data.visits,
+		  notficiations_unseen: self.data.notifications_unseen,
+		  messages_unseen : self.data.messages_unseen,
+		  notifications: self.data.notifications,
+
+	  })
   ),
   on (
 	  SelfAction.removeUnseenNotifications,

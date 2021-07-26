@@ -88,9 +88,8 @@ router.post('/login/', async (req, res) => {
       console.log(user_id);
       if (user_id > 0) {
         let token = create_token(user_id, maxAge)
-        console.log(token);
         res.cookie('jwt', token, {maxAge: maxAge * 1000});
-        res.status(200).json({message:"User is connected", id: user_id});
+        res.status(200).json({message:"User is connected", id: user_id, jwt: token});
       }
       else {
         res.status(404).send("Error trying to login the user")

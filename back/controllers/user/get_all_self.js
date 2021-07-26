@@ -35,8 +35,8 @@ async function get_all_self(mail) {
             self.matches = transformIdToArray(await get_all_matches(mail), "case");
             self.likes = transformIdToArray(await get_all_likes(mail), "to_mail");
             self.unlikes = transformIdToArray(await get_all_unlikes(mail), "to_mail");
-            self.received_likes = transformIdToArray(await get_all_received_likes(mail), "to_mail");
-            self.received_unlikes = transformIdToArray(await get_all_received_unlikes(mail), "to_mail");
+            self.received_likes = transformIdToArray(await get_all_received_likes(mail), "from_mail");
+            self.received_unlikes = transformIdToArray(await get_all_received_unlikes(mail), "from_mail");
             self.visits = transformIdToArray(await get_all_visits(mail), "to_mail");
             self.images = await get_all_images(mail)
             self.login = true;

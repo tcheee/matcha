@@ -1,6 +1,7 @@
 const db = require('../db/db.js')
 const create_match = require('./create_match.js')
 const delete_match = require('./delete_match.js')
+const create_notification = require('../controllers/notification/create_notification.js')
 
 function check_match(from_mail, to_mail, like) {
     return new Promise((resolve, reject) => {
@@ -16,6 +17,7 @@ function check_match(from_mail, to_mail, like) {
                         console.log(res.rows[0])
                         const match_room = await create_match(from_mail, to_mail);
                         if (match_room != -1) {
+                            await create_notification({from: from_mail, to: to_mail, type: "match"});
                             resolve({message: "match_created", room: match_room})
                         }
                         else {

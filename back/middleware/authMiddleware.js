@@ -1,23 +1,23 @@
 const jwt = require('jsonwebtoken');
 
-function requireAuth(req,res, next) {
-    const token = req.cookies.jwt;
-
-    if (token) {
-        jwt.verify(token, 'secret key', (err, decodedToken) =>{
-            if (err) {
-                console.log(err.message);
-                res.status(404).redirect('/');
-            }
-            else {
-                console.log(decodedToken);
-                next();
-            }
-        });
-    }
-    else {
-        res.status(404).redirect('/');
-    }
+function requireAuth(token) {
+    return new Promise ((resolve, reject) => {
+        if (token) {
+            jwt.verify(token, 'secret key', (err, decodedToken) => {
+                if (err) {
+                    console.log(err.message);
+                    resolve (-1)
+                }
+                else {
+                    console.log(decodedToken);
+                    resolve (0);
+                }
+            });
+        }
+        else {
+            resolve (-1);
+        }
+    });
 }
 
 module.exports.requireAuth = requireAuth;

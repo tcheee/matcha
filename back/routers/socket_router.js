@@ -1,4 +1,6 @@
 function launchSocketConnection(io) {
+    var client = {}
+
     const set_online = require('../controllers/user/set_online.js')
     const { getDataAllUsers } = require("../sockets/getDataAllUsers.js")(io, client)
     const { handleChat } = require("../sockets/handleChat.js")(io)
@@ -10,16 +12,10 @@ function launchSocketConnection(io) {
     const { handleBlock } = require("../sockets/handleBlock.js")(io, client)
     const { handleReport } = require("../sockets/handleReport.js")(io, client)
 
-    var client = {}
-    var i = 0;
-
     const onConnection = (socket) => {
         console.log("made connection here")
-        console.log(socket)
-        //set_online(mail)
-
-        client[i] = socket.id // to transform once we have the mail in the socket request
-        i++;
+        client[socket.handshake.auth.mail] = socket.id
+        set_online(socket.handshake.auth.mail)
     
         socket.on('data', getDataAllUsers)
         socket.on('room', handleRoomJoining)

@@ -1,7 +1,7 @@
 const db = require('../../db/db.js')
 
 function set_online(mail) {
-    db.query('UPDATE USERS set is_online=true where id=$1;', [mail], (err, result) => {
+    db.query('UPDATE USERS set is_online = true where mail=$1;', [mail], (err, result) => {
         if (err) {
             console.log(err)
             return(-1);

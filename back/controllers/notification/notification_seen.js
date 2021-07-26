@@ -2,7 +2,7 @@ const db = require('../../db/db.js')
 
 function notification_seen(mail) {
     return new Promise((resolve, reject) => { 
-        db.query('UPDATE NOTIFICATIONS set seen = true where id=$1;', [mail], (err, result) => {
+        db.query('UPDATE NOTIFICATIONS set seen = true where to_mail=$1;', [mail], (err, result) => {
             if (err) {
                 console.log(err)
                 resolve(-1);

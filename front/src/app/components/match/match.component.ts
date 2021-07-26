@@ -25,6 +25,7 @@ export class MatchComponent implements OnInit, AfterViewInit {
   usersData$ : Observable<any>;
   usersData : any;
   displayedColumns: string[] = ['first_name', 'last_name', 'image', 'interests', 'genre', 'fame'];
+  tab: any;
   dataSource : MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -43,8 +44,11 @@ export class MatchComponent implements OnInit, AfterViewInit {
     this.selfData$.pipe(first()).subscribe(res => this.selfData = res);
     this.usersData$ = this.store$.select(UsersSelector.getAllStateData);
     this.usersData$.pipe(first()).subscribe(res => this.usersData = res);
-    console.log(this.usersData);
-    this.dataSource = new MatTableDataSource<any>(this.usersData.users);
+    this.tab = this.usersData.users.map(( item : any ) => ({
+            ...item,
+            realImage : "data:image/jpeg;base64," + item.image
+        })),
+    this.dataSource = new MatTableDataSource<any>(this.tab);
   }
 
   applyFilter(event: Event) {

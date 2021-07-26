@@ -23,7 +23,7 @@
         <!-- Name Column -->
     <ng-container matColumnDef="image">
       <th mat-header-cell *matHeaderCellDef> Picture </th>
-      <td mat-cell *matCellDef="let element"> <img [src]="element.image" /> </td>
+      <td mat-cell *matCellDef="let element"> <img src={{element.realImage}} > </td>
     </ng-container>
 
     <!-- Weight Column -->

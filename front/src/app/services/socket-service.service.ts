@@ -54,9 +54,13 @@ export class socketService {
       this.socket.emit("room", {room: room});
     }
 
+    leaveRoom(room:string) {
+      this.socket.emit("leave-room", {room: room});
+    }
+
     sendChat(from: string, to: string, content: string, room: string) {
       console.log(from, to, content, room);
-      this.socket.emit("chat", {from : from, to: to, content: content, room: room})
+      this.socket.emit("chat", {from_mail : from, to_mail: to, content: content, room: room})
     }
 
     public onChat() {
@@ -69,7 +73,6 @@ export class socketService {
 
     // SOCKET LIKE/UNLIKE/BLOCK/NOTIF
     sendMatchAction(message: string, from : string, to : string){
-      console.log(message, from, to)
       this.socket.emit(message, {from : from , to : to})
     }
 

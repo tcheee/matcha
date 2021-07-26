@@ -1,7 +1,7 @@
 const db = require('../../db/db.js')
 
-function create_message(data) {
-    db.query('INSERT INTO inboxes(from_mail, to_mail, content, room) VALUES($1, $2, $3, $4) RETURNING id;', [data.from, data.to, data.content, data.room], (err, result) => {
+function create_message(data, bool) {
+    db.query('INSERT INTO inboxes(from_mail, to_mail, content, room, seen) VALUES($1, $2, $3, $4, $5) RETURNING id;', [data.from_mail, data.to_mail, data.content, data.room, bool], (err, result) => {
         if (err) {
             console.log(err)
             return(-1)

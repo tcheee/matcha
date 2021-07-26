@@ -2,7 +2,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 
-import { Component, OnInit, ViewChildren, ViewChild, AfterViewInit, QueryList, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChildren, ViewChild, AfterViewInit, QueryList, ElementRef, HostListener } from '@angular/core';
 import { Location } from '@angular/common';
 import { MatList, MatListItem } from '@angular/material/list';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -85,6 +85,11 @@ export class ChatComponent implements OnInit {
     this.matListItems.changes.subscribe(elements => {
       this.scrollToBottom();
     });
+  }
+
+  ngOnDestroy(): void {
+    //Leave the room when the user is leaving the chat 
+    this.socketService.leaveRoom(this.room);
   }
 
   private scrollToBottom(): void {

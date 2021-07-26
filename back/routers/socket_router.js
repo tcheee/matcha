@@ -3,9 +3,10 @@ function launchSocketConnection(io) {
 
     const set_online = require('../controllers/user/set_online.js')
     const { getDataAllUsers } = require("../sockets/getDataAllUsers.js")(io, client)
-    const { handleChat } = require("../sockets/handleChat.js")(io)
+    const { handleChat } = require("../sockets/handleChat.js")(io, client)
     const { handleTyping } = require("../sockets/handleTyping.js")(io, client)
     const { handleRoomJoining } = require("../sockets/handleRoomJoining.js")(io, client)
+    const { handleRoomLeaving } = require("../sockets/handleRoomLeaving.js")(io, client)
     const { handleDisconnect } = require("../sockets/handleDisconnect.js")(io, client)
     const { handleLike } = require("../sockets/handleLike.js")(io, client)
     const { handleUnlike } = require("../sockets/handleUnlike.js")(io, client)
@@ -21,6 +22,7 @@ function launchSocketConnection(io) {
     
         socket.on('data', getDataAllUsers)
         socket.on('room', handleRoomJoining)
+        socket.on('leave-room', handleRoomLeaving)
         socket.on('chat', handleChat)
         socket.on('typing', handleTyping)
         socket.on('like', handleLike)

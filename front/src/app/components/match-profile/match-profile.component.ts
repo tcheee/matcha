@@ -59,6 +59,7 @@ export class MatchProfileComponent implements OnInit {
     this.selfData$.subscribe(res => {
       this.selfData = res;
       this.likedyou = this.userData[0].mail === this.selfData.mail
+      this.selfData.likes.lenght ? undefined : this.youlike = false;
       this.selfData.likes.forEach((likedmail : any) => {
       if (likedmail.target == this.userData[0].mail)
         this.youlike = true;

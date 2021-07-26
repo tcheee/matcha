@@ -75,7 +75,8 @@ CREATE TABLE matches
     mail_a VARCHAR(100) NOT NULL, 
     mail_b VARCHAR(100) NOT NULL,
     room VARCHAR(100) NOT NULL UNIQUE,
-    creation_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    creation_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(mail_a, mail_b)
 );
 
 CREATE TABLE blocks

@@ -28,7 +28,6 @@ module.exports = (io, client) => {
         try {
             const from = await notifySpecificUser(client, data.from)
             const to = await notifySpecificUser(client, data.to)
-            console.log(to)
             if (from) {
                 io.to(client[data.from]).emit('notification_update', {data: from})
             }

@@ -85,28 +85,3 @@ CREATE TABLE blocks
     blocked BOOLEAN DEFAULT '1', 
     creation_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
-INSERT INTO users(uuid, mail, password, first_name, last_name, age, genre, orientation, lat, lng, biography, interests) VALUES
- ('testbbbb', 'test@mail.com', 'oitnbionbtin', 'another', 'guy', 25, 'Man', 'Hetero', 10.15, 25.30, 'This is my bio', 'test;interest;lol'),
- ('aaa-roigngionio', 'testigo@mail.com', 'oitngorpbionbtin', 'another', 'tom', 25, 'Girl', 'Bi', 10.20, 18.18756478, 'I love dating apps', 'test;interest;lol');
-
-INSERT INTO images(user_mail, image_link) VALUES
- ('test@mail.com', 'http://link/ec2/photos_1');
-
-INSERT INTO notifications(from_mail, to_mail, notification_type) VALUES
- ('test@mail.com', 'to@mail.com', 'visit');
-
-INSERT INTO inboxes(from_mail, to_mail, content) VALUES
- ('test@mail.com', 'to@mail.com', 'Yo, comment tu vas?');
-
-INSERT INTO visits(from_mail, to_mail) VALUES
- ('test@mail.com', 'to@mail.com');
-
-INSERT INTO likes(from_mail, to_mail, likes) VALUES
- ('test@mail.com', 'to@mail.com', 1);
-
-INSERT INTO matches(mail_a, mail_b, room) VALUES
- ('test@mail.com', 'to@mail.com', 'uuid-first-room');
-
-INSERT INTO blocks(from_mail, to_mail) VALUES
- ('test@mail.com', 'toblockingmail@mail.com');

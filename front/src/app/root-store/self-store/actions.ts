@@ -15,6 +15,10 @@ export const removeUnseenNotifications = createAction(
 	'[Self] Remove Unseen Notification',
 )
 
+export const removeUnseenMessages = createAction(
+	'[Self] Remove Unseen Messages',
+)
+
 export const likeAction = createAction(
 	'[Self] Like Action',
 	props<{from : string, to : string}>()

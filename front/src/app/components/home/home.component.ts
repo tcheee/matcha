@@ -1,3 +1,4 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { Router } from '@angular/router';
@@ -23,6 +24,7 @@ import { AuthServiceService } from '../../services/auth-service.service';
 export class HomeComponent implements OnInit {
   isExpanded: boolean = false;
   notificationsUnseen : any;
+  messagesUnseen: any;
   constructor(
     private router: Router,
     private store$: Store<RootStoreState.RootState>,
@@ -33,15 +35,21 @@ export class HomeComponent implements OnInit {
     this.store$.select(SelfSelectors.notificationsUnseen).subscribe(
       res => this.notificationsUnseen = parseInt(res)
     )
+    this.store$.select(SelfSelectors.messagesUnseen).subscribe(
+      res => this.messagesUnseen = parseInt(res)
+    )
     this.router.navigate(['home/welcome'])
   }
 
   removeNotifications(){
     this.store$.select(SelfSelectors.mail).pipe(first()).subscribe(
       res => 
-      this.authservice.removeNotification(res))
-    this.store$.dispatch(SelfAction.removeUnseenNotifications());
-    this.router.navigate(['/home/history'])
+      this.authservice.removeNotification(res));
+  }
+  removeMessages(){
+    this.store$.select(SelfSelectors.mail).pipe(first()).subscribe(
+      res =>
+      this.authservice.removeMessage(res));
   }
   home(){
     this.router.navigate(["home/welcome"])

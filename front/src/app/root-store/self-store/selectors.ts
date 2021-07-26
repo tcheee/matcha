@@ -27,3 +27,8 @@ export const mail: MemoizedSelector<object, string> = createSelector(
 	selectSelfState,
 	(state: State): any => state.mail
 )
+
+export const messagesUnseen: MemoizedSelector<object, string> = createSelector (
+	selectSelfState,
+	(state : State): any => state.messages_unseen
+)

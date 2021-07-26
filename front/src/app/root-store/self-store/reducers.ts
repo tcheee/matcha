@@ -51,6 +51,13 @@ const SelfReducer = createReducer(
 
   ),
   on (
+	SelfAction.removeUnseenMessages,
+	(state): State => ({
+	       ...state,
+	       messages_unseen : "0",
+	})
+  ),
+  on (
 	  SelfAction.updateSelf,
 	  (state, {user , images}): State => ({
 		  ...state,

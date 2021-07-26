@@ -43,12 +43,30 @@ export class AuthServiceService {
     return this.http.post(`${changePasswordUrl}`, data).subscribe(data => console.log(data))
   }
   removeNotification(mail : string){
-    return this.http.post(`${resetNotifUrl}`,{mail : mail}).subscribe(data => console.log(data))
+    return this.http.post(`${resetNotifUrl}`,{mail : mail}).subscribe((data : any) => {
+       if (data.success === true){
+        this.store$.dispatch(SelfAction.removeUnseenNotifications());
+        this.router.navigate(['/home/history'])
+       }
+       else {
+        this._snackBar.open("Something bad Happened")
+       }
+       
+    })
   }
 
   removeMessage(mail : string){
-    return this.http.post(`${resetMessagefUrl}`,{mail : mail}).subscribe(data => console.log(data))
-  }
+    return this.http.post(`${resetMessagefUrl}`,{mail : mail}).subscribe((data : any)=> {
+      if (data.success === true){
+        this.store$.dispatch(SelfAction.removeUnseenMessages());
+        this.router.navigate(['/home/chat'])
+       }
+       else {
+        this._snackBar.open("Something bad Happened")
+       }
+       
+    })
+    }
 
   register(data : any){
     const payload: FormData = new FormData();

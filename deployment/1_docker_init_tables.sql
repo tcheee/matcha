@@ -65,7 +65,8 @@ CREATE TABLE likes
     from_mail VARCHAR(100) NOT NULL, 
     to_mail VARCHAR(100) NOT NULL,
     likes INT NOT NULL,
-    creation_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    creation_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE (from_mail, to_mail)
 );
 
 CREATE TABLE matches

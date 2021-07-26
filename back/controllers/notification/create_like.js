@@ -4,7 +4,7 @@ const update_rating = require('../../functions/update_rating.js')
 
 function insertLikeDb(body) {
     return new Promise(async (resolve, reject) => { 
-        db.query('INSERT INTO likes(from_mail, to_mail, likes) VALUES($1, $2, $3) RETURNING id;', [body.from, body.to, body.likes], (err, result) => {
+        db.query('INSERT INTO likes(from_mail, to_mail, likes) VALUES($1, $2, $3) ON CONFLICT (from_mail, to_mail) DO UPDATE SET likes = $3 RETURNING id;', [body.from, body.to, body.likes], (err, result) => {
             if (err) {
                 console.log(err)
                 resolve(-1)

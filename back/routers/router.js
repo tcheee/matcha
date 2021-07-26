@@ -8,17 +8,17 @@ const create_user = require('../controllers/user/create_user.js')
 const update_user = require('../controllers/user/update_user.js')
 const activate_user = require('../controllers/user/activate_user.js')
 const login_user = require('../controllers/user/login_user.js')
+const create_token = require("../functions/create_token")
 const get_all_data = require('../controllers/user/get_all_data.js')
-const verify_token = require("../controllers/user/verify_token")
 const reset_password = require("../controllers/user/reset_password.js")
 const resend_password = require("../controllers/user/resend_password.js")
 const upload_image = require("../controllers/user/upload_image.js")
 const get_all_messages = require("../controllers/message/get_all_messages")
 const get_message_order = require("../controllers/message/get_message_order")
 const get_all_images = require("../controllers/user/get_all_images.js")
-const get_all_notifications = require("../controllers/notification/get_all_notifications")
+const get_all_images = require("../controllers/user/get_all_images.js")
+const notification_seen = require("../controllers/notification/notification_seen")
 const timing = require("../controllers/user/update_timestamp")
-const create_token = require("../functions/create_token")
 const { requireAuth } = require("../middleware/authMiddleware");
 const maxAge = 24 * 10 * 60 * 60;
 
@@ -103,6 +103,7 @@ router.post('/login/', async (req, res) => {
 
 router.post('/notifications-seen', async (req, res) => {
   const mail = req.body.mail
+  console.log('hereee for notifications-seen')
   let status = await notification_seen(mail);
   if (status === 0) {
     res.status(200).json({success: true, message:'Notifications updated'})

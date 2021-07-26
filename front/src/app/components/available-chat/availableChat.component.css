@@ -9,13 +9,11 @@
     height: 100%;
 }
 
-.chat-list {
-}
-
 .chat-list-item {
     margin-top: 15px;
     margin-bottom: 15px;
     border-radius: 10px;
+    margin-left: 30%;
     background-color: #f6e8f0;
     width: 40%;
 }

@@ -2,20 +2,24 @@
   <mat-card class="main-card">
     <h1 style="text-align:center">  {{ to }}</h1>
     <mat-list class="chat-list">
-      <mat-list-item *ngFor="let message of messages" [ngClass]="['chat-list-item']">
-        <div *ngIf="message.from_mail == to; else elseBlock">
-          <p mat-line>
-            <span> {{message.content}} </span>
-          </p>
-        </div>
-        <ng-template #elseBlock>
-          <p mat-line>
-            <span> {{message.content}} </span>
-          </p>
-        </ng-template>
-      </mat-list-item>
+      <div *ngFor="let message of messages">
+          <div *ngIf="message.from_mail == to; else elseBlock">
+            <mat-list-item [ngClass]="['chat-list-item to']">
+              <p mat-line>
+                {{message.content}}
+              </p>
+            </mat-list-item>
+          </div>
+          <ng-template #elseBlock>
+            <mat-list-item [ngClass]="['chat-list-item from']">
+              <p mat-line>
+                {{message.content}}
+              </p>
+            </mat-list-item>
+          </ng-template>
+      </div>
     </mat-list>
-    <div class="chat-footer-container" style="text-align: center;">
+    <div class="chat-footer-container">
       <mat-form-field class="chat-input">
         <input matInput
                #inputMessage

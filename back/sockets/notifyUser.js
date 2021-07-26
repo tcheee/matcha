@@ -21,12 +21,13 @@ const notifySpecificUser = (client, mail) => {
 
 module.exports = (io, client) => {
     const notify = async function(data) {
-        console.log('---------------')
-        console.log(data)
         const socket = this;
+        if (data.to === undefined) {
+            data.to = data.to_mail
+        }
         try {
             const from = await notifySpecificUser(client, data.from)
-            const to = await notifySpecificUser (client, data.to || data.to_mail)
+            const to = await notifySpecificUser(client, data.to)
             console.log(to)
             if (from) {
                 io.to(client[data.from]).emit('notification_update', {data: from})

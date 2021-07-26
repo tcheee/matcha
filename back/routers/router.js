@@ -143,7 +143,7 @@ router.post('/reset-password/', async (req, res) => {
 });
 
 router.get('/all-photos/', async (req, res) => {
-  const images = await get_all_images(req.query.email)
+  const images = await get_all_images(req.query.mail)
   if (images != -1) {
     res.status(200).json(images)
   }

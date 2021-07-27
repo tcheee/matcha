@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthServiceService} from '../../services/auth-service.service'
 import { socketService} from '../../services/socket-service.service'
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-authenticate',
@@ -18,7 +19,8 @@ export class AuthenticateComponent implements OnInit {
     private fb: FormBuilder,
     private router : Router,
     private authservice : AuthServiceService,
-    private socketservice: socketService
+    private socketservice: socketService,
+    private _snackBar: MatSnackBar,
   ) {}
 
   ngOnInit() {
@@ -33,16 +35,15 @@ export class AuthenticateComponent implements OnInit {
 
   onSubmit() {
     this.authservice.login(this.form.value).subscribe(result => {
+      console.log(result)
       if (result.message = "User is connected"){
         this.socketservice.setUpSocketConnexion(result.jwt, this.form.value['email'])
         this.socketservice.getData(this.form.value.email)
-      } else {
-        /// wait for toms to send a bad result
-        alert("You're email or password do not exist")
-        return ;
-      }
-    })
-  };
+      }},
+      (error ) => {
+        this._snackBar.open(error.error.message, undefined, {duration : 1500 })
+      })
+    };
 
   forgetPasswordPage(){
     this.router.navigate(['forget-password'])

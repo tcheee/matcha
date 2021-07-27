@@ -42,12 +42,12 @@ export class AuthServiceService {
   changePassword(data : any) {
     return this.http.post(`${changePasswordUrl}`, data).subscribe((data : any) => {
       if (data.success === true){
-          this._snackBar.open("Password successfuly change"),
+          this._snackBar.open("Password successfuly change", undefined, {duration : 1500 }),
           this.router.navigate(["/home/welcome"])
       }
       else 
       { 
-          this._snackBar.open("something bad happened")
+          this._snackBar.open("something bad happened",  undefined, {duration : 1500 })
       }
     })
   }
@@ -59,7 +59,7 @@ export class AuthServiceService {
         this.router.navigate(['/home/history'])
        }
        else {
-        this._snackBar.open("Something bad Happened")
+        this._snackBar.open("Something bad Happened", undefined, {duration : 1500 })
        }
        
     })
@@ -77,12 +77,14 @@ export class AuthServiceService {
           this.router.navigate(['/home/chat'])
       }
       else {
-        this._snackBar.open("Something bad Happened")
+        this._snackBar.open("Something bad Happened", undefined, {duration : 1500 })
        }
        
     })
     }
     blockUser(from : string, to : string){
+      console.log(from)
+      console.log(to)
       return this.http.post(`${blockUrl}`, {from : from , to: to}).subscribe(data => console.log(data))
     }
 
@@ -112,14 +114,14 @@ export class AuthServiceService {
    // this.http = new HttpClient(this.handler);
     this.http.post(`${registerUrl}`, payload)
     .subscribe(data => {
-      this._snackBar.open("You are successfully created")
+      this._snackBar.open("You are successfully created", undefined, {duration : 1500 })
       this.router.navigate(['/']),
       console.log("return data is " + JSON.stringify(data))},
       (error) => { 
         // error() method block
         if (error)
         console.log(error)
-        this._snackBar.open(error.error.message, "Try again")
+        this._snackBar.open(error.error.message, undefined, {duration : 1500 })
       }
     )
     }
@@ -147,7 +149,7 @@ export class AuthServiceService {
         });
         this.http.post(`${updateUrl}`, payload)
     .subscribe(data => {
-      this._snackBar.open("You are successfully Updated")
+      this._snackBar.open("You are successfully Updated", undefined, {duration : 1500 })
       this.router.navigate(['/home/welcome'])
       this.store$.dispatch(SelfAction.updateSelf({user : data['data']['user'], images : data['data']['images']}));
      console.log(data)  }  ) 

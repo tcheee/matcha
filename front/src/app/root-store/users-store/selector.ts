@@ -8,8 +8,9 @@ import { State, key } from './state'
 export const selectUsersState: MemoizedSelector<object, State> = createFeatureSelector<State>(key);
 
 // selectors
-export const getAllStateData: MemoizedSelector<object, any> = createSelector(
+export const getAllUsersStateData: MemoizedSelector<object, any> = createSelector(
 	selectUsersState,
 	(state: State): any => state
       );
+
 

@@ -49,7 +49,7 @@ export class MatchProfileComponent implements OnInit {
   ngOnInit(): void {
     const id = this._activatedRoute.snapshot.paramMap.get('id');
     this.selfData$ = this.store$.select(SelfSelectors.getAllStateData);
-    this.usersData$ = this.store$.select(UsersSelector.getAllStateData);
+    this.usersData$ = this.store$.select(UsersSelector.getAllUsersStateData);
     this.usersData$.subscribe(res => {
       this.isOnline = false
       this.usersData = res.users

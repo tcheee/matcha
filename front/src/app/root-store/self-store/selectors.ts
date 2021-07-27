@@ -1,5 +1,8 @@
 // ngrx imports
 import { createFeatureSelector, createSelector, MemoizedSelector } from '@ngrx/store';
+import { Observable, of } from 'rxjs';
+import { map, filter, first} from 'rxjs/operators';
+import { getAllUsersStateData}  from '../../root-store/users-store/selector'
 
 // store imports
 import { State, key } from './state'
@@ -31,4 +34,10 @@ export const mail: MemoizedSelector<object, string> = createSelector(
 export const messagesUnseen: MemoizedSelector<object, string> = createSelector (
 	selectSelfState,
 	(state : State): any => state.messages_unseen
+)
+
+
+export const getBlockData: MemoizedSelector<object, any> = createSelector(
+	selectSelfState,
+	(state : State): any => state.blocks
 )

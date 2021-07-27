@@ -9,10 +9,16 @@ async function reset_password(uuid, password) {
         db.query('UPDATE USERS set password=$1 where uuid=$2;', [password,uuid], (err, result) => {
             if (err) {
                 console.log(err)
-                reject(err);
+                resolve(-1);
             }
             else {
-                resolve(0)
+                if (result.rows != undefined) {
+                    resolve(0)
+                }
+                else
+                {
+                    resolve(-1)
+                }
             }
         })
     })

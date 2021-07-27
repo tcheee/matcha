@@ -40,8 +40,18 @@ export class AuthServiceService {
   }
 
   changePassword(data : any) {
-    return this.http.post(`${changePasswordUrl}`, data).subscribe(data => console.log(data))
+    return this.http.post(`${changePasswordUrl}`, data).subscribe((data : any) => {
+      if (data.success === true){
+          this._snackBar.open("Password successfuly change"),
+          this.router.navigate(["/home/welcome"])
+      }
+      else 
+      { 
+          this._snackBar.open("something bad happened")
+      }
+    })
   }
+
   removeNotification(mail : string){
     return this.http.post(`${resetNotifUrl}`,{mail : mail}).subscribe((data : any) => {
        if (data.success === true){

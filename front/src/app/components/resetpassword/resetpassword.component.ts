@@ -35,6 +35,8 @@ export class ResetpasswordComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.form.invalid)
+      return ;
     console.log(this.uuid)
     const data = {uuid: this.uuid, password: this.form.value.password}
     console.log(data)

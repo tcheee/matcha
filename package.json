@@ -4,6 +4,9 @@
     "private": true,
     "description": "",
     "main": "./back/app.js",
+    "engines": {
+        "node": "16.x"
+      },
     "scripts": {
         "start": "cd ./back && node app.js",
         "build": "cd ./front && ng build --prod",

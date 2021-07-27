@@ -15,7 +15,19 @@ const UsersReducer = createReducer(
 	users : users.users
 	}
   )
-));
+),
+  on(
+	 UsersAction.updateIsOnline,
+	  (state ,{isOnline, mail}): State => {
+		const index = state.users.findIndex((user : any) => user.mail === mail); //finding index of the item
+		return { 
+			 ...state,
+			 users : state.users.map((content, i) => i === index ? {...content, is_online : isOnline} : content)
+		}
+		}
+
+  ));
+
 
 export function reducers(state: State | undefined, action: Action) {
 	return UsersReducer(state, action);

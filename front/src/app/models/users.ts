@@ -11,4 +11,5 @@ export interface User {
 	biography: string;
 	fame: number;
 	last_connection: string;
+	is_online: boolean;
 }

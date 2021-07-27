@@ -23,8 +23,11 @@
     <p style="margin: 6px 0px 0px 0px" >
     Orientation : {{userData[0].orientation}}
     </p>
-    <p style="margin: 6px 0px 0px 0px" >
+    <p *ngIf="userData[0].is_online === false"style="margin: 6px 0px 0px 0px" >
     Last connection : {{userData[0].last_connection}}
+    </p>
+    <p *ngIf="userData[0].is_online === true"style="margin: 6px 0px 0px 0px" >
+    {{userData[0].first_name}} is currently Online
     </p>
     <mat-divider></mat-divider>
     <h1 style="margin: 5px 0px 0px 0px">Picture</h1>

@@ -37,6 +37,7 @@ export class MatchProfileComponent implements OnInit {
   image3: string = "";
   likedyou : boolean = false;
   youlike : boolean = false;
+  isOnline : boolean = false;
   constructor(
     private _activatedRoute : ActivatedRoute,
     private store$: Store<RootStoreState.RootState>,
@@ -48,14 +49,15 @@ export class MatchProfileComponent implements OnInit {
   ngOnInit(): void {
     const id = this._activatedRoute.snapshot.paramMap.get('id');
     this.selfData$ = this.store$.select(SelfSelectors.getAllStateData);
-   
     this.usersData$ = this.store$.select(UsersSelector.getAllStateData);
     this.usersData$.subscribe(res => {
+      this.isOnline = false
       this.usersData = res.users
-    })
-    this.userData = this.usersData.filter(function(res : any) {
+      this.userData = this.usersData.filter(function(res : any) {
       return res.id == id;
     });
+    this.isOnline = this.userData[0].is_online
+  });
     this.selfData$.subscribe(res => {
       this.selfData = res;
       this.likedyou = this.userData[0].mail === this.selfData.mail

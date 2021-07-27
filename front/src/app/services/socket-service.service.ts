@@ -50,6 +50,7 @@ export class socketService {
       this.socket.on('login_update', (data : any) => {
         console.log("LOGIN/LOGOUT UPDATE");
         console.log(data.login)
+        this.store$.dispatch(UsersAction.updateIsOnline({isOnline: data.login , mail : data.mail}))
       })
     }
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpBackend, HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { baseUrl, resetPasswordUrl, registerUrl, changePasswordUrl, updateUrl, imageUrl, orderMessageUrl, messageHistoryUrl, resetNotifUrl, resetMessagefUrl} from 'src/environments/environment';
+import { baseUrl, resetPasswordUrl, registerUrl, changePasswordUrl, updateUrl, imageUrl, orderMessageUrl, messageHistoryUrl, resetNotifUrl, resetMessagefUrl, blockUrl} from 'src/environments/environment';
 import {MatSnackBar} from '@angular/material/snack-bar';
 // ngrx imports
 import { Store, } from '@ngrx/store';
@@ -81,6 +81,9 @@ export class AuthServiceService {
        }
        
     })
+    }
+    blockUser(from : string, to : string){
+      return this.http.post(`${blockUrl}`, {from : from , to: to}).subscribe(data => console.log(data))
     }
 
   register(data : any){

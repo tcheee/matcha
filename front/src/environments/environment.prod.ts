@@ -1,8 +1,7 @@
 export const environment = {
-  production: true
+  production: true,
+  socketURL : 'https://matcha-heroku.herokuapp.com/'
 };
-
-export const socketURL = 'https://matcha-heroku.herokuapp.com/'
 
 export const baseUrl = 'https://matcha-heroku.herokuapp.com/login'
 export const resetPasswordUrl = 'https://matcha-heroku.herokuapp.com/resend-password/'

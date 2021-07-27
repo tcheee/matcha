@@ -35,7 +35,6 @@ export class AuthenticateComponent implements OnInit {
 
   onSubmit() {
     this.authservice.login(this.form.value).subscribe(result => {
-      console.log(result)
       if (result.message = "User is connected"){
         this.socketservice.setUpSocketConnexion(result.jwt, this.form.value['email'])
         this.socketservice.getData(this.form.value.email)

@@ -91,8 +91,6 @@ unlikeAction(){
 }
 
 blockAction(){
- // this.store$.dispatch(SelfAction.blockAction({from: this.selfData.mail, to: this.userData[0].mail}))
-//  this.socketService.sendMatchAction("block", this.selfData.mail, this.userData[0].mail)
   this.authservice.blockUser(this.selfData.mail, this.userData[0].mail)
   this.router.navigate(['/home/match'])
 }

@@ -94,7 +94,15 @@ const SelfReducer = createReducer(
 		  biography: user.biography,
 		  interests: user.interest,
 	  })
-  )
+  ),
+  on (
+	SelfAction.blockAction,
+	(state, {blocks}): State => ({
+		...state,
+		blocks: blocks,
+	})
+
+  ),
 )
 export function reducers(state: State | undefined, action: Action) {
 	return SelfReducer(state, action);

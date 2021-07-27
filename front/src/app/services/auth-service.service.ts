@@ -8,6 +8,7 @@ import { Store, } from '@ngrx/store';
 // store imports
 import { RootStoreState, SelfAction, UsersAction} from '../root-store';
 import { Router } from '@angular/router';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -83,9 +84,9 @@ export class AuthServiceService {
     })
     }
     blockUser(from : string, to : string){
-      console.log(from)
-      console.log(to)
-      return this.http.post(`${blockUrl}`, {from : from , to: to}).subscribe(data => console.log(data))
+      return this.http.post(`${blockUrl}`, {from : from , to: to}).subscribe((data : any)  => {
+        this.store$.dispatch(SelfAction.blockAction({blocks : data.blocked_users}))
+      })
     }
 
   register(data : any){

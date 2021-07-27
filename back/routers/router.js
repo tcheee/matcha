@@ -19,7 +19,7 @@ const notification_seen = require("../controllers/notification/notification_seen
 const message_seen = require("../controllers/message/message_seen")
 const block_user = require("../controllers/user/block_user.js")
 const get_all_blocks = require("../controllers/user/get_all_blocks.js")
-const transformIdToArray = require('../../functions/transformIdToArray.js')
+const transformIdToArray = require('../functions/transformIdToArray.js')
 const maxAge = 24 * 10 * 60 * 60;
 
 router.get('/', (req, res) => {
@@ -89,7 +89,7 @@ router.post('/login/', async (req, res) => {
         res.status(200).json({message:"User is connected", id: user_id, jwt: token});
       }
       else {
-        res.status(404).send("Error trying to login the user")
+        res.status(404).send({success: false, message: "Your Email or Password is not valid"})
       }
     } catch (err) {
       console.error(err);

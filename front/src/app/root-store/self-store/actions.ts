@@ -30,7 +30,7 @@ export const unLikeAction = createAction(
 )
 export const blockAction = createAction(
 	'[Self] Block Action',
-	props<{from : string, to : string}>()
+	props<{blocks : Array<string>}>()
 )
 export const VisitAction = createAction(
 	'[Self] visit Action',

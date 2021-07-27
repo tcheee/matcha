@@ -10,20 +10,7 @@ const get_all_notifications = require('../notification/get_all_notifications.js'
 const get_unseen_notifications = require('../notification/get_unseen_notifications.js')
 const get_unseen_messages = require('../message/get_unseen_messages.js')
 const get_all_images = require('./get_all_images.js')
-
-function transformIdToArray(object, column_name) {
-    var array = [];
-    for (i in object) {
-        let data = {
-            target: object[i][column_name],
-        }
-        if (column_name === "case") {
-            data.room = object[i]['room']
-        }
-        array[i] = data
-    }
-    return (array);
-}
+const transformIdToArray = require('../../functions/transformIdToArray.js')
 
 async function get_all_self(mail) {
     return new Promise(async (resolve, reject) => {

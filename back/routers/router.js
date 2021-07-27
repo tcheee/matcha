@@ -19,6 +19,7 @@ const notification_seen = require("../controllers/notification/notification_seen
 const message_seen = require("../controllers/message/message_seen")
 const block_user = require("../controllers/user/block_user.js")
 const get_all_blocks = require("../controllers/user/get_all_blocks.js")
+const transformIdToArray = require('../../functions/transformIdToArray.js')
 const maxAge = 24 * 10 * 60 * 60;
 
 router.get('/', (req, res) => {
@@ -174,7 +175,7 @@ router.get('/message-order/', async (req, res) => {
 router.post('/block/', async (req, res) => {
   const message_order = await block_user(req.body)
   if (message_order != -1) {
-    const result = await get_all_blocks(req.query.from);
+    const result = transformIdToArray(await get_all_blocks(req.body.from), "to_mail")
     res.status(200).json({blocked_users: result})
   }
   else {

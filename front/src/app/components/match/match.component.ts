@@ -34,9 +34,6 @@ export class MatchComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
- // ngAfterViewInit() {
- //   this.dataSource.paginator = this.paginator;
- // }
   constructor(
     private store$: Store<RootStoreState.RootState>,
 
@@ -65,10 +62,8 @@ export class MatchComponent implements OnInit, AfterViewInit {
       else
         this.orientation = "Man"
 
-    console.log(this.orientation)
     this.tab = [...this.usersData.users];
     if(this.selfData.orientation !== "Bisexual"){
-      console.log("pass")
       this.tab = this.tab.sort(((a : any, b : any) => {
         if(a.genre != this.orientation && b.genre === this.orientation){
           return 1;
@@ -88,8 +83,6 @@ export class MatchComponent implements OnInit, AfterViewInit {
       }))
     this.tab = this.tab.sort(((a: any, b: any) => {
       if (a.fame === b.fame && a.genre === b.genre){
-        console.log(a.distance)
-        console.log(b.distance)
         return a.distance > b.distance ? 1 : -1
       }
       else {

@@ -16,4 +16,3 @@ export const resetNotifUrl = 'https://matcha-heroku.herokuapp.com/notifications-
 export const resetMessagefUrl = 'https://matcha-heroku.herokuapp.com/messages-seen'
 export const imageUrl = 'https://matcha-heroku.herokuapp.com/all-photos/'
 export const blockUrl = 'https://matcha-heroku.herokuapp.com/block/'
-/*

@@ -172,9 +172,7 @@ router.get('/message-order/', async (req, res) => {
 });
 
 router.post('/block/', async (req, res) => {
-  console.log(req.query.from)
-  console.log(req.query.to)
-  const message_order = await block_user(req.query)
+  const message_order = await block_user(req.body)
   if (message_order != -1) {
     const result = await get_all_blocks(req.query.from);
     res.status(200).json({blocked_users: result})

@@ -44,8 +44,8 @@ function launchMassCreation(tmp_mail, numberBot) {
       body.is_geolocated = true;
       body.biography = biography[k]
       body.interest = interest[k] + "1," + interest[k] + "2," + interest[k] + "3";
-      //var encoded = base64_encode('../back/db/test/' + k + ".jpeg"); // From the Deployement repo for launch.sh
-      var encoded = base64_encode('./test/' + k + ".jpeg"); // From the DB repo
+      var encoded = base64_encode('../back/db/test/' + k + ".jpeg"); // From the Deployement repo for launch.sh
+      //var encoded = base64_encode('./test/' + k + ".jpeg"); // From the DB repo
 
       await create_user(body, false)
       await upload_image(body, encoded, 0)

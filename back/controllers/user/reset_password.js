@@ -17,7 +17,7 @@ async function reset_password(uuid, password) {
                 }
                 else
                 {
-                    resolve(-1)
+                    resolve (-1)
                 }
             }
         })

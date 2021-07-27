@@ -9,7 +9,7 @@ async function send_mail(mail, subject, content) {
     secure: false, // true for 465, false for other ports
     auth: {
       user: 'matcha42mail@gmail.com', // generated ethereal user
-      pass: 'Rootroot123$', // generated ethereal password
+      pass: 'iksdnipvwheazlcm', // generated ethereal password
     },
   });
 

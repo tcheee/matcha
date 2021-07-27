@@ -56,6 +56,9 @@
     <button mat-icon-button color="primary" matTooltip="Report User as Fake">
         <mat-icon>report</mat-icon>
       </button>
+    <button *ngIf="isMatch === true"mat-icon-button color="primary" matTooltip="chat with " (click)="routeToChat()">
+        <mat-icon>message</mat-icon>
+      </button>
   </mat-card-actions>
 </mat-card>
 </div>

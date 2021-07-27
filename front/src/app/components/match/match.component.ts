@@ -24,7 +24,7 @@ export class MatchComponent implements OnInit, AfterViewInit {
   selfData : any;
   usersData$ : Observable<any>;
   usersData : any;
-  displayedColumns: string[] = ['first_name', 'last_name', 'image', 'interests', 'genre', 'fame', 'distance'];
+  displayedColumns: string[] = ['first_name', 'last_name', 'age', 'image', 'interests', 'genre', 'fame', 'distance'];
   tab: any;
   blocks$: Observable<any>;
   blocks: any;

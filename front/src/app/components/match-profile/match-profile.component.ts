@@ -38,6 +38,8 @@ export class MatchProfileComponent implements OnInit {
   likedyou : boolean = false;
   youlike : boolean = false;
   isOnline : boolean = false;
+  isMatch : boolean = false;
+  routeRoom : string = "";
   constructor(
     private _activatedRoute : ActivatedRoute,
     private store$: Store<RootStoreState.RootState>,
@@ -66,7 +68,14 @@ export class MatchProfileComponent implements OnInit {
       if (likedmail.target == this.userData[0].mail)
         this.youlike = true;
     })
+      this.selfData.matches.lenght ? undefined : this.isMatch = false;
+      this.selfData.matches.forEach((matches : any) => {
+        if (matches.target === this.userData[0].mail){
+          this.isMatch = true;
+          this.routeRoom = matches.room;
+        }
     });
+  }),
     
     this.authservice.getImages(this.userData[0].mail).subscribe(
       (result : any) => {
@@ -93,6 +102,10 @@ unlikeAction(){
 blockAction(){
   this.authservice.blockUser(this.selfData.mail, this.userData[0].mail)
   this.router.navigate(['/home/match'])
+}
+
+routeToChat(){
+  this.router.navigate(['/home/chat/' + this.routeRoom])
 }
 
 

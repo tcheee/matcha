@@ -16,8 +16,6 @@ const io = require("socket.io")(httpServer, {
   }
 });
 
-
-//app.use(express.static('test_back')); // To delete
 app.use(express.static("../front/dist/front/"))
 app.use(express.json())
 app.use(cors({credentials: true, origin: 'http://localhost:4200' || "https://matcha-heroku.herokuapp.com/"}));

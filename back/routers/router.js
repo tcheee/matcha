@@ -21,9 +21,6 @@ const block_user = require("../controllers/user/block_user.js")
 const get_all_blocks = require("../controllers/user/get_all_blocks.js")
 const maxAge = 24 * 10 * 60 * 60;
 
-
-//router.use(express.static('test_back')); // To delete and change to push again 
-
 router.get('/', (req, res) => {
   res.sendFile("index.html", {root: '../front/dist/front/'});
 });

@@ -26,6 +26,7 @@ module.exports = (io, client) => {
             data.to = data.to_mail
         }
         try {
+            console.log(client)
             const from = await notifySpecificUser(client, data.from)
             const to = await notifySpecificUser(client, data.to)
             if (from) {

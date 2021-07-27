@@ -1,21 +1,21 @@
 const { Pool } = require('pg')
 
 //LOCAL env
-const pool = new Pool({
-    host: "127.0.0.1",
-    port: 5432,
-    user: "root",
-    password: "root",
-    database: "matcha"
-});
+// const pool = new Pool({
+//     host: "127.0.0.1",
+//     port: 5432,
+//     user: "root",
+//     password: "root",
+//     database: "matcha"
+// });
 
 // //PROD 
-// const pool = new Pool ({
-//   connectionString: process.env.DATABASE_URL,
-//   ssl: {
-//     rejectUnauthorized: false
-//   }
-// })
+const pool = new Pool ({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
+})
 
 
 module.exports = {
@@ -27,8 +27,8 @@ module.exports = {
         console.log(err);
       }
       else {
-        console.log('Param for the query below: ', {params})
-        console.log('executed query', { text, duration, rows: res.rowCount })
+        // console.log('Param for the query below: ', {params})
+        // console.log('executed query', { text, duration, rows: res.rowCount })
       }
       callback(err, res)
     })

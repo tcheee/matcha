@@ -46,7 +46,6 @@ export class socketService {
         console.log(data);
         console.log("SOCKET UPDATE")
         this.store$.dispatch(SelfAction.NotificationUpdate({self : data}))
-        this.socket.disconnect()
       });
       this.socket.on('login_update', (data : any) => {
         console.log("LOGIN/LOGOUT UPDATE");

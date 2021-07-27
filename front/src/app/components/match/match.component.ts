@@ -5,7 +5,7 @@ import { Observable, pipe } from 'rxjs';
 import { first } from 'rxjs/operators'
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
-import { MatSort } from '@angular/material/sort';
+import { Sort, MatSort } from '@angular/material/sort';
 // store imports
 import {
   SelfSelectors,
@@ -30,12 +30,13 @@ export class MatchComponent implements OnInit, AfterViewInit {
   blocks: any;
   dataSource : MatTableDataSource<any>;
   orientation : string;
+  sortedData : any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
+ // ngAfterViewInit() {
+ //   this.dataSource.paginator = this.paginator;
+ // }
   constructor(
     private store$: Store<RootStoreState.RootState>,
 
@@ -101,9 +102,14 @@ export class MatchComponent implements OnInit, AfterViewInit {
             ...item,
             realImage : "data:image/jpeg;base64," + item.image
         })),
+    this.sortedData = this.tab
     this.dataSource = new MatTableDataSource<any>(this.tab);
   }
 
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
   applyFilter(event: Event) {
     // get the filter value
     const filterValue = (event.target as HTMLInputElement).value;
@@ -117,5 +123,4 @@ export class MatchComponent implements OnInit, AfterViewInit {
       }
     }
   }
-
 }

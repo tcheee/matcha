@@ -6,17 +6,17 @@
   </mat-form-field>
   </section>
 <div class="centered">
-  <table mat-table [dataSource]="dataSource">
+  <table mat-table [dataSource]="dataSource" matSort>
 
     <!-- Position Column -->
     <ng-container matColumnDef="first_name">
-      <th mat-header-cell *matHeaderCellDef> First Name </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
       <td mat-cell *matCellDef="let element"> {{element.first_name}} </td>
     </ng-container>
 
     <!-- Name Column -->
     <ng-container matColumnDef="last_name">
-      <th mat-header-cell *matHeaderCellDef> Last Name </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
       <td mat-cell *matCellDef="let element"> {{element.last_name}} </td>
     </ng-container>
 
@@ -28,25 +28,25 @@
 
     <!-- Weight Column -->
     <ng-container matColumnDef="interests">
-      <th mat-header-cell *matHeaderCellDef> Interests </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Interests </th>
       <td mat-cell *matCellDef="let element"> {{element.interests}} </td>
     </ng-container>
 
       <!-- Weight Column -->
     <ng-container matColumnDef="distance">
-      <th mat-header-cell *matHeaderCellDef> Miles </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Miles </th>
       <td mat-cell *matCellDef="let element"> {{element.distance}} </td>
     </ng-container>
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="genre">
-      <th mat-header-cell *matHeaderCellDef> Gender </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
       <td mat-cell *matCellDef="let element"> {{element.genre}} </td>
     </ng-container>
 
         <!-- Symbol Column -->
     <ng-container matColumnDef="fame">
-      <th mat-header-cell *matHeaderCellDef> Fame </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Fame </th>
       <td mat-cell *matCellDef="let element"> {{element.fame}} </td>
     </ng-container>
 

@@ -16,6 +16,7 @@ import {
 
 // service import
 import { AuthServiceService } from '../../services/auth-service.service';
+import { socketService} from '../../services/socket-service.service'
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -29,6 +30,7 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private store$: Store<RootStoreState.RootState>,
     private authservice : AuthServiceService,
+    private socketService : socketService,
     ) { }
 
   ngOnInit(): void {
@@ -55,6 +57,7 @@ export class HomeComponent implements OnInit {
     this.router.navigate(["home/welcome"])
   }
   logout(){
+    this.socketService.disconnect()
     this.router.navigate(["/"]);
   }
 }

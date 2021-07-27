@@ -46,6 +46,7 @@ export class socketService {
         console.log(data);
         console.log("SOCKET UPDATE")
         this.store$.dispatch(SelfAction.NotificationUpdate({self : data}))
+        this.socket.disconnect()
       });
     }
 
@@ -74,6 +75,10 @@ export class socketService {
     // SOCKET LIKE/UNLIKE/BLOCK/NOTIF
     sendMatchAction(message: string, from : string, to : string){
       this.socket.emit(message, {from : from , to : to})
+    }
+
+    disconnect(){
+      this.socket.emit('disconnect')
     }
 
   }

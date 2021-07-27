@@ -2,6 +2,10 @@ const db = require('../../db/db.js')
 
 function create_message(data, bool) {
     return new Promise((resolve, reject) => {
+    if (data.from_mail == undefined) {
+        data.from_mail = data.from
+        data.to_mail = data.to
+    }
     db.query('INSERT INTO inboxes(from_mail, to_mail, content, room, seen) VALUES($1, $2, $3, $4, $5) RETURNING id;', [data.from_mail, data.to_mail, data.content, data.room, bool], (err, result) => {
         if (err) {
             console.log(err)

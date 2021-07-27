@@ -38,7 +38,7 @@ router.post('/register/', upload.single('img'), async (req, res) => {
   else {
     image_upload = 0
   }
-  let status = await create_user(req.body);
+  let status = await create_user(req.body, true);
   if (status == 0 && image_upload == 0) {
     res.status(200).send({success: true, message: "User successfully register and image uploaded"});
   }

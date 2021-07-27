@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 
-function create_user(body) {
+function create_user(body, prod_bool) {
     return new Promise(async (resolve, reject) => {
     const uuid = uuidv4();
     let unix_timestamp = Date.now();
@@ -29,7 +29,9 @@ function create_user(body) {
         else {
             const content = "Hello " + body.first_name + ", you create an account to access Matcha. Please click on this link to active your account : http://localhost:4200/activate-account/" + uuid
             const subject = "Hello, please confirm you Matcha account 👋👋👋"
-            send_mail(body.email, subject, content);
+            if (prod_bool === true) {
+                send_mail(body.email, subject, content);
+            }
             resolve (0)
         }
       })

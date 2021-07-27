@@ -46,7 +46,7 @@ function launchMassCreation(tmp_mail, numberBot) {
       body.interest = interest[k] + "1," + interest[k] + "2," + interest[k] + "3";
       var encoded = base64_encode('../back/db/test/' + k + ".jpeg");
 
-      await create_user(body)
+      await create_user(body, false)
       await upload_image(body, encoded, 0)
     }
 

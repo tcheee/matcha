@@ -42,7 +42,7 @@ router.post('/register/', upload.single('img'), async (req, res) => {
     res.status(200).send({success: true, message: "User successfully register and image uploaded"});
   }
   else if (status == -2 && image_upload == 0) {
-    res.status(400).send({success: false, message: "mail already used" })
+    res.status(400).send({success: false, message: "Mail already used" })
   }
   else {
     res.status(404).send({success: false, message: "We were not able to register the user ..."});

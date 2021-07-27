@@ -31,7 +31,7 @@ function check_match(from_mail, to_mail, like) {
             })
         }
         else {
-            db.query('Select * from public.matches where mail_a = $1 and mail_b = $2;', [to_mail, from_mail], async (err, res) => {
+            db.query('Select * from public.matches where (mail_a = $1 and mail_b = $2) or (mail_a = $2 and mail_b = $1);', [to_mail, from_mail], async (err, res) => {
                 if (err) {
                     console.log(err)
                     rejet (err)

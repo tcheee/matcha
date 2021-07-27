@@ -11,7 +11,6 @@ function launchSocketConnection(io) {
     const { handleLike } = require("../sockets/handleLike.js")(io, client)
     const { handleUnlike } = require("../sockets/handleUnlike.js")(io, client)
     const { handleVisit } = require("../sockets/handleVisit.js")(io, client)
-    const { handleBlock } = require("../sockets/handleBlock.js")(io, client)
     const { handleReport } = require("../sockets/handleReport.js")(io, client)
 
     const onConnection = (socket) => {
@@ -28,7 +27,6 @@ function launchSocketConnection(io) {
         socket.on('like', handleLike)
         socket.on('unlike', handleUnlike)
         socket.on('visit', handleVisit)
-        socket.on('block', handleBlock)
         socket.on('report', handleReport)
         socket.on('disconnect', handleDisconnect)
     }

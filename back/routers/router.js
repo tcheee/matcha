@@ -9,7 +9,6 @@ const update_user = require('../controllers/user/update_user.js')
 const activate_user = require('../controllers/user/activate_user.js')
 const login_user = require('../controllers/user/login_user.js')
 const create_token = require("../functions/create_token")
-const get_all_data = require('../controllers/user/get_all_data.js')
 const reset_password = require("../controllers/user/reset_password.js")
 const resend_password = require("../controllers/user/resend_password.js")
 const upload_image = require("../controllers/user/upload_image.js")
@@ -18,8 +17,8 @@ const get_message_order = require("../controllers/message/get_message_order")
 const get_all_images = require("../controllers/user/get_all_images.js")
 const notification_seen = require("../controllers/notification/notification_seen")
 const message_seen = require("../controllers/message/message_seen")
-const timing = require("../controllers/user/update_timestamp")
-const { requireAuth } = require("../middleware/authMiddleware");
+const block_user = require("../controllers/user/block_user.js")
+const get_all_blocks = require("../controllers/user/get_all_blocks.js")
 const maxAge = 24 * 10 * 60 * 60;
 
 
@@ -175,11 +174,17 @@ router.get('/message-order/', async (req, res) => {
   }
 });
 
-router.post('/all/', async (req, res) => {
-  console.log(req.body)
-  let data = await get_all_data(req.body.mail)
-  console.log(data)
-  res.json(data)
+router.post('/block/', async (req, res) => {
+  console.log(req.query.from)
+  console.log(req.query.to)
+  const message_order = await block_user(req.query)
+  if (message_order != -1) {
+    const result = await get_all_blocks(req.query.from);
+    res.status(200).json({blocked_users: result})
+  }
+  else {
+    res.status(404).send({success: false, message:'There was a problem blocking this user'})
+  }
 });
 
 router.use((req, res) => {

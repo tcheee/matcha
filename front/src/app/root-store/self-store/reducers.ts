@@ -13,6 +13,7 @@ const SelfReducer = createReducer(
 	(state, {self}): State => ({
 	...state,
 	id: self.self.user.id,
+	uuid: self.self.user.uuid,
 	mail: self.self.user.mail,
 	first_name: self.self.user.first_name,
 	last_name: self.self.user.last_name,

@@ -29,7 +29,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfileComponent implements OnInit {
-
+  uuid: string = ""; 
   id: string = "";
   lat : string = "";
   lng : string = "";
@@ -85,6 +85,8 @@ export class ProfileComponent implements OnInit {
 
     this.store$.select(SelfSelectors.getAllStateData).pipe(first()).subscribe(
       res => {
+        console.log(res)
+        this.uuid = res.uuid
         this.id = res.id
         this.image =  res.image
         this.image1 = res.image1 !== "data:image/jpeg;base64,undefined" ?  res.image1 : "", 
@@ -198,6 +200,6 @@ export class ProfileComponent implements OnInit {
   }
 
   updatePassword(){
-    this.router.navigate(['reset-password'])
+    this.router.navigate(['reset-password'], { queryParams: {uuid: this.uuid}})
   }
 }

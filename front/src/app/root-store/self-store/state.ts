@@ -1,5 +1,6 @@
 export interface State {
     id: number;
+    uuid: string;
     mail: string;
     first_name: string;
     last_name: string;
@@ -31,6 +32,7 @@ export interface State {
 
 export const initialState: State = {
 	id: 0,
+    uuid: '',
 	first_name: '',
     last_name: '',
     mail: '',

@@ -12,7 +12,8 @@ async function reset_password(uuid, password) {
                 resolve(-1);
             }
             else {
-                if (result.rows != undefined) {
+                console.log(result)
+                if (result.rowCount > 0) {
                     resolve(0)
                 }
                 else

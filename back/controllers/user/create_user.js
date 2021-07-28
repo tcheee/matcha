@@ -10,6 +10,7 @@ function create_user(body, prod_bool) {
     const uuid = uuidv4();
     let unix_timestamp = Date.now();
     let date = new Date(unix_timestamp)
+    console.log(body)
 
     body.password = await bcrypt.hash(body.password, saltRounds);
 

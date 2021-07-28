@@ -8,7 +8,6 @@ import { Store, } from '@ngrx/store';
 // store imports
 import { RootStoreState, SelfAction, UsersAction} from '../root-store';
 import { Router } from '@angular/router';
-import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'

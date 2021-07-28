@@ -1,48 +1,57 @@
-<h2> Age slider</h2>
-<mat-slider 
-  (change)="sortAge($event)" 
-  step="1"
-  min="0"
-  max="100"
-  [value]="sortAgeValue">
-</mat-slider>
-{{sortAgeValue}}
+<div class="container"> 
+  <div class="slide-div">
+    <h4 class="slide-title"> Age slider</h4>
+    <mat-slider 
+      (change)="sortAge($event)" 
+      step="1"
+      min="10"
+      max="100"
+      [value]="sortAgeValue">
+    </mat-slider>
+    {{sortAgeValue}}
+  </div>
 
-<h2> Miles slider</h2>
-<mat-slider 
-  (change)="sortMiles($event)" 
-  step="20"
-  min="0"
-  max="10000"
-  [value]="sortmilesValue">
-</mat-slider>
-{{sortmilesValue}}
+  <div class="slide-div"> 
+    <h4 class="slide-title"> Distance slider</h4>
+    <mat-slider 
+      (change)="sortMiles($event)" 
+      step="20"
+      min="10"
+      max="500"
+      [value]="sortmilesValue">
+    </mat-slider>
+    {{sortmilesValue}}
+  </div>
 
-<h2> Fame slider</h2>
-<mat-slider 
-  (input)="sortFame($event)" 
-  step="50"
-  min="0"
-  max="10000"
-  [value]="sortFameValue">
-</mat-slider>
-{{sortFameValue}}
+  <div class="slide-div">
+    <h4 class="slide-title"> Fame slider</h4>
+    <mat-slider 
+      (input)="sortFame($event)" 
+      step="20"
+      min="0"
+      max="250"
+      [value]="sortFameValue">
+    </mat-slider>
+    {{sortFameValue}}
+  </div>
 
-<h2> Interest Slider</h2>
-
-<mat-slider 
-  (input)="sortInterest($event)" 
-  step="1"
-  min="0"
-  max="10"
-  [value]="sortInterestValue">
-</mat-slider>
-{{sortInterestValue}}
+  <div class="slide-div">
+    <h4 class="slide-title"> Interest Slider</h4>
+    <mat-slider 
+      (input)="sortInterest($event)" 
+      step="1"
+      min="0"
+      max="50"
+      [value]="sortInterestValue">
+    </mat-slider>
+    {{sortInterestValue}}
+  </div>
+</div>
 
 <section class="filter-row">
   <!-- Filters and columns -->
   <mat-form-field class="campaigns-table-filter" >
-    <mat-label>Quick Filter</mat-label>
+    <mat-label>Search</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
   </mat-form-field>
   </section>
@@ -81,7 +90,7 @@
 
       <!-- Weight Column -->
     <ng-container matColumnDef="distance">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Miles </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Distance </th>
       <td mat-cell *matCellDef="let element"> {{element.distance}} </td>
     </ng-container>
 

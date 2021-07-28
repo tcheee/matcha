@@ -29,3 +29,21 @@ table {
       th.mat-sort-header-sorted {
 	color: black;
       }
+
+.container {
+	display: flex; /* or inline-flex */
+	flex-direction: row;
+	justify-content: center;
+}
+
+.slide-title {
+	color: #e91e63;
+	justify-content: center;
+	text-align: center;
+	font-weight: bold;
+}
+.slide-div {
+	margin-top: 1%;
+	margin-right: 1%;
+	padding: 0;
+}

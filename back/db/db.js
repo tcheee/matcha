@@ -1,6 +1,6 @@
 const { Pool } = require('pg')
 
-//LOCAL env
+////LOCAL env
 // const pool = new Pool({
 //     host: "127.0.0.1",
 //     port: 5432,
@@ -9,7 +9,7 @@ const { Pool } = require('pg')
 //     database: "matcha"
 // });
 
-//PROD 
+////PROD 
 const pool = new Pool ({
   connectionString: process.env.DATABASE_URL,
   ssl: {

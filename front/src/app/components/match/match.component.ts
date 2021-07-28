@@ -77,15 +77,7 @@ export class MatchComponent implements OnInit, AfterViewInit {
 
 
     if(this.selfData.orientation !== "Bisexual"){
-      this.tab = this.tab.sort(((a : any, b : any) => {
-        if(a.genre != this.orientation && b.genre === this.orientation){
-          return 1;
-        }
-        if(a.genre === this.orientation && b.genre != this.orientation){
-          return -1;
-        }
-        return 0;
-      }))
+      this.tab = this.tab.filter((res : any) => res.genre === this.orientation)
   }
 
     this.tab = this.tab.sort(((a : any, b : any) => {

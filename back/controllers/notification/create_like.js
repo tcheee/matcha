@@ -24,6 +24,10 @@ async function create_like(body) {
         if (result !== -1) {
             update_rating(body.to, body.likes);
             let match = await check_match(body.from, body.to, body.likes);
+            console.log('match: ', match)
+            if (match == -1) {
+                resolve(({message: "dislike_created"}))
+            }
             resolve(match)
         }
         else {

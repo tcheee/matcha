@@ -109,7 +109,6 @@ export class MatchComponent implements OnInit, AfterViewInit {
             realImage : "data:image/jpeg;base64," + item.image
         })),
     this.sortedData = this.tab
-    console.log(this.tab)
     this.dataSource = new MatTableDataSource<any>(this.tab);
   }
 
@@ -211,7 +210,6 @@ export class MatchComponent implements OnInit, AfterViewInit {
     }
   }
   sortMiles(event: MatSliderChange){
-    console.log(event.value)
       this.sortmilesValue = event.value;
       this.dataSource.filterPredicate = (data : any ,filter) => {
         if (event.value !== 0 && this.sortAgeValue === 0 && this.sortFameValue === 0 && this.sortInterestValue === 0){
@@ -288,12 +286,9 @@ export class MatchComponent implements OnInit, AfterViewInit {
   }
 
   sortInterest(event: MatSliderChange){
-    console.log(event.value)
     this.sortInterestValue = event.value;
     this.dataSource.filterPredicate = (data : any ,filter) => {
       if (event.value !== 0 && this.sortAgeValue === 0 && this.sortmilesValue === 0 && this.sortFameValue === 0){
-        console.log("pass")
-        console.log(data.common_interest)
         return (data.common_interest > event.value!)
       }
       if (event.value !== 0 && this.sortAgeValue !== 0 && this.sortmilesValue === 0 && this.sortFameValue === 0){

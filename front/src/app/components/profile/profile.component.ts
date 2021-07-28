@@ -85,14 +85,12 @@ export class ProfileComponent implements OnInit {
 
     this.store$.select(SelfSelectors.getAllStateData).pipe(first()).subscribe(
       res => {
-        console.log(res)
         this.uuid = res.uuid
         this.id = res.id
         this.image =  res.image
         this.image1 = res.image1 !== "data:image/jpeg;base64,undefined" ?  res.image1 : "", 
         this.image2 = res.image2 !== "data:image/jpeg;base64,undefined" ?  res.image2 : "", 
         this.image3 = res.image3 !== "data:image/jpeg;base64,undefined" ?  res.image3 : "",
-        console.log(this.image1)
         this.lat = res.lat;
         this.lng = res.lng;
         this.interests = res.interests.split(',');
@@ -113,12 +111,10 @@ export class ProfileComponent implements OnInit {
       })
   }
   onSubmit(){
-    console.log(this.updateForm.value);
 
     this.updateFormConfirm = this.updateForm.value;
     if ( !this.updateForm.valid || this.interests.length == 0) {
       this._snackBar.open("The form is not Valid, You must have at least one interest, email, firstname ...")
-      console.log(this.updateForm.valid)
           return;
       }
    if (this.updateFormConfirm.geolocalize && this.updateFormConfirm.geolocalize === 1){
@@ -136,7 +132,6 @@ export class ProfileComponent implements OnInit {
     this.file2 instanceof File ? this.updateFormConfirm['img2'] = this.file2 : null ;
     this.file3 instanceof File ? this.updateFormConfirm['img3'] = this.file3 : null ;
     this.updateFormConfirm.interest = this.interests;
-    console.log(this.updateFormConfirm)
     this.authservice.update(this.updateFormConfirm);
     
 
@@ -185,7 +180,6 @@ export class ProfileComponent implements OnInit {
   }
 
   onChangeFileInput(): void {
-    console.log("laa")
     const files: { [key: string]: File } = this.fileInput.nativeElement.files;
     this.file = files[0];
   }

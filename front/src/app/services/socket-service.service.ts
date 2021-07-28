@@ -33,23 +33,17 @@ export class socketService {
     }
 
     getData(mail : string) {
-      console.log("EMIT")
       this.socket.emit("data", {mail : mail}, (response: any) => {
         if (response.data){
           this.store$.dispatch(SelfAction.sendDatatoStore({self: response.data}))
           this.store$.dispatch(UsersAction.sendDatatoStore({users: response.data}))
           this.router.navigate(['/home'])
-          console.log(response)
         }
       });
       this.socket.on('notification_update', (data: any) => {
-        console.log(data);
-        console.log("SOCKET UPDATE")
         this.store$.dispatch(SelfAction.NotificationUpdate({self : data}))
       });
       this.socket.on('login_update', (data : any) => {
-        console.log("LOGIN/LOGOUT UPDATE");
-        console.log(data.login)
         this.store$.dispatch(UsersAction.updateIsOnline({isOnline: data.login , mail : data.mail}))
       })
     }
@@ -64,14 +58,12 @@ export class socketService {
     }
 
     sendChat(from: string, to: string, content: string, room: string) {
-      console.log(from, to, content, room);
       this.socket.emit("chat", {from_mail : from, to_mail: to, content: content, room: room})
     }
 
     public onChat() {
         return new Observable (observer => {
             this.socket.on('chat', (data: any) => {
-                console.log(data);
                 observer.next(data)});
         });
     }

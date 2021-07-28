@@ -58,7 +58,6 @@ export class HistoryComponent implements OnInit {
           tab = [...res.users]
           tab.forEach((item : any) => {
             if (item.mail === row.from_mail){
-              console.log(item.id)
               this.router.navigate(['home/match/' + item.id])
             }
           })

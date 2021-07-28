@@ -66,7 +66,6 @@ export class ChatComponent implements OnInit {
     //Get all the history of messages with this specific room
     this.service.getMessagesHistory(this.room)
     .subscribe((data: any) => {
-      console.log(data)
       this.messages = data
     });
 

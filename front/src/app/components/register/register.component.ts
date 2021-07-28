@@ -76,7 +76,6 @@ export class RegisterComponent implements OnInit {
   get f() { return this.registerForm.controls; }
 
   onSubmit() {
-    console.log(this.registerForm.value);
       this.submitted = true;
       // (when we choose a file the submit button is trigerred idk why)
       if (!this.file || !this.registerForm.valid || this.interests.length <= 0) {
@@ -99,7 +98,6 @@ export class RegisterComponent implements OnInit {
       this.authservice.register(this.registerFormConfirm);
       // display form values on success
      // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
-     console.log(this.registerFormConfirm)
   }
 
   onReset() {

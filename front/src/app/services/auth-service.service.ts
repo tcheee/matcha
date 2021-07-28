@@ -27,7 +27,6 @@ export class AuthServiceService {
   }
 
   getOrderMessages(data : any) :Observable<any>{
-    console.log(data);
     return this.http.get(`${orderMessageUrl}`, {withCredentials: true, params: {email: data}});
   }
 
@@ -36,7 +35,7 @@ export class AuthServiceService {
   }
 
   resetPassword(data : any) {
-    return this.http.post(`${resetPasswordUrl}`, data).subscribe(data => console.log(data))
+    return this.http.post(`${resetPasswordUrl}`, data).subscribe(data => data)
   }
 
   changePassword(data : any) {
@@ -65,7 +64,6 @@ export class AuthServiceService {
     })
   }
   getImages(data : string) {
-    console.log(data)
     return this.http.get(`${imageUrl}`, {params: {mail : data}});
   }
 
@@ -108,19 +106,15 @@ export class AuthServiceService {
     payload.append('img', data.img);
 
 
-    payload.forEach((value, key) => {
-    console.log("key %s: value %s", key, value);
-    })
    // this.http = new HttpClient(this.handler);
     this.http.post(`${registerUrl}`, payload)
     .subscribe(data => {
       this._snackBar.open("You are successfully created", undefined, {duration : 1500 })
-      this.router.navigate(['/']),
-      console.log("return data is " + JSON.stringify(data))},
+      this.router.navigate(['/'])
+      },
       (error) => { 
         // error() method block
         if (error)
-        console.log(error)
         this._snackBar.open(error.error.message, undefined, {duration : 1500 })
       }
     )
@@ -144,14 +138,11 @@ export class AuthServiceService {
       payload.append('lng', data.lng);
       payload.append('interest', data.interest);
 
-      payload.forEach((value, key) => {
-        console.log("key %s: value %s", key, value);
-        });
         this.http.post(`${updateUrl}`, payload)
     .subscribe(data => {
       this._snackBar.open("You are successfully Updated", undefined, {duration : 1500 })
       this.router.navigate(['/home/welcome'])
       this.store$.dispatch(SelfAction.updateSelf({user : data['data']['user'], images : data['data']['images']}));
-     console.log(data)  }  ) 
+      }  ) 
   }
 }

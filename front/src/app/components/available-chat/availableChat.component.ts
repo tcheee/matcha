@@ -45,7 +45,6 @@ export class availableChatComponent implements OnInit {
         data.map((message: any) => {
           message.contact = message.from_mail === this.email? message.to_mail : message.from_mail;
         })
-        console.log(data)
         this.messages = data
       });
   }

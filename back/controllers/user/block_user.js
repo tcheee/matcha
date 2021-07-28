@@ -14,6 +14,7 @@ function block_user(data) {
                 data.likes = -1;
                 data.type = 'unlike'
                 const like = await create_like(data)
+                console.log('result of the suppression of the like')
                 console.log(like) // for vic
                 if (like == -1) {
                     resolve (-1)

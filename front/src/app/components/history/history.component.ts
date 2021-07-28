@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy, AfterViewInit, ViewChild  } from '@angular/core';
+import { Component, OnInit,  ViewChild  } from '@angular/core';
+import { Router} from '@angular/router';
 //ngrx imports
 import { Store } from '@ngrx/store';
 import { Observable, pipe } from 'rxjs';
@@ -25,6 +26,7 @@ import { AuthServiceService } from '../../services/auth-service.service';
 export class HistoryComponent implements OnInit {
   selfData$ : Observable<any>;
   selfData : any;
+  userData$ : Observable<any>;
   displayedColumns: string[] = ['notification_type', 'from_mail', 'creation_time'];
   dataSource : MatTableDataSource<any>;
 
@@ -37,6 +39,7 @@ export class HistoryComponent implements OnInit {
   constructor(
     private store$: Store<RootStoreState.RootState>,
     private authservice : AuthServiceService,
+    private router : Router,
   ) { }
 
   ngOnInit(): void {
@@ -46,7 +49,21 @@ export class HistoryComponent implements OnInit {
     this.store$.select(SelfSelectors.mail).pipe(first()).subscribe(
       res => 
       this.authservice.removeNotification(res))
-  //  this.store$.dispatch(SelfAction.removeUnseenNotifications());
+  }
+
+  routeToUser(row : any){
+    let tab;
+    this.store$.select(UsersSelector.getAllUsersStateData).subscribe(
+      (res : any)   => {
+          tab = [...res.users]
+          tab.forEach((item : any) => {
+            if (item.mail === row.from_mail){
+              console.log(item.id)
+              this.router.navigate(['home/match/' + item.id])
+            }
+          })
+      }
+    )
   }
 
 }

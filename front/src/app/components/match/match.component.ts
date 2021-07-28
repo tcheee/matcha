@@ -94,6 +94,14 @@ export class MatchComponent implements OnInit, AfterViewInit {
         return 0;
       }
     }))
+    this.tab = this.tab.sort(((a : any, b : any) => {
+      if(a.fame === b.fame && a.genre === b.genre && a.distance === b.distance){
+        return a.common_interest < b.common_interest ? 1 : -1
+      }
+      else {
+        return 0;
+      }
+    }))
 
     // change tab for images
     this.tab = this.tab.map(( item : any ) => ({
@@ -115,13 +123,55 @@ export class MatchComponent implements OnInit, AfterViewInit {
 
     // apply it to the dataSource.
     if (this.dataSource) {
+    //  this.dataSource.filter = filterValue.trim().toLowerCase();
+      if(this.sortAgeValue !== 0  || this.sortmilesValue !== 0 || this.sortFameValue !== 0 || this.sortInterestValue !== 0){
+        this.dataSource.filterPredicate = (data : any, filter) => {
+          if(this.sortAgeValue !== 0  && this.sortmilesValue === 0 && this.sortFameValue === 0 && this.sortInterestValue === 0){
+            return (data.age < this.sortAgeValue! && (data.first_name.startsWith(filterValue) || data.last_name.startsWith(filterValue)))
+          }
+          if(this.sortAgeValue === 0  && this.sortmilesValue !== 0 && this.sortFameValue === 0 && this.sortInterestValue === 0){
+            return (data.distance < this.sortmilesValue! && (data.first_name.startsWith(filterValue) || data.last_name.startsWith(filterValue)))
+          }
+          if(this.sortAgeValue === 0  && this.sortmilesValue === 0 && this.sortFameValue !== 0 && this.sortInterestValue === 0){
+            return (data.fame < this.sortFameValue! && (data.first_name.startsWith(filterValue) || data.last_name.startsWith(filterValue)))
+          }
+          if(this.sortAgeValue === 0  && this.sortmilesValue === 0 && this.sortFameValue === 0 && this.sortInterestValue !== 0){
+            return (data.common_interest > this.sortInterestValue! && (data.first_name.startsWith(filterValue) || data.last_name.startsWith(filterValue)))
+          }
+          if(this.sortAgeValue !== 0  && this.sortmilesValue !== 0 && this.sortFameValue === 0 && this.sortInterestValue === 0){
+            return (data.age < this.sortAgeValue! && data.distance < this.sortmilesValue! && (data.first_name.startsWith(filterValue) || data.last_name.startsWith(filterValue)))
+          }
+          if(this.sortAgeValue !== 0  && this.sortmilesValue === 0 && this.sortFameValue !== 0 && this.sortInterestValue === 0){
+            return (data.age < this.sortAgeValue! && data.fame < this.sortFameValue! && (data.first_name.startsWith(filterValue) || data.last_name.startsWith(filterValue)))
+          }
+          if(this.sortAgeValue !== 0  && this.sortmilesValue !== 0 && this.sortFameValue === 0 && this.sortInterestValue !== 0){
+            return (data.age < this.sortAgeValue! && data.common_interest > this.sortInterestValue! && (data.first_name.startsWith(filterValue) || data.last_name.startsWith(filterValue)))
+          }
+          if(this.sortAgeValue === 0  && this.sortmilesValue !== 0 && this.sortFameValue !== 0 && this.sortInterestValue === 0){
+            return (data.disance < this.sortmilesValue! && data.fame < this.sortFameValue! && (data.first_name.startsWith(filterValue) || data.last_name.startsWith(filterValue)))
+          }
+          if(this.sortAgeValue === 0  && this.sortmilesValue !== 0 && this.sortFameValue === 0 && this.sortInterestValue !== 0){
+            return (data.disance < this.sortmilesValue! && data.common_interest > this.sortInterestValue! && (data.first_name.startsWith(filterValue) || data.last_name.startsWith(filterValue)))
+          }
+          if(this.sortAgeValue === 0  && this.sortmilesValue === 0 && this.sortFameValue !== 0 && this.sortInterestValue !== 0){
+            return (data.fame < this.sortFameValue! && data.common_interest > this.sortInterestValue! && (data.first_name.startsWith(filterValue) || data.last_name.startsWith(filterValue)))
+          }
+          else 
+            return true
+      }
+      this.dataSource.filter = "" + Math.random()
+    }
+    else{
       this.dataSource.filter = filterValue.trim().toLowerCase();
-      if (this.dataSource.paginator) {
+    }
+
+      }
+    if (this.dataSource.paginator) {
         // reset the paginator to the first page.
         this.dataSource.paginator.firstPage();
       }
     }
-  }
+
   sortAge(event: MatSliderChange){
     if(this.dataSource){
     this.sortAgeValue = event.value

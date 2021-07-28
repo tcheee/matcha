@@ -5,19 +5,27 @@ mat-card {
 	text-align: center;
       }
       .signin-content {
-	height: 70vh;
+	height: 101vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: #FFD2BC;
+	background-color: #F7F0F5;
       }
       .full-width-input {
 	width: 100%;
       }
-      .color {
-	      height: 100vh;
-	      background-color: #DCA082;
-      }
       .cursor {
 	      cursor: pointer;
       }
+
+      .title {
+		color: #F1D302;
+		letter-spacing: 0.05cm;
+		font-weight: bold;
+	}
+
+	.button {
+		background-color: #F1D302;
+		color: white;
+		margin-bottom: 4%;
+	}

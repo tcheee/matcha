@@ -104,7 +104,7 @@ unlikeAction(){
 blockAction(){
   this.authservice.blockUser(this.selfData.mail, this.userData[0].mail)
   this._snackBar.open("You have successfully block " + this.userData[0].first_name + this.userData[0].last_name,  undefined, {duration : 1500 })
-  this.router.navigate(['/home'])
+  this.router.navigate(['/home/welcome'])
 }
 
 routeToChat(){

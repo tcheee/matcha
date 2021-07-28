@@ -51,10 +51,6 @@ export class MatchComponent implements OnInit, AfterViewInit {
     this.selfData$.pipe(first()).subscribe(res => this.selfData = res);
     this.usersData$ = this.store$.select(UsersSelector.getAllUsersStateData);
     this.usersData$.pipe(first()).subscribe(res => this.usersData = res);
-  //  this.blocks$ = this.store$.select(SelfSelectors.)
-  //  if (this.selfData.blocks.lenght > 0){
-  //    this.usersData.users.filter((res : any) => this.selfData.blocks.includes(res.mail))
-  //  }
 
   // SORT ARRAY PHASE
     if(this.selfData.orientation === 'Homosexual')
@@ -113,6 +109,7 @@ export class MatchComponent implements OnInit, AfterViewInit {
             realImage : "data:image/jpeg;base64," + item.image
         })),
     this.sortedData = this.tab
+    console.log(this.tab)
     this.dataSource = new MatTableDataSource<any>(this.tab);
   }
 
@@ -137,17 +134,29 @@ export class MatchComponent implements OnInit, AfterViewInit {
     if(this.dataSource){
     this.sortAgeValue = event.value
       this.dataSource.filterPredicate = (data : any ,filter) => {
-        if (event.value !== 0 && this.sortmilesValue === 0 && this.sortFameValue === 0){
+        if (event.value !== 0 && this.sortmilesValue === 0 && this.sortFameValue === 0 && this.sortInterestValue === 0){
           return (data.age < event.value!)
         }
-        if (event.value !== 0 && this.sortmilesValue !== 0 && this.sortFameValue === 0){
+        if (event.value !== 0 && this.sortmilesValue !== 0 && this.sortFameValue === 0 && this.sortInterestValue === 0){
           return (data.age < event.value! && data.distance < this.sortmilesValue!)
         }
-        if (event.value !== 0 && this.sortmilesValue === 0 && this.sortFameValue !== 0){
+        if (event.value !== 0 && this.sortmilesValue === 0 && this.sortFameValue !== 0 && this.sortInterestValue === 0){
           return (data.age < event.value! && data.fame < this.sortFameValue!)
         }
-        if (event.value !== 0 && this.sortmilesValue !== 0 && this.sortFameValue !== 0){
+        if (event.value !== 0 && this.sortmilesValue === 0 && this.sortFameValue === 0 && this.sortInterestValue !== 0){
+          return (data.age < event.value! && data.common_interest > this.sortInterestValue!)
+        }
+        if (event.value !== 0 && this.sortmilesValue !== 0 && this.sortFameValue !== 0 && this.sortInterestValue === 0){
           return (data.age < event.value! && data.distance < this.sortmilesValue! && data.fame < this.sortFameValue!)
+        }
+        if (event.value !== 0 && this.sortmilesValue === 0 && this.sortFameValue !== 0 && this.sortInterestValue === 0){
+          return (data.age < event.value! && data.common_interest > this.sortInterestValue! && data.fame < this.sortFameValue!)
+        }
+        if (event.value !== 0 && this.sortmilesValue !== 0 && this.sortFameValue === 0 && this.sortInterestValue === 0){
+          return (data.age < event.value! && data.distance < this.sortmilesValue! && data.common_interest > this.sortInterestValue!)
+        }
+        if (event.value !== 0 && this.sortmilesValue !== 0 && this.sortFameValue !== 0 && this.sortInterestValue !== 0){
+          return (data.age < event.value! && data.distance < this.sortmilesValue! && data.fame < this.sortFameValue! && data.common_interest > this.sortInterestValue!)
         }
         else 
           return true
@@ -163,17 +172,29 @@ export class MatchComponent implements OnInit, AfterViewInit {
     console.log(event.value)
       this.sortmilesValue = event.value;
       this.dataSource.filterPredicate = (data : any ,filter) => {
-        if (event.value !== 0 && this.sortAgeValue === 0 && this.sortFameValue === 0){
+        if (event.value !== 0 && this.sortAgeValue === 0 && this.sortFameValue === 0 && this.sortInterestValue === 0){
           return (data.distance < event.value!)
         }
-        if (event.value !== 0 && this.sortAgeValue !== 0 && this.sortFameValue === 0){
+        if (event.value !== 0 && this.sortAgeValue !== 0 && this.sortFameValue === 0 && this.sortInterestValue === 0){
           return (data.distance < event.value!&& data.age < this.sortAgeValue!)
         }
-        if (event.value !== 0 && this.sortAgeValue === 0 && this.sortFameValue !== 0){
+        if (event.value !== 0 && this.sortAgeValue === 0 && this.sortFameValue !== 0 && this.sortInterestValue === 0){
           return (data.distance < event.value!&& data.fame < this.sortFameValue!)
         }
-        if (event.value !== 0 && this.sortAgeValue !== 0 && this.sortFameValue !== 0){
+        if (event.value !== 0 && this.sortAgeValue === 0 && this.sortFameValue === 0 && this.sortInterestValue !== 0){
+          return (data.distance < event.value!&& data.common_interest > this.sortInterestValue!)
+        }
+        if (event.value !== 0 && this.sortAgeValue !== 0 && this.sortFameValue !== 0 && this.sortInterestValue === 0){
           return (data.distance < event.value! && data.age < this.sortAgeValue! && data.fame < this.sortFameValue!)
+        }
+        if (event.value !== 0 && this.sortAgeValue === 0 && this.sortFameValue !== 0 && this.sortInterestValue !== 0){
+          return (data.distance < event.value! && data.common_interest > this.sortInterestValue! && data.fame < this.sortFameValue!)
+        }
+        if (event.value !== 0 && this.sortAgeValue !== 0 && this.sortFameValue === 0 && this.sortInterestValue !== 0){
+          return (data.distance < event.value! && data.age < this.sortAgeValue! && data.common_interest > this.sortInterestValue!)
+        }
+        if (event.value !== 0 && this.sortAgeValue !== 0 && this.sortFameValue !== 0 && this.sortInterestValue !== 0){
+          return (data.distance < event.value! && data.age < this.sortAgeValue! && data.fame < this.sortFameValue! && data.common_interest > this.sortInterestValue!)
         }
         else 
           return true
@@ -189,17 +210,29 @@ export class MatchComponent implements OnInit, AfterViewInit {
   sortFame(event: MatSliderChange){
       this.sortFameValue = event.value;
       this.dataSource.filterPredicate = (data : any ,filter) => {
-        if (event.value !== 0 && this.sortAgeValue === 0 && this.sortmilesValue === 0){
+        if (event.value !== 0 && this.sortAgeValue === 0 && this.sortmilesValue === 0 && this.sortInterestValue === 0){
           return (data.fame < event.value!)
         }
-        if (event.value !== 0 && this.sortAgeValue !== 0 && this.sortmilesValue === 0){
+        if (event.value !== 0 && this.sortAgeValue !== 0 && this.sortmilesValue === 0 && this.sortInterestValue === 0){
           return (data.fame < event.value! && data.age < this.sortAgeValue!)
         }
-        if (event.value !== 0 && this.sortAgeValue === 0 && this.sortmilesValue !== 0){
+        if (event.value !== 0 && this.sortAgeValue === 0 && this.sortmilesValue !== 0 && this.sortInterestValue === 0){
           return (data.fame < event.value! && data.distance < this.sortmilesValue!)
         }
-        if (event.value !== 0 && this.sortAgeValue !== 0 && this.sortmilesValue !== 0){
+        if (event.value !== 0 && this.sortAgeValue === 0 && this.sortmilesValue === 0 && this.sortInterestValue !== 0){
+          return (data.fame < event.value! && data.common_interest > this.sortInterestValue!)
+        }
+        if (event.value !== 0 && this.sortAgeValue !== 0 && this.sortmilesValue !== 0 && this.sortInterestValue === 0){
           return (data.fame < event.value! && data.distance < this.sortmilesValue! && data.age < this.sortAgeValue!)
+        }
+        if (event.value !== 0 && this.sortAgeValue !== 0 && this.sortmilesValue === 0 && this.sortInterestValue === 0){
+          return (data.fame < event.value! && data.common_interest > this.sortInterestValue! && data.age < this.sortAgeValue!)
+        }
+        if (event.value !== 0 && this.sortAgeValue === 0 && this.sortmilesValue !== 0 && this.sortInterestValue !== 0){
+          return (data.fame < event.value! && data.distance < this.sortmilesValue! && data.common_interest > this.sortInterestValue!)
+        }
+        if (event.value !== 0 && this.sortAgeValue !== 0 && this.sortmilesValue !== 0 && this.sortInterestValue !== 0){
+          return (data.fame < event.value! && data.distance < this.sortmilesValue! && data.common_interest > this.sortInterestValue! && data.age < this.sortAgeValue!)
         }
         else 
           return true
@@ -213,19 +246,34 @@ export class MatchComponent implements OnInit, AfterViewInit {
   }
 
   sortInterest(event: MatSliderChange){
-    this.sortFameValue = event.value;
+    console.log(event.value)
+    this.sortInterestValue = event.value;
     this.dataSource.filterPredicate = (data : any ,filter) => {
-      if (event.value !== 0 && this.sortAgeValue === 0 && this.sortmilesValue === 0){
-        return (data.fame < event.value!)
+      if (event.value !== 0 && this.sortAgeValue === 0 && this.sortmilesValue === 0 && this.sortFameValue === 0){
+        console.log("pass")
+        console.log(data.common_interest)
+        return (data.common_interest > event.value!)
       }
-      if (event.value !== 0 && this.sortAgeValue !== 0 && this.sortmilesValue === 0){
-        return (data.fame < event.value! && data.age < this.sortAgeValue!)
+      if (event.value !== 0 && this.sortAgeValue !== 0 && this.sortmilesValue === 0 && this.sortFameValue === 0){
+        return (data.common_interest > event.value! && data.age < this.sortAgeValue!)
       }
-      if (event.value !== 0 && this.sortAgeValue === 0 && this.sortmilesValue !== 0){
-        return (data.fame < event.value! && data.distance < this.sortmilesValue!)
+      if (event.value !== 0 && this.sortAgeValue === 0 && this.sortmilesValue !== 0 && this.sortFameValue === 0){
+        return (data.common_interest > event.value! && data.distance < this.sortmilesValue!)
       }
-      if (event.value !== 0 && this.sortAgeValue !== 0 && this.sortmilesValue !== 0){
-        return (data.fame < event.value! && data.distance < this.sortmilesValue! && data.age < this.sortAgeValue!)
+      if (event.value !== 0 && this.sortAgeValue === 0 && this.sortmilesValue === 0 && this.sortFameValue !== 0){
+        return (data.common_interest > event.value! && data.fame < this.sortFameValue!)
+      }
+      if (event.value !== 0 && this.sortAgeValue !== 0 && this.sortmilesValue !== 0 && this.sortFameValue === 0){
+        return (data.common_interest > event.value! && data.age < this.sortAgeValue! && data.distance < this.sortmilesValue!)
+      }
+      if (event.value !== 0 && this.sortAgeValue !== 0 && this.sortmilesValue === 0 && this.sortFameValue !== 0){
+        return (data.common_interest > event.value! && data.age < this.sortAgeValue! && data.fame < this.sortFameValue!)
+      }
+      if (event.value !== 0 && this.sortAgeValue === 0 && this.sortmilesValue !== 0 && this.sortFameValue !== 0){
+        return (data.common_interest > event.value! && data.fame < this.sortFameValue! && data.distance < this.sortmilesValue!)
+      }
+      if (event.value !== 0 && this.sortAgeValue !== 0 && this.sortmilesValue !== 0 && this.sortFameValue !== 0){
+        return (data.common_interest > event.value! && data.fame < this.sortFameValue! && data.distance < this.sortmilesValue! && data.age < this.sortAgeValue!)
       }
       else 
         return true

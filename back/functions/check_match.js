@@ -21,7 +21,7 @@ function check_match(from_mail, to_mail, like) {
                             resolve({message: "match_created", room: match_room})
                         }
                         else {
-                            resolve ({message: "error whil creating the match"})
+                            resolve ({message: "error while creating the match"})
                         }
                     }
                     else {
@@ -38,7 +38,7 @@ function check_match(from_mail, to_mail, like) {
                 }
                 else {
                     if (res.rows[0] != undefined) {
-                        const match_deletion = await delete_match(from_mail, to_mail);
+                        const match_deletion = await delete_match(from_mail, to_mail, res.rows[0].room);
                         if (match_deletion != -1) {
                             resolve ({message: "match_deleted"})
                         }

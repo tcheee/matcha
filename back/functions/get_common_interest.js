@@ -11,9 +11,6 @@ function get_common_interest(interests1, interests2) {
                   }
                 }
             }
-            console.log(array1)
-            console.log(array2)
-            console.log(k)
             resolve (k);
         } catch (err) {
             console.error(err);

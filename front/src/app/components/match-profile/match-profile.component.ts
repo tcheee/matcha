@@ -105,9 +105,7 @@ blockAction(){
 }
 
 routeToChat(){
-  this.router.navigate(['/home/chat/' + this.routeRoom])
+  this.router.navigate(['/home/chat/' + this.routeRoom], {state: {to: this.userData[0].mail}})
 }
-
-
 
 }

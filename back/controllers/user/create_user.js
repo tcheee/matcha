@@ -27,7 +27,7 @@ function create_user(body, prod_bool) {
             }
         }
         else {
-            const content = "Hello " + body.first_name + ", you create an account to access Matcha. Please click on this link to active your account : http://localhost:4200/activate-account/" + uuid
+            const content = "Hello " + body.firstName + ", you create an account to access Matcha. Please click on this link to active your account : http://localhost:4200/activate-account/" + uuid
             const subject = "Hello, please confirm you Matcha account 👋👋👋"
             if (prod_bool === true) {
                 send_mail(body.email, subject, content);

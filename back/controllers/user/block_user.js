@@ -3,7 +3,7 @@ const create_like = require('../notification/create_like.js')
 
 function block_user(data) {
     return new Promise((resolve, reject) => {
-        db.query('INSERT INTO blocks(from_mail, to_mail, blocked) VALUES($1, $2, $3) RETURNING id;', [data.from, data.to, '1'], async (err, result) => {
+        db.query('INSERT INTO blocks(from_mail, to_mail, blocked) VALUES($1, $2, $3) ON CONFLICT (from_mail, to_mail) DO UPDATE SET blocked = 1 RETURNING id;', [data.from, data.to, '1'], async (err, result) => {
             if (err) {
                 console.log(err)
                 resolve (-1)

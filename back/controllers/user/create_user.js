@@ -1,5 +1,6 @@
 const db = require('../../db/db.js')
 const send_mail = require('./send_mail.js')
+const activate_user = require('./activate_user.js')
 const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
@@ -31,9 +32,7 @@ function create_user(body, prod_bool) {
             const content = "Hello " + body.firstName + ", you create an account to access Matcha. Please click on this link to active your account : http://localhost:4200/activate-account/" + uuid // LOCAL
             //const content = "Hello " + body.firstName + ", you create an account to access Matcha. Please click on this link to active your account : https://matcha-heroku.herokuapp.com/activate-account/" + uuid   // PROD
             const subject = "Hello, please confirm you Matcha account 👋👋👋"
-            if (prod_bool === true) {
-                send_mail(body.email, subject, content);
-            }
+            prod_bool === true ? send_mail(body.email, subject, content) : activate_user(result.rows[0].id)
             resolve (0)
         }
       })

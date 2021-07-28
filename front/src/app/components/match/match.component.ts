@@ -282,5 +282,6 @@ resetSlider(){
   this.sortmilesValue = 0;
   this.sortFameValue = 0;
   this.sortInterestValue = 0;
+  this.dataSource.filter = '';
 }
 }

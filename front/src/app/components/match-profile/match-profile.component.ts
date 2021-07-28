@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, pipe } from 'rxjs';
 import { first } from 'rxjs/operators';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 // store imports
 import {
@@ -46,6 +47,7 @@ export class MatchProfileComponent implements OnInit {
     private router: Router,
     private socketService : socketService,
     private authservice : AuthServiceService,
+    private _snackBar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
@@ -101,7 +103,8 @@ unlikeAction(){
 
 blockAction(){
   this.authservice.blockUser(this.selfData.mail, this.userData[0].mail)
-  this.router.navigate(['/home/match'])
+  this._snackBar.open("You have successfully block " + this.userData[0].first_name + this.userData[0].last_name,  undefined, {duration : 1500 })
+  this.router.navigate(['/home'])
 }
 
 routeToChat(){

@@ -121,18 +121,21 @@ export class ProfileComponent implements OnInit {
       console.log(this.updateForm.valid)
           return;
       }
- //   if (this.updateFormConfirm.geolocalize && this.updateFormConfirm.geolocalize === 1){
- //     this.updateFormConfirm.lat = this.lat;
- //     this.updateFormConfirm.lng = this.lng;
- //   }
+   if (this.updateFormConfirm.geolocalize && this.updateFormConfirm.geolocalize === 1){
+    this.location.getIpAddress().subscribe((res: any)  => {
+           this.ipAdress = res['ip'],
+           this.location.getGEOLocation(this.ipAdress).subscribe((res: any) => {
+      this.updateFormConfirm.lat = res['latitude'];;
+      this.updateFormConfirm.lng = res['longitude'];
+    })
+  })}
+
     this.updateFormConfirm.id = this.id;
     this.file instanceof File ? this.updateFormConfirm['img'] = this.file : null ;
     this.file1 instanceof File ? this.updateFormConfirm['img1'] = this.file1 : null ;
     this.file2 instanceof File ? this.updateFormConfirm['img2'] = this.file2 : null ;
     this.file3 instanceof File ? this.updateFormConfirm['img3'] = this.file3 : null ;
     this.updateFormConfirm.interest = this.interests;
-    this.updateFormConfirm.lat = this.lat;
-    this.updateFormConfirm.lng = this.lng;
     console.log(this.updateFormConfirm)
     this.authservice.update(this.updateFormConfirm);
     

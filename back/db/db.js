@@ -9,7 +9,7 @@ const pool = new Pool({
     database: "matcha"
 });
 
-// // //PROD 
+//PROD 
 // const pool = new Pool ({
 //   connectionString: process.env.DATABASE_URL,
 //   ssl: {

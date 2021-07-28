@@ -4,7 +4,7 @@
     <mat-slider 
       (change)="sortAge($event)" 
       step="1"
-      min="10"
+      min="0"
       max="100"
       [value]="sortAgeValue">
     </mat-slider>
@@ -16,8 +16,8 @@
     <mat-slider 
       (change)="sortMiles($event)" 
       step="20"
-      min="10"
-      max="500"
+      min="0"
+      max="7000"
       [value]="sortmilesValue">
     </mat-slider>
     {{sortmilesValue}}
@@ -29,7 +29,7 @@
       (input)="sortFame($event)" 
       step="20"
       min="0"
-      max="250"
+      max="500"
       [value]="sortFameValue">
     </mat-slider>
     {{sortFameValue}}
@@ -41,7 +41,7 @@
       (input)="sortInterest($event)" 
       step="1"
       min="0"
-      max="50"
+      max="7"
       [value]="sortInterestValue">
     </mat-slider>
     {{sortInterestValue}}

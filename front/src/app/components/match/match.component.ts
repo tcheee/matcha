@@ -12,6 +12,7 @@ import {
   RootStoreState,
   UsersSelector,
 } from '../../root-store';
+import { MatSliderChange } from '@angular/material/slider';
 
 @Component({
   selector: 'app-match',
@@ -33,6 +34,11 @@ export class MatchComponent implements OnInit, AfterViewInit {
   sortedData : any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+
+  sortAgeValue : number | null = 0;
+  sortmilesValue : number | null = 0;
+  sortFameValue : number | null = 0;
+  sortInterestValue : number | null = 0;
 
   constructor(
     private store$: Store<RootStoreState.RootState>,
@@ -127,4 +133,96 @@ export class MatchComponent implements OnInit, AfterViewInit {
       }
     }
   }
+  sortAge(event: MatSliderChange){
+    if(this.dataSource){
+    this.sortAgeValue = event.value
+      this.dataSource.filterPredicate = (data : any ,filter) => {
+        if (event.value !== 0 && this.sortmilesValue === 0){
+          return (data.age < event.value!)
+        }
+        if (event.value !== 0 && this.sortmilesValue !== 0){
+          return (data.age < event.value! && data.distance < this.sortmilesValue!)
+        }
+        else 
+          return true
+      }
+      this.dataSource.filter = "" + Math.random()
+    }
+    if (this.dataSource.paginator) {
+      // reset the paginator to the first page.
+      this.dataSource.paginator.firstPage();
+    }
+  }
+  sortMiles(event: MatSliderChange){
+    console.log(event.value)
+      this.sortmilesValue = event.value;
+      this.dataSource.filterPredicate = (data : any ,filter) => {
+        if (event.value !== 0 && this.sortAgeValue === 0){
+          return (data.distance < event.value!)
+        }
+        if (event.value !== 0 && this.sortAgeValue !== 0){
+          return (data.distance < event.value!&& data.age < this.sortAgeValue!)
+        }
+        else 
+          return true
+      }
+      this.dataSource.filter = "" + Math.random()
+      
+    if (this.dataSource.paginator) {
+      // reset the paginator to the first page.
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  sortFame(event: MatSliderChange){
+      this.sortFameValue = event.value;
+      this.dataSource.filterPredicate = (data : any ,filter) => {
+        if (event.value !== 0 && this.sortAgeValue === 0 && this.sortmilesValue === 0){
+          return (data.fame < event.value!)
+        }
+        if (event.value !== 0 && this.sortAgeValue !== 0 && this.sortmilesValue === 0){
+          return (data.fame < event.value! && data.age < this.sortAgeValue!)
+        }
+        if (event.value !== 0 && this.sortAgeValue === 0 && this.sortmilesValue !== 0){
+          return (data.fame < event.value! && data.distance < this.sortmilesValue!)
+        }
+        if (event.value !== 0 && this.sortAgeValue !== 0 && this.sortmilesValue !== 0){
+          return (data.fame < event.value! && data.distance < this.sortmilesValue! && data.age < this.sortAgeValue!)
+        }
+        else 
+          return true
+      }
+      this.dataSource.filter = "" + Math.random()
+      
+    if (this.dataSource.paginator) {
+      // reset the paginator to the first page.
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  sortInterest(event: MatSliderChange){
+    this.sortFameValue = event.value;
+    this.dataSource.filterPredicate = (data : any ,filter) => {
+      if (event.value !== 0 && this.sortAgeValue === 0 && this.sortmilesValue === 0){
+        return (data.fame < event.value!)
+      }
+      if (event.value !== 0 && this.sortAgeValue !== 0 && this.sortmilesValue === 0){
+        return (data.fame < event.value! && data.age < this.sortAgeValue!)
+      }
+      if (event.value !== 0 && this.sortAgeValue === 0 && this.sortmilesValue !== 0){
+        return (data.fame < event.value! && data.distance < this.sortmilesValue!)
+      }
+      if (event.value !== 0 && this.sortAgeValue !== 0 && this.sortmilesValue !== 0){
+        return (data.fame < event.value! && data.distance < this.sortmilesValue! && data.age < this.sortAgeValue!)
+      }
+      else 
+        return true
+    }
+    this.dataSource.filter = "" + Math.random()
+    
+  if (this.dataSource.paginator) {
+    // reset the paginator to the first page.
+    this.dataSource.paginator.firstPage();
+  }
+}
 }

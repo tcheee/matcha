@@ -1,3 +1,44 @@
+<h2> Age slider</h2>
+<mat-slider 
+  (change)="sortAge($event)" 
+  step="1"
+  min="0"
+  max="100"
+  [value]="sortAgeValue">
+</mat-slider>
+{{sortAgeValue}}
+
+<h2> Miles slider</h2>
+<mat-slider 
+  (change)="sortMiles($event)" 
+  step="20"
+  min="0"
+  max="10000"
+  [value]="sortmilesValue">
+</mat-slider>
+{{sortmilesValue}}
+
+<h2> Fame slider</h2>
+<mat-slider 
+  (input)="sortFame($event)" 
+  step="50"
+  min="0"
+  max="10000"
+  [value]="sortFameValue">
+</mat-slider>
+{{sortFameValue}}
+
+<h2> Interest Slider</h2>
+
+<mat-slider 
+  (input)="sortInterest($event)" 
+  step="1"
+  min="0"
+  max="10"
+  [value]="sortInterestValue">
+</mat-slider>
+{{sortInterestValue}}
+
 <section class="filter-row">
   <!-- Filters and columns -->
   <mat-form-field class="campaigns-table-filter" >

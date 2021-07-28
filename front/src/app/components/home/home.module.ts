@@ -27,6 +27,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
+import {MatSliderModule} from '@angular/material/slider';
 // forms
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import { fromEventPattern } from 'rxjs';
@@ -54,6 +55,7 @@ import { fromEventPattern } from 'rxjs';
       MatTableModule,
       MatPaginatorModule,
       MatSortModule,
+      MatSliderModule,
 
   ]
 })

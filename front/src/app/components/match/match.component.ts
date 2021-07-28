@@ -277,4 +277,10 @@ export class MatchComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator.firstPage();
   }
 }
+resetSlider(){
+  this.sortAgeValue = 0;
+  this.sortmilesValue = 0;
+  this.sortFameValue = 0;
+  this.sortInterestValue = 0;
+}
 }

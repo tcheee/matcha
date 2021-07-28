@@ -137,11 +137,17 @@ export class MatchComponent implements OnInit, AfterViewInit {
     if(this.dataSource){
     this.sortAgeValue = event.value
       this.dataSource.filterPredicate = (data : any ,filter) => {
-        if (event.value !== 0 && this.sortmilesValue === 0){
+        if (event.value !== 0 && this.sortmilesValue === 0 && this.sortFameValue === 0){
           return (data.age < event.value!)
         }
-        if (event.value !== 0 && this.sortmilesValue !== 0){
+        if (event.value !== 0 && this.sortmilesValue !== 0 && this.sortFameValue === 0){
           return (data.age < event.value! && data.distance < this.sortmilesValue!)
+        }
+        if (event.value !== 0 && this.sortmilesValue === 0 && this.sortFameValue !== 0){
+          return (data.age < event.value! && data.fame < this.sortFameValue!)
+        }
+        if (event.value !== 0 && this.sortmilesValue !== 0 && this.sortFameValue !== 0){
+          return (data.age < event.value! && data.distance < this.sortmilesValue! && data.fame < this.sortFameValue!)
         }
         else 
           return true
@@ -157,11 +163,17 @@ export class MatchComponent implements OnInit, AfterViewInit {
     console.log(event.value)
       this.sortmilesValue = event.value;
       this.dataSource.filterPredicate = (data : any ,filter) => {
-        if (event.value !== 0 && this.sortAgeValue === 0){
+        if (event.value !== 0 && this.sortAgeValue === 0 && this.sortFameValue === 0){
           return (data.distance < event.value!)
         }
-        if (event.value !== 0 && this.sortAgeValue !== 0){
+        if (event.value !== 0 && this.sortAgeValue !== 0 && this.sortFameValue === 0){
           return (data.distance < event.value!&& data.age < this.sortAgeValue!)
+        }
+        if (event.value !== 0 && this.sortAgeValue === 0 && this.sortFameValue !== 0){
+          return (data.distance < event.value!&& data.fame < this.sortFameValue!)
+        }
+        if (event.value !== 0 && this.sortAgeValue !== 0 && this.sortFameValue !== 0){
+          return (data.distance < event.value! && data.age < this.sortAgeValue! && data.fame < this.sortFameValue!)
         }
         else 
           return true

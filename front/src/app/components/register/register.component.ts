@@ -48,13 +48,6 @@ export class RegisterComponent implements OnInit {
       ) { }
 
   ngOnInit() {
-    this.location.getIpAddress().subscribe((res: any)  => {
-      this.ipAdress = res['ip'],
-      this.location.getGEOLocation(this.ipAdress).subscribe((res: any) => {
-        this.lat = res['latitude'];
-        this.lng = res['longitude'];
-      })
-    }),
       this.registerForm = this.formBuilder.group({
           email: ['', [Validators.email, Validators.required]],
           password: ['', [
@@ -90,6 +83,13 @@ export class RegisterComponent implements OnInit {
       this._snackBar.open("The form is not Valid, Please complete the red field(s)")
           return;
       }
+      this.location.getIpAddress().subscribe((res: any)  => {
+        this.ipAdress = res['ip'],
+        this.location.getGEOLocation(this.ipAdress).subscribe((res: any) => {
+          this.lat = res['latitude'];
+          this.lng = res['longitude'];
+        })
+      }),
       this.registerFormConfirm = this.registerForm.value;
       this.registerFormConfirm.interest = this.interests;
       this.registerFormConfirm.img = this.file;

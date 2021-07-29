@@ -17,7 +17,7 @@ function create_user(body, prod_bool) {
 
     body.age = parseInt(body.age,10);
 
-    db.query('INSERT INTO users(uuid, mail, password, first_name, last_name, age, genre, orientation, lat, lng, is_geolocated, biography, last_connection, is_active, interests) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING id;', [uuid, body.email, body.password, body.firstName, body.lastName, body.age, body.gender, body.orientation, body.lat, body.lng, body.is_geolocated, body.biography, date, '0', body.interest], (err, result) => {
+    db.query('INSERT INTO users(uuid, mail, password, first_name, last_name, age, genre, orientation, lat, lng, is_geolocated, biography, last_connection, is_active, interests) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING uuid;', [uuid, body.email, body.password, body.firstName, body.lastName, body.age, body.gender, body.orientation, body.lat, body.lng, body.is_geolocated, body.biography, date, '0', body.interest], (err, result) => {
         if (err) {
             if (err.constraint == 'users_mail_key') {
                 console.log('Mail already exists in the db.')
@@ -32,7 +32,7 @@ function create_user(body, prod_bool) {
             const content = "Hello " + body.firstName + ", you create an account to access Matcha. Please click on this link to active your account : http://localhost:4200/activate-account/" + uuid // LOCAL
             //const content = "Hello " + body.firstName + ", you create an account to access Matcha. Please click on this link to active your account : https://matcha-heroku.herokuapp.com/activate-account/" + uuid   // PROD
             const subject = "Hello, please confirm you Matcha account 👋👋👋"
-            prod_bool === true ? send_mail(body.email, subject, content) : activate_user(result.rows[0].id)
+            prod_bool === true ? send_mail(body.email, subject, content) : activate_user(result.rows[0].uuid)
             resolve (0)
         }
       })

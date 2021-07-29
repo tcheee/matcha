@@ -75,6 +75,7 @@ router.post('/update/', upload.fields([{ name: 'img', maxCount: 1}, {name: 'img1
 });
 
 router.post('/activate/', (req, res) => {
+  console.log(req.body)
   let status = activate_user(req.body.id);
   res.send(status);
 })

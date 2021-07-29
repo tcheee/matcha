@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpBackend, HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { baseUrl, resetPasswordUrl, registerUrl, changePasswordUrl, updateUrl, imageUrl, orderMessageUrl, messageHistoryUrl, resetNotifUrl, resetMessagefUrl, blockUrl} from 'src/environments/environment';
+import { baseUrl, resetPasswordUrl, registerUrl, changePasswordUrl, updateUrl, imageUrl, orderMessageUrl, messageHistoryUrl, resetNotifUrl, resetMessagefUrl, blockUrl, activateUrl} from 'src/environments/environment';
 import {MatSnackBar} from '@angular/material/snack-bar';
 // ngrx imports
 import { Store, } from '@ngrx/store';
@@ -49,6 +49,10 @@ export class AuthServiceService {
           this._snackBar.open("something bad happened",  undefined, {duration : 1500 })
       }
     })
+  }
+
+  activateUser(data : string) {
+    return this.http.post(`${activateUrl}`, data).subscribe(data => data)
   }
 
   removeNotification(mail : string){
@@ -138,7 +142,7 @@ export class AuthServiceService {
       payload.append('lng', data.lng);
       payload.append('interest', data.interest);
 
-        this.http.post(`${updateUrl}`, payload)
+    this.http.post(`${updateUrl}`, payload)
     .subscribe(data => {
       this._snackBar.open("You are successfully Updated", undefined, {duration : 1500 })
       this.router.navigate(['/home/welcome'])

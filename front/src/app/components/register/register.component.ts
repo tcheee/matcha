@@ -84,7 +84,7 @@ export class RegisterComponent implements OnInit {
         switchMap((value:any) => {
         this.userIP = value.ip;
       //  let url = `http://api.ipstack.com/${value.ip}?access_key=ea257a63d9a9bd1011ab7fb771839e07`
-        return this.http.get(`http://api.ipstack.com/${value.ip}?access_key=ea257a63d9a9bd1011ab7fb771839e07`);
+        return this.http.get(`https://api.ipstack.com/${value.ip}?access_key=ea257a63d9a9bd1011ab7fb771839e07`);
         })
       ).subscribe(
         (value:any) => {

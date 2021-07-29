@@ -87,7 +87,6 @@ router.post('/activate-account/', async (req, res) => {
 })
 
 router.post('/login/', async (req, res) => {
-    console.log(__dirname)
     try {
       let user_id = await login_user(req.body.email, req.body.password)
       console.log(user_id);

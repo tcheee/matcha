@@ -6,6 +6,7 @@ import { AuthenticateComponent} from './components/authenticate/authenticate.com
 import { RegisterComponent } from './components/register/register.component';
 import { ForgetpasswordComponent} from './components/forgetpassword/forgetpassword.component';
 import { ResetpasswordComponent} from './components/resetpassword/resetpassword.component';
+import { ActivateComponent} from './components/activate/activate.component';
 
 import { IsSignedGuardGuard} from './guards/is-signed-guard.guard';
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'forget-password', component: ForgetpasswordComponent},
   {path: 'reset-password', component: ResetpasswordComponent},
+  {path: 'activate-account', component: ActivateComponent},
   { path: '**', redirectTo: '' }
 ];
 

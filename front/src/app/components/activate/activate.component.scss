@@ -1,0 +1,31 @@
+mat-card {
+	justify-content: center;
+	max-width: 400px;
+	margin: 2em auto;
+	text-align: center;
+      }
+      .signin-content {
+	height: 101vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #F7F0F5;
+      }
+      .full-width-input {
+	width: 100%;
+      }
+      .cursor {
+	      cursor: pointer;
+      }
+
+    .title {
+		color: #F1D302;
+		letter-spacing: 0.05cm;
+		font-weight: bold;
+	}
+
+	.button {
+		background-color: #F1D302;
+		color: white;
+		margin-bottom: 4%;
+	}

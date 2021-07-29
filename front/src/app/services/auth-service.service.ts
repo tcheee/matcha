@@ -51,7 +51,7 @@ export class AuthServiceService {
     })
   }
 
-  activateUser(data : string) {
+  activateUser(data : any) {
     return this.http.post(`${activateUrl}`, data).subscribe((data : any) => {
       if (data.success === true){
           this._snackBar.open("Account activated", undefined, {duration : 1500 }),

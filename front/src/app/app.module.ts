@@ -17,10 +17,12 @@ import { ResetpasswordComponent } from './components/resetpassword/resetpassword
 import { ChatComponent } from './components/chat/chat.component';
 import { DisconnectComponent } from './components/disconnect/disconnect.component';
 import { availableChatComponent } from './components/available-chat/availableChat.component';
+import { ActivateComponent } from './components/activate/activate.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ActivateComponent,
     ForgetpasswordComponent,
     ResetpasswordComponent,
     ChatComponent,

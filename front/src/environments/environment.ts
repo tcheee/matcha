@@ -19,7 +19,7 @@ export const resetNotifUrl = 'http://localhost:3000/notifications-seen'
 export const resetMessagefUrl = 'http://localhost:3000/messages-seen'
 export const imageUrl = 'http://localhost:3000/all-photos/'
 export const blockUrl = 'http://localhost:3000/block/'
-export const activateUrl = 'http://localhost:4200/activate-account/'
+export const activateUrl = 'http://localhost:3000/activate-account/'
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

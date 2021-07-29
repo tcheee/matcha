@@ -74,10 +74,15 @@ router.post('/update/', upload.fields([{ name: 'img', maxCount: 1}, {name: 'img1
   }
 });
 
-router.post('/activate/', (req, res) => {
-  console.log(req.body)
-  let status = activate_user(req.body.id);
-  res.send(status);
+router.post('/activate-account/', async (req, res) => {
+  console.log(req.body.uuid)
+  let status = await activate_user(req.body.uuid);
+  if (status === 0) {
+    res.status(200).json({success: true, message:'User activated'})
+  }
+  else {
+    res.status(404).send({success: false, message:'There was a problem activating the user'})
+  }
 })
 
 router.post('/login/', async (req, res) => {

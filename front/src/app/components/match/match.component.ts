@@ -69,7 +69,7 @@ export class MatchComponent implements OnInit, AfterViewInit {
       this.tab.forEach((item : any, index : any) => {
         this.selfData.blocks.map((res : any) => {
           if (item.mail === res.target){
-            this.tab.splice(index, 1)
+            let x = this.tab.splice(index, 1)
           }
         })
       })

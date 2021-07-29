@@ -52,7 +52,17 @@ export class AuthServiceService {
   }
 
   activateUser(data : string) {
-    return this.http.post(`${activateUrl}`, data).subscribe(data => data)
+    return this.http.post(`${activateUrl}`, data).subscribe((data : any) => {
+      if (data.success === true){
+          this._snackBar.open("Account activated", undefined, {duration : 1500 }),
+          this.router.navigate(["/"])
+      }
+      else 
+      { 
+          this._snackBar.open("Activation did not work",  undefined, {duration : 1500 })
+          this.router.navigate(["/"])
+      }
+    })
   }
 
   removeNotification(mail : string){

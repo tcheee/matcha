@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, AfterViewInit, ViewChild, Self  } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, AfterViewInit, ViewChild, Self, ComponentFactoryResolver  } from '@angular/core';
 //ngrx imports
 import { Store } from '@ngrx/store';
 import { Observable, pipe } from 'rxjs';
@@ -65,15 +65,18 @@ export class MatchComponent implements OnInit, AfterViewInit {
         this.orientation = "Man"
 
     this.tab = [...this.usersData.users];
+    console.log(this.tab)
+    console.log(this.selfData.blocks)
     if(this.selfData.blocks){
-      this.tab.forEach((item : any, index : any) => {
-        this.selfData.blocks.map((res : any) => {
+      this.selfData.blocks.map((res : any) => {
+        this.tab.map((item : any, index : any) => {
           if (item.mail === res.target){
-            let x = this.tab.splice(index, 1)
+            this.tab.splice(index, 1)
           }
         })
       })
     }
+    console.log(this.tab)
 
 
     if(this.selfData.orientation !== "Bisexual"){

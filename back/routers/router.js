@@ -23,7 +23,7 @@ const transformIdToArray = require('../functions/transformIdToArray.js')
 const maxAge = 24 * 10 * 60 * 60;
 
 router.get('/', (req, res) => {
-  res.sendFile("index.html", {root: '../front/dist/front/'});
+  res.sendFile("index.html", {root: '../../front/dist/front/'});
 });
 
 router.post('/register/', upload.single('img'), async (req, res) => {
@@ -86,6 +86,7 @@ router.post('/activate-account/', async (req, res) => {
 })
 
 router.post('/login/', async (req, res) => {
+    console.log(__dirname)
     try {
       let user_id = await login_user(req.body.email, req.body.password)
       console.log(user_id);
@@ -192,7 +193,7 @@ router.post('/block/', async (req, res) => {
 
 router.use((req, res) => {
     //res.status(404).send('We did not find what you were looking for ...')
-    res.sendFile("index.html", {root: '../src/index.html'});
+    res.sendFile("index.html", {root: '../../front/dist/front/'});
 });
 
 module.exports = router;

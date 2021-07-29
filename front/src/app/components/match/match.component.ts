@@ -65,8 +65,6 @@ export class MatchComponent implements OnInit, AfterViewInit {
         this.orientation = "Man"
 
     this.tab = [...this.usersData.users];
-    console.log(this.tab)
-    console.log(this.selfData.blocks)
     if(this.selfData.blocks){
       this.selfData.blocks.map((res : any) => {
         this.tab.map((item : any, index : any) => {
@@ -76,7 +74,6 @@ export class MatchComponent implements OnInit, AfterViewInit {
         })
       })
     }
-    console.log(this.tab)
 
 
     if(this.selfData.orientation !== "Bisexual"){

@@ -74,15 +74,6 @@ export class ProfileComponent implements OnInit {
 
 
   ngOnInit(): void {
-    // location
- //   this.location.getIpAddress().subscribe((res: any)  => {
- //     this.ipAdress = res['ip'],
- //     this.location.getGEOLocation(this.ipAdress).subscribe((res: any) => {
-//        this.lat = res['latitude'];
-//        this.lng = res['longitude'];
- //     })
- //   }),
-
     this.store$.select(SelfSelectors.getAllStateData).pipe(first()).subscribe(
       res => {
         this.uuid = res.uuid
@@ -125,6 +116,10 @@ export class ProfileComponent implements OnInit {
       this.updateFormConfirm.lng = res['longitude'];
     })
   })}
+  else {
+    this.updateFormConfirm.lat = this.lat;
+    this.updateFormConfirm.lng = this.lng;
+  }
 
     this.updateFormConfirm.id = this.id;
     this.file instanceof File ? this.updateFormConfirm['img'] = this.file : null ;

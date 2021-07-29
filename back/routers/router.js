@@ -191,7 +191,7 @@ router.post('/block/', async (req, res) => {
 });
 
 router.use((req, res) => {
-    res.sendFile(__dirname + '../front/src/index.html')
+    res.status(404).send('We did not find what you were looking for ...')
 });
 
 module.exports = router;

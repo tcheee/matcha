@@ -56,12 +56,16 @@ export class MatchComponent implements OnInit, AfterViewInit {
     if(this.selfData.orientation === 'Homosexual')
       if(this.selfData.genre === 'Man')
         this.orientation = "Man"
-      else
+      if(this.selfData.genre === 'Non-binary')
+        this.orientation = "Non-binary"
+      if (this.selfData.genre === 'Woman')
         this.orientation = "Woman"
     if(this.selfData.orientation === 'Heterosexual')
       if(this.selfData.genre === 'Man')
         this.orientation = "Woman"
-      else
+      if(this.selfData.genre === 'Non-binary')
+        this.orientation = "Non-binary"
+      if(this.selfData.genre === 'Woman')
         this.orientation = "Man"
 
     this.tab = [...this.usersData.users];
@@ -75,9 +79,9 @@ export class MatchComponent implements OnInit, AfterViewInit {
       })
     }
 
-
+    console.log(this.orientation)
     if(this.selfData.orientation !== "Bisexual"){
-      this.tab = this.tab.filter((res : any) => res.genre === this.orientation)
+      this.tab = this.tab.filter((res : any) => res.genre === this.orientation && res.orientation != 'Homosexual')
   }
 
     this.tab = this.tab.sort(((a : any, b : any) => {

@@ -12,8 +12,6 @@ import { take, first } from 'rxjs/operators';
 // chips 
 import {MatChipInputEvent} from '@angular/material/chips';
 import {MatSnackBar} from '@angular/material/snack-bar';
-// geo
-import { LocationService} from '../../services/location.service';
 // services
 import { AuthServiceService} from '../../services/auth-service.service'
 
@@ -67,7 +65,6 @@ export class ProfileComponent implements OnInit {
     private router: Router,
     private store$: Store<RootStoreState.RootState>,
     private formBuilder: FormBuilder,
-    private location: LocationService,
     private authservice : AuthServiceService,
     private _snackBar: MatSnackBar,
     ) { }
@@ -109,13 +106,7 @@ export class ProfileComponent implements OnInit {
           return;
       }
    if (this.updateFormConfirm.geolocalize && this.updateFormConfirm.geolocalize === 1){
-    this.location.getIpAddress().subscribe((res: any)  => {
-           this.ipAdress = res['ip'],
-           this.location.getGEOLocation(this.ipAdress).subscribe((res: any) => {
-      this.updateFormConfirm.lat = res['latitude'];;
-      this.updateFormConfirm.lng = res['longitude'];
-    })
-  })}
+  }
   else {
     this.updateFormConfirm.lat = this.lat;
     this.updateFormConfirm.lng = this.lng;

@@ -2,10 +2,10 @@ import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { HttpClient, HttpErrorResponse,HttpHeaders } from '@angular/common/http';
+import { catchError, retry, switchMap } from 'rxjs/operators';
 // chips 
 import {MatChipInputEvent} from '@angular/material/chips';
-// geo
-import { LocationService} from '../../services/location.service';
 
 // services
 import { AuthServiceService} from '../../services/auth-service.service'
@@ -39,12 +39,12 @@ export class RegisterComponent implements OnInit {
   fileInput : any;
 
   file: File | null = null;
-
+  userIP : any;
   constructor(
     private formBuilder: FormBuilder,
     private authservice : AuthServiceService,
-    private location: LocationService,
     private _snackBar: MatSnackBar,
+    private http: HttpClient,
       ) { }
 
   ngOnInit() {
@@ -64,12 +64,9 @@ export class RegisterComponent implements OnInit {
           interest: ['', ],
           biography: ['', Validators.required],
           img: ['', ],
-          lng: [''],
-          lat: [''],
           is_geolocated: [''],
       },
     );
-
   }
 
   // convenience getter for easy access to form fields
@@ -79,25 +76,30 @@ export class RegisterComponent implements OnInit {
       this.submitted = true;
       // (when we choose a file the submit button is trigerred idk why)
       if (!this.file || !this.registerForm.valid || this.interests.length <= 0) {
-      this._snackBar.open("The form is not Valid, Please complete the red field(s)")
+      this._snackBar.open("The form is not Valid, Please complete the red field(s)", undefined, {duration : 1500 })
           return;
       }
-      this.location.getIpAddress().subscribe((res: any)  => {
-        this.ipAdress = res['ip'],
-        this.location.getGEOLocation(this.ipAdress).subscribe((res: any) => {
-          this.lat = res['latitude'];
-          this.lng = res['longitude'];
+      this.http.get('https://jsonip.com')
+      .pipe(
+        switchMap((value:any) => {
+        this.userIP = value.ip;
+      //  let url = `http://api.ipstack.com/${value.ip}?access_key=ea257a63d9a9bd1011ab7fb771839e07`
+        return this.http.get(`http://api.ipstack.com/${value.ip}?access_key=ea257a63d9a9bd1011ab7fb771839e07`);
         })
-      }),
-      this.registerFormConfirm = this.registerForm.value;
-      this.registerFormConfirm.interest = this.interests;
-      this.registerFormConfirm.img = this.file;
-      this.registerFormConfirm.lat = this.lat;
-      this.registerFormConfirm.lng = this.lng;
-      // send to back
-      this.authservice.register(this.registerFormConfirm);
-      // display form values on success
-     // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
+      ).subscribe(
+        (value:any) => {
+        console.log(value);
+        this.registerFormConfirm = this.registerForm.value;
+        this.registerFormConfirm['lat'] = value.latitude;
+        this.registerFormConfirm['lng'] = value.longitude;
+        this.registerFormConfirm.interest = this.interests;
+        this.registerFormConfirm.img = this.file;
+        this.authservice.register(this.registerFormConfirm);
+        },
+        err => {
+          this._snackBar.open("You have to start with '#' get Location", undefined, {duration : 1500 })
+        }
+      );
   }
 
   onReset() {
@@ -114,7 +116,7 @@ export class RegisterComponent implements OnInit {
         this.interests.push(value);
       }
       else{
-        this._snackBar.open("You have to start with '#' character")
+        this._snackBar.open("You have to start with '#' character", undefined, {duration : 1500 })
       }
     }
 

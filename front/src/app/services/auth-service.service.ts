@@ -101,6 +101,9 @@ export class AuthServiceService {
     }
 
   register(data : any){
+  //  console.log(data)
+  //  console.log(data.lat)
+  //  console.log(data.lng)
     const payload: FormData = new FormData();
     if(data.is_geolocated === 'yes')
       payload.append('is_geolocated', "true");

@@ -64,14 +64,12 @@ export class MatchComponent implements OnInit, AfterViewInit {
       }
       if (this.selfData.genre === 'Woman')
       {
-        console.log("ccc")
         this.orientation = "Woman"
       }
     }
     if(this.selfData.orientation === 'Heterosexual'){
       if(this.selfData.genre === 'Man')
       {
-        console.log("lkaa")
         this.orientation = "Woman"
       }
       if(this.selfData.genre === 'Non-binary')
@@ -84,7 +82,6 @@ export class MatchComponent implements OnInit, AfterViewInit {
       }
     }
 
-    console.log(this.orientation)
     this.tab = [...this.usersData.users];
     if(this.selfData.blocks){
       this.selfData.blocks.map((res : any) => {

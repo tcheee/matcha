@@ -14,7 +14,8 @@ import {MatChipInputEvent} from '@angular/material/chips';
 import {MatSnackBar} from '@angular/material/snack-bar';
 // services
 import { AuthServiceService} from '../../services/auth-service.service'
-
+import { HttpClient, HttpErrorResponse,HttpHeaders } from '@angular/common/http';
+import { catchError, retry, switchMap } from 'rxjs/operators';
 // store imports
 import {
   SelfSelectors,
@@ -61,12 +62,16 @@ export class ProfileComponent implements OnInit {
   file1: File | null = null;
   file2: File | null = null;
   file3: File | null = null;
+
+  userIP : any;
+
   constructor(
     private router: Router,
     private store$: Store<RootStoreState.RootState>,
     private formBuilder: FormBuilder,
     private authservice : AuthServiceService,
     private _snackBar: MatSnackBar,
+    private http: HttpClient,
     ) { }
 
 
@@ -105,13 +110,34 @@ export class ProfileComponent implements OnInit {
       this._snackBar.open("The form is not Valid, You must have at least one interest, email, firstname ...")
           return;
       }
-   if (this.updateFormConfirm.geolocalize && this.updateFormConfirm.geolocalize === 1){
+   if (this.updateFormConfirm.geolocalize && this.updateFormConfirm.geolocalize === "1"){
+    this.http.get('https://jsonip.com')
+    .pipe(
+      switchMap((value:any) => {
+      this.userIP = value.ip;
+    //  let url = `http://api.ipstack.com/${value.ip}?access_key=ea257a63d9a9bd1011ab7fb771839e07`
+      return this.http.get(`http://api.ipstack.com/${value.ip}?access_key=ea257a63d9a9bd1011ab7fb771839e07`);
+      })
+    ).subscribe(
+      (value:any) => {
+      this.updateFormConfirm.lat = value.latitude;
+      this.updateFormConfirm.lng = value.longitude;
+      this.updateFormConfirm.id = this.id;
+      this.file instanceof File ? this.updateFormConfirm['img'] = this.file : null ;
+      this.file1 instanceof File ? this.updateFormConfirm['img1'] = this.file1 : null ;
+      this.file2 instanceof File ? this.updateFormConfirm['img2'] = this.file2 : null ;
+      this.file3 instanceof File ? this.updateFormConfirm['img3'] = this.file3 : null ;
+      this.updateFormConfirm.interest = this.interests;
+      this.authservice.update(this.updateFormConfirm);
+      },
+      err => {
+        this._snackBar.open(err, undefined, {duration : 1500 })
+      }
+    );
   }
   else {
     this.updateFormConfirm.lat = this.lat;
     this.updateFormConfirm.lng = this.lng;
-  }
-
     this.updateFormConfirm.id = this.id;
     this.file instanceof File ? this.updateFormConfirm['img'] = this.file : null ;
     this.file1 instanceof File ? this.updateFormConfirm['img1'] = this.file1 : null ;
@@ -119,8 +145,8 @@ export class ProfileComponent implements OnInit {
     this.file3 instanceof File ? this.updateFormConfirm['img3'] = this.file3 : null ;
     this.updateFormConfirm.interest = this.interests;
     this.authservice.update(this.updateFormConfirm);
+}
     
-
   }
      onReset() {
       this.submitted = false;

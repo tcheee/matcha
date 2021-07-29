@@ -29,8 +29,8 @@ function create_user(body, prod_bool) {
             }
         }
         else {
-            //const content = "Hello " + body.firstName + ", you create an account to access Matcha. Please click on this link to active your account : http://localhost:4200/activate-account?uuid=" + uuid // LOCAL
-            const content = "Hello " + body.firstName + ", you create an account to access Matcha. Please click on this link to active your account : https://matcha-heroku.herokuapp.com/activate-account?uuid=" + uuid   // PROD
+            const content = "Hello " + body.firstName + ", you create an account to access Matcha. Please click on this link to active your account : http://localhost:4200/activate-account?uuid=" + uuid // LOCAL
+            //const content = "Hello " + body.firstName + ", you create an account to access Matcha. Please click on this link to active your account : https://matcha-heroku.herokuapp.com/activate-account?uuid=" + uuid   // PROD
             const subject = "Hello, please confirm you Matcha account 👋👋👋"
             prod_bool === true ? send_mail(body.email, subject, content) : activate_user(result.rows[0].uuid)
             resolve (0)
